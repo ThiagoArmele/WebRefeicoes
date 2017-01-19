@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
+        <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+      
+    <script>
+	    function carregar(pagina){
+	        $("#conteudo").load(pagina);
+	    }
+    </script>
+      
+</h:head>
+<h:body>
+	    <div class="container-fluid">
+			<div class="row">
+				<form>
+					<div class="col-lg-1 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Codigo" />
+					</div>
+					<div class="col-lg-5 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Nome" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<input style="width: 100%" class="form-control" placeholder="CPF" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<input style="width: 100%" class="form-control" placeholder="RG" />
+					</div>
+					<div class="col-lg-1 form-group">
+						<input style="width: 100%" class="form-control" placeholder="DDD" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Telefone" />
+					</div>
+					<div class="col-lg-1 form-group">
+						<input style="width: 100%" class="form-control" placeholder="DDD" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Celular" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Usuario" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Senha" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Rua" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Número" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Bairro" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<input style="width: 100%" class="form-control" placeholder="Cidade" />
+					</div>
+					<div class="col-lg-1 form-group">
+						<input style="width: 100%" class="form-control" placeholder="CEP" />
+					</div>
+					<div  class="col-lg-12 form-group">
+						<p class="pull-right">
+						  <button type="button" class="btn btn-success">Salvar</button>
+						  <button type="button" class="btn btn-danger">Excluir</button>
+						  <button type="button" class="btn btn-primary">Limpar</button>
+						</p>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<p:dataTable  value="">
+   				<p:column headerText="Codigo"
+   					style="width: 90px" sortBy="">
+   					<h:outputText value="" />
+   				</p:column>
+
+   				<p:column headerText="Nome" sortBy="">
+   					<h:outputText value="" />
+   				</p:column>
+
+   				<p:column headerText="CPF"
+   					style="width: 160px" sortBy="">
+   					<h:outputText value="" />
+   				</p:column>
+
+   				<p:column headerText="DDD (Celular)"
+   					style='width: 120px' sortBy="">
+   					<h:outputText value="" />
+   				</p:column>
+
+   				<p:column headerText="Celular"
+   					style='width: 140px' sortBy="">
+   					<h:outputText value="" />
+   				</p:column>
+
+   				<p:column style='width: 200px' sortBy="">
+   					<h:outputText value="" />
+   				</p:column>
+   			</p:dataTable>
+		</div>
+  </h:body>
+</html>  

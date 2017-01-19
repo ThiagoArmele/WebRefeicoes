@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
+        <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+      
+    <script>
+	    function carregar(pagina){
+	        $("#conteudo").load(pagina);
+	    }
+    </script>
+      
+</h:head>
+<h:body>
+	<div class="container-fluid" style="height: 100%;">
+		<div class="row" style="height: 100%;">
+		    <div class="col-lg-2" id='menu' style="height: 100%; padding: 0px">
+			   <nav class="navbar navbar-default sidebar" role="navigation" style=' width: 100%;'>
+			    <div class="container-fluid">
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>      
+			    </div>
+			    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+			      <ul class="nav navbar-nav" style='    width: 100%;'>
+			      	<li class="dropdown">
+			      		
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret" style='margin-right: 10px;'></span>Funcionário </a>
+			          <ul class="dropdown-menu forAnimate" role="menu" style='background: rgba(68, 68, 68, 0.73);'>
+			            <li><a href='#' onclick="carregar('CadastroFuncionario.xhtml')">Cadastro</a></li>
+			            <li><a href="#">Permissão</a></li>
+			          </ul>
+			        </li>      
+				    <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret" style='    margin-right: 10px;'></span>Cliente </a>
+			          <ul class="dropdown-menu forAnimate" role="menu"  style='background: rgba(68, 68, 68, 0.73);'>
+			            <li><a href='#' onclick="carregar('CadastroCliente.xhtml')">Cadastro</a></li>
+			          </ul>
+			        </li>  
+			        <li class="dropdown">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret" style='margin-right: 10px;'></span>Conênio</a>
+			          <ul class="dropdown-menu forAnimate" role="menu"  style='background: rgba(68, 68, 68, 0.73);'>
+			            <li><a onclick="">Cadastro</a></li>
+			            <li><a onclick="">Consultar</a></li>
+			          </ul>
+			        </li>  
+			      </ul>
+			    </div>
+			  </div>
+			</nav>
+		   </div>
+		   <div id="conteudo" class="col-lg-10">
+		</div>
+		</div>
+		
+	</div>
+	
+</h:body>
+</html>
