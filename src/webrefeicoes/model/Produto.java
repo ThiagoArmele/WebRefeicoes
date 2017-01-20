@@ -10,6 +10,7 @@ public class Produto {
 	private String composicao;
 	private boolean isCardapio;
 	private String teste;
+	private String teste2;
 	
 	public int getCodigo() {
 		return codigo;
