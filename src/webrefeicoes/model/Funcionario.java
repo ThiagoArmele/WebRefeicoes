@@ -1,21 +1,58 @@
 package webrefeicoes.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Funcionario {
 	
+	@Id
+	@GeneratedValue
+	@Column (name="idFuncionario")
 	private int codigo;
+	
+	@Column (name="nome")
 	private String nome;
+	
+	@Column (name="cpf")
 	private String cpf;
+	
+	@Column (name="rg")
 	private String rg;
+	
+	@Column (name="dddTelefone")
 	private int dddTelefone;
+	
+	@Column (name="telefone")
 	private String telefone;
+	
+	@Column (name="dddCelular")
 	private int dddCelular;
+
+	@Column (name="celular")
 	private String celular;
+	
+	@Column (name="usuario")
 	private String usuario;
+	
+	@Column (name="senha")
 	private String senha;
+	
+	@Column (name="rua")
 	private String rua;
+	
+	@Column (name="bairro")
 	private String bairro;
+	
+	@Column (name="cidade")
 	private String cidade;
+	
+	@Column (name="cep")
 	private int cep;
+	
+	@Column (name="numResidencia")
 	private int numEnd;
 	
 	public int getCodigo() {
