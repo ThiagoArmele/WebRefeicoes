@@ -3,7 +3,7 @@ package webrefeicoes.model;
 public class Produto {
 
 	private int codigo;
-	private String descriçao;
+	private String descricao;
 	private String tipo;
 	private String nomePrato;
 	private double preco;
@@ -18,12 +18,12 @@ public class Produto {
 		this.codigo = codigo;
 	}
 	
-	public String getDescriçao() {
-		return descriçao;
+	public String getDescricao() {
+		return descricao;
 	}
 	
-	public void setDescriçao(String descriçao) {
-		this.descriçao = descriçao;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	public String getTipo() {
