@@ -11,6 +11,7 @@ public class Produto {
 	private boolean isCardapio;
 	private String teste;
 	private String teste2;
+	private String teste3;
 	
 	public int getCodigo() {
 		return codigo;
