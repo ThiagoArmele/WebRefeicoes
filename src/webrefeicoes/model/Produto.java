@@ -9,6 +9,7 @@ public class Produto {
 	private double preco;
 	private String composicao;
 	private boolean isCardapio;
+	private String teste;
 	
 	public int getCodigo() {
 		return codigo;
