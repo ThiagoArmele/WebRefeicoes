@@ -83,34 +83,32 @@
 			</div>
 		</div>
 		<div class="container-fluid">
-			<p:dataTable  value="">
+			<p:dataTable  var="funcionario" emptyMessage="Nenhum Registro Encontrado" 
+			value="#{FuncionarioController.listaFuncionarios}">
    				<p:column headerText="Codigo"
    					style="width: 90px" sortBy="">
-   					<h:outputText value="" />
+   					<h:outputText value="#{funcionario.codigo}" />
    				</p:column>
 
    				<p:column headerText="Nome" sortBy="">
-   					<h:outputText value="" />
+   					<h:outputText value="#{funcionario.nome}" />
    				</p:column>
 
    				<p:column headerText="CPF"
    					style="width: 160px" sortBy="">
-   					<h:outputText value="" />
+   					<h:outputText value="#{funcionario.cpf}" />
    				</p:column>
 
    				<p:column headerText="DDD (Celular)"
    					style='width: 120px' sortBy="">
-   					<h:outputText value="" />
+   					<h:outputText value="#{funcionario.dddCelular}" />
    				</p:column>
 
    				<p:column headerText="Celular"
    					style='width: 140px' sortBy="">
-   					<h:outputText value="" />
+   					<h:outputText value="#{funcionario.celular}"/>
    				</p:column>
 
-   				<p:column style='width: 200px' sortBy="">
-   					<h:outputText value="" />
-   				</p:column>
    			</p:dataTable>
 		</div>
   </h:body>
