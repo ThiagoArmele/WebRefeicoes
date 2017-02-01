@@ -5,43 +5,46 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import webrefeicoes.model.Funcionario;
+import webrefeicoes.model.Cliente;
 
-public class FuncionarioDAO {
+public class ClienteDAO {
 
-	public void save(Funcionario funcionario) {
+	public void save(Cliente cliente) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.save(funcionario);
+		session.save(cliente);
 		t.commit();
 	}
 
-	public Funcionario getFuncionario(long id) {
+	public Cliente getCliente(long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		return (Funcionario) session.load(Funcionario.class, id);
+		return (Cliente) session.load(Cliente.class, id);
 	}
 
-	public List<Funcionario> list() {
+	public List<Cliente> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List<Funcionario> lista = session.createQuery("from Funcionario").list();
+		List<Cliente> lista = session.createQuery("from Cliente").list();
 		t.commit();
 		return lista;
 	}
 
-	public void remove(Funcionario funcionario) {
+	public void remove(Cliente cliente) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.delete(funcionario);
+		session.delete(cliente);
 		t.commit();
 	}
 
-	public void update(Funcionario funcionario) {
+	public void update(Cliente cliente) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.update(funcionario);
+		session.update(cliente);
 		t.commit();
 		
 	}
 
 }
+
+
+

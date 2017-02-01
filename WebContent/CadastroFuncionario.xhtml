@@ -12,104 +12,204 @@
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="Menu.css" />
-    <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
-        <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
-      
-    <script>
-	    function carregar(pagina){
-	        $("#conteudo").load(pagina);
-	    }
-    </script>
-      
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
 <h:body>
-	    <div class="container-fluid">
 			<div class="row">
-				<form>
+			
+				<h:form id="formulario">
+					<p:messages id="messages" />
+					
 					<div class="col-lg-1 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Codigo" />
+						<p:inputText style="width: 100%" 
+						id="Codigo"
+						value="#{FuncionarioController.funcionario.codigo}"
+						placeholder="Codigo" />
 					</div>
 					<div class="col-lg-5 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Nome" />
-					</div>
-					<div class="col-lg-3 form-group">
-						<input style="width: 100%" class="form-control" placeholder="CPF" />
-					</div>
-					<div class="col-lg-3 form-group">
-						<input style="width: 100%" class="form-control" placeholder="RG" />
-					</div>
-					<div class="col-lg-1 form-group">
-						<input style="width: 100%" class="form-control" placeholder="DDD" />
+						<p:inputText style="width: 100%" 
+						 value="#{FuncionarioController.funcionario.nome}"
+						 required="true" 
+						 placeholder="Nome"
+						 id="Nome" />
+						 
 					</div>
 					<div class="col-lg-2 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Telefone" />
-					</div>
-					<div class="col-lg-1 form-group">
-						<input style="width: 100%" class="form-control" placeholder="DDD" />
-					</div>
-					<div class="col-lg-2 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Celular" />
-					</div>
-					<div class="col-lg-3 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Usuario" />
-					</div>
-					<div class="col-lg-3 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Senha" />
-					</div>
-					<div class="col-lg-3 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Rua" />
+						<p:inputText  style="width: 100%"  placeholder="CPF" 
+						required="true" 
+						id="CPF" 
+						value="#{FuncionarioController.funcionario.cpf}"
+						/>
 					</div>
 					<div class="col-lg-2 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Número" />
+						<p:inputText style="width: 100%"  placeholder="RG" 
+						required="true" 
+						id="RG"
+						value="#{FuncionarioController.funcionario.rg}"
+						/>
 					</div>
-					<div class="col-lg-3 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Bairro" />
-					</div>
-					<div class="col-lg-3 form-group">
-						<input style="width: 100%" class="form-control" placeholder="Cidade" />
+					<div class="col-lg-2 form-group">
+						<p:calendar 
+						placeholder="Data de Nascimento"  
+						value="#{FuncionarioController.funcionario.dataNascimento}"
+						pattern="dd/MM/yyyy"
+						locale="de" navigator="true"
+						style="width: 100%" 
+						required="true"  
+						id="DataNascimento"
+						 mask="true" />
 					</div>
 					<div class="col-lg-1 form-group">
-						<input style="width: 100%" class="form-control" placeholder="CEP" />
+						<p:inputMask style="width: 100%"  
+						id="DDDTelefone" 
+						maxlength="2"
+						value="#{FuncionarioController.funcionario.dddTelefone}"
+						placeholder="DDD" />
 					</div>
-					<div  class="col-lg-12 form-group">
-						<p class="pull-right">
-						  <button type="button" class="btn btn-success">Salvar</button>
-						  <button type="button" class="btn btn-danger">Excluir</button>
-						  <button type="button" class="btn btn-primary">Limpar</button>
-						</p>
+					<div class="col-lg-2 form-group">
+						<p:inputMask style="width: 100%" 
+						id="Telefone" 
+						maxlength="8"
+						placeholder="Telefone" 
+						value="#{FuncionarioController.funcionario.telefone}"
+						/>
+					</div>
+					<div class="col-lg-1 form-group">
+						<p:inputMask style="width: 100%" 
+						id="DDDCelular"
+						maxlength="2"
+						placeholder="DDD"
+						value="#{FuncionarioController.funcionario.dddCelular}"
+						 />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:inputText style="width: 100%"
+						id="Celular"
+						maxlength="9"
+						placeholder="Celular" 
+						value="#{FuncionarioController.funcionario.celular}"
+						/>
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%"  
+						id="Usuario"
+						placeholder="Usuario" 
+						required="true" 
+						maxlength="30"
+						value="#{FuncionarioController.funcionario.usuario}"
+						/>
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:password id='senha' style="width: 100%"  placeholder="Senha" 
+						required="true" 
+						redisplay="true"
+						maxlength="20"
+						value="#{FuncionarioController.funcionario.senha}"
+						/>
 					</div>
 					
-				</form>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%"  
+						id="Rua"
+						placeholder="Rua" 
+						value="#{FuncionarioController.funcionario.rua}"
+						/>
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:inputText style="width: 100%" 
+						id="Número"
+						placeholder="Número" 
+						maxlength="8"
+						value="#{FuncionarioController.funcionario.numEnd}"
+						/>
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%"  
+						id="Bairro"
+						placeholder="Bairro" 
+						value="#{FuncionarioController.funcionario.bairro}"
+						/>
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%"  
+						id="Cidade"
+						placeholder="Cidade" 
+						value="#{FuncionarioController.funcionario.cidade}"
+						/>
+					</div>
+					<div class="col-lg-1 form-group">
+						<p:inputText style="width: 100%"  
+						id="CEP"
+						placeholder="CEP" 
+						value="#{FuncionarioController.funcionario.cep}"
+						/>
+					</div>
+					<div  class="col-lg-12 form-group">
+						
+						  <p:commandButton value= "Salvar" update="messages gridFuncionario" styleClass="btn btn-success" action="#{FuncionarioController.adicionarFuncionario}" >
+						  </p:commandButton>
+						  <p:commandButton immediate="true" value="Limpar" actionListener="#{FuncionarioController.limparDados}"  update="@form:formulario"  styleClass="btn btn-primary" >
+				          	 <p:resetInput target="formulario" />
+				          </p:commandButton>
+					</div>
+					
+				</h:form>
 			</div>
-		</div>
-		<div class="container-fluid">
-			<p:dataTable  var="funcionario" emptyMessage="Nenhum Registro Encontrado" 
+			
+			<p:dataTable id='gridFuncionario' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="funcionario" 
+			scrollHeight="50%"
+			selection="#{FuncionarioController.selecionaFuncionario}"
+			rowKey="#{funcionario.codigo}"
 			value="#{FuncionarioController.listaFuncionarios}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{FuncionarioController.trazerDados}"/>
+				
    				<p:column headerText="Codigo"
-   					style="width: 90px" sortBy="">
+   					style="width: 90px;text-align: center" 
+   					sortBy="#{funcionario.codigo}">
    					<h:outputText value="#{funcionario.codigo}" />
    				</p:column>
 
-   				<p:column headerText="Nome" sortBy="">
+   				<p:column headerText="Nome" 
+   					style="width:100%"
+   					sortBy="#{funcionario.nome}">
    					<h:outputText value="#{funcionario.nome}" />
    				</p:column>
 
    				<p:column headerText="CPF"
-   					style="width: 160px" sortBy="">
-   					<h:outputText value="#{funcionario.cpf}" />
+   					style="width: 160px;text-align: center"
+   					sortBy="#{funcionario.cpf}">
+   					<h:outputText styleClass="text-center" value="#{funcionario.cpf}" />
    				</p:column>
-
+				
+				<p:column headerText="Usuário"
+   					style='width: 120px;text-align: center' sortBy="#{funcionario.usuario}">
+   					<h:outputText value="#{funcionario.usuario}" />
+   				</p:column>
+   				
    				<p:column headerText="DDD (Celular)"
-   					style='width: 120px' sortBy="">
+   					style='width: 200px;text-align: center' sortBy="#{funcionario.dddCelular}">
    					<h:outputText value="#{funcionario.dddCelular}" />
    				</p:column>
 
    				<p:column headerText="Celular"
-   					style='width: 140px' sortBy="">
+   					style='width: 140px;text-align: center' sortBy="#{funcionario.celular}">
    					<h:outputText value="#{funcionario.celular}"/>
+   				</p:column>
+   				
+   				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton update="gridFuncionario" action="#{FuncionarioController.excluirFuncionario(funcionario)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   					
    				</p:column>
 
    			</p:dataTable>
-		</div>
   </h:body>
 </html>  

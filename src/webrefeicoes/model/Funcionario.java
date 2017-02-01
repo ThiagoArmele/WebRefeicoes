@@ -1,5 +1,8 @@
 package webrefeicoes.model;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,8 +11,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="funcionario")
-public class Funcionario {
+public class Funcionario implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	@Column (name="idFuncionario")
@@ -25,16 +33,16 @@ public class Funcionario {
 	private String rg;
 	
 	@Column (name="dddTelefone")
-	private int dddTelefone;
+	private Integer dddTelefone;
 	
 	@Column (name="telefone")
-	private String telefone;
+	private Integer telefone;
 	
 	@Column (name="dddCelular")
-	private int dddCelular;
+	private Integer dddCelular;
 
 	@Column (name="celular")
-	private String celular;
+	private Integer celular;
 	
 	@Column (name="usuario")
 	private String usuario;
@@ -52,10 +60,13 @@ public class Funcionario {
 	private String cidade;
 	
 	@Column (name="cep")
-	private int cep;
+	private Integer cep;
 	
 	@Column (name="numResidencia")
-	private int numEnd;
+	private Integer numEnd;
+	
+	@Column (name="dataNascimento")
+	private Date dataNascimento;
 	
 	public int getCodigo() {
 		return codigo;
@@ -89,35 +100,35 @@ public class Funcionario {
 		this.rg = rg;
 	}
 	
-	public int getDddTelefone() {
+	public Integer getDddTelefone() {
 		return dddTelefone;
 	}
 	
-	public void setDddTelefone(int dddTelefone) {
+	public void setDddTelefone(Integer dddTelefone) {
 		this.dddTelefone = dddTelefone;
 	}
 	
-	public String getTelefone() {
+	public Integer getTelefone() {
 		return telefone;
 	}
 	
-	public void setTelefone(String telefone) {
+	public void setTelefone(Integer telefone) {
 		this.telefone = telefone;
 	}
 	
-	public int getDddCelular() {
+	public Integer getDddCelular() {
 		return dddCelular;
 	}
 	
-	public void setDddCelular(int dddCelular) {
+	public void setDddCelular(Integer dddCelular) {
 		this.dddCelular = dddCelular;
 	}
 	
-	public String getCelular() {
+	public Integer getCelular() {
 		return celular;
 	}
 	
-	public void setCelular(String celular) {
+	public void setCelular(Integer celular) {
 		this.celular = celular;
 	}
 	
@@ -161,20 +172,58 @@ public class Funcionario {
 		this.cidade = cidade;
 	}
 	
-	public int getCep() {
+	public Integer getCep() {
 		return cep;
 	}
 	
-	public void setCep(int cep) {
+	public void setCep(Integer cep) {
 		this.cep = cep;
 	}
 
-	public int getNumEnd() {
+	public Integer getNumEnd() {
 		return numEnd;
 	}
 
-	public void setNumEnd(int numEnd) {
+	public void setNumEnd(Integer numEnd) {
 		this.numEnd = numEnd;
 	}
+	
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	
+	public Funcionario() {
+		
+	}
+
+	public Funcionario(int codigo, String nome, String cpf, String rg, Integer dddTelefone, Integer telefone,
+			Integer dddCelular, Integer celular, String usuario, String senha, String rua, String bairro, String cidade,
+			Integer cep, Integer numEnd, Date dataNascimento) {
+		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.rg = rg;
+		this.dddTelefone = dddTelefone;
+		this.telefone = telefone;
+		this.dddCelular = dddCelular;
+		this.celular = celular;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.rua = rua;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.cep = cep;
+		this.numEnd = numEnd;
+		this.dataNascimento = dataNascimento;
+	}
+	
+	
+	
 	
 }

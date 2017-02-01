@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
-	<persistence-unit name="WebRefeicoes">
+	<persistence-unit name="WebRefeicoes" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>webrefeicoes.model.Funcionario</class>
+		<class>webrefeicoes.model.Cliente</class>
+		<class>webrefeicoes.model.Empresa</class>
 		<properties>
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		<property name="hibernate.hbm2ddl.auto" value="update" />

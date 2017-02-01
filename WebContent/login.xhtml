@@ -1,16 +1,63 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"> 
-
-<ui:composition template="index.xhtml">
-        <ui:define name="conteudo">  // AQUI TEM O NOME CONTEUDO QUE É O LOCAL DO TEMPLATE
-            <f:view>
-                <h:form id="formUsuario">
-                        // todo resto do seu form
-                 </h:form>
-            </f:view>
-        </ui:define>
-    </ui:composition>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="login.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+      
+    <script>
+    
+    </script>
+      
+</h:head>
+<h:body>
+	<div class="bodylogin">
+		<nav class="navbar nav-header navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <img src="resources/images/logo_teste.png" style="height: 75px;margin-right: 10px;"  alt="webrefeicoes"  class="img-respondive"/>WebRefeições
+	    </div>
+	  </div>
+	</nav>
+	<div class="headerLogin">
+			<img src="resources/images/logo_teste.png" alt="webrefeicoes"  class="img-respondive imgLogin"/>
+		</div>
+	<div class="containerLogin">
+		
+		<div class="conteudoLogin">
+			<h:form id="login">
+				<p:messages id="messages" />
+				<div class="form-group">
+						<p:inputText style="width: 100%" 
+						id="usuario"
+						value="#{loginController.funcionario.usuario}"
+						placeholder="Usuário" />
+					</div>
+					<div class="form-group">
+						<p:password style="width: 100%" 
+						 value="#{loginController.funcionario.senha}"
+						 placeholder="Senha"
+						 id="senha" />
+						 
+					</div>
+				  <p:commandButton value="Entrar" styleClass="btn btn-danger btn-lg btn-block" action="#{loginController.envia}" ajax="false">
+				  </p:commandButton>
+			</h:form>
+		</div>
+	</div>
+	<footer>
+  	    <strong>Copyright &copy; 2017 <a href="#" style="color: #6d0000;">WebRefeições</a>.</strong> Todos Direitos Reservados.
+	</footer>
+	</div>
+</h:body>
 </html>

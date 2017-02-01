@@ -1,0 +1,12 @@
+.ui-calendar > input {
+	width: 100%;
+}
+
+.ui-selectonemenu .ui-selectonemenu-trigger {
+    width: 23px !important;
+}
+
+
+.ui-selectonemenu {
+    padding-right: inherit !important;
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+      
+    <script>
+	    function carregar(pagina){
+	        $("#conteudo").load(pagina);
+	    }
+    </script>
+      
+</h:head>
+<h:body>
+			<div class="row">
+			
+				<h:form id="formulario">
+					<p:messages id="messages" />
+					
+					<div class="col-lg-1 form-group">
+						<p:inputText style="width: 100%" 
+						id="Codigo"
+						value="#{empresaController.empresa.codigo}"
+						placeholder="Código" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.nomeFantasia}"
+						 required="true" 
+						 placeholder="Nome Fatansia"
+						 id="NomeFantasia" />
+					</div>
+					<div class="col-lg-4 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.razaoSocial}"
+						 required="true" 
+						 placeholder="Razão Social"
+						 id="RazaoSocial" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.cnpj}"
+						 required="true" 
+						 placeholder="CNPJ"
+						 id="Cnpj" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.inscricaoEstadual}"
+						 required="true" 
+						 placeholder="Inscrição Estadual"
+						 id="InscricaoEstadual" />
+					</div>
+					<div class="col-lg-1 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.dddTelefone}"
+						 required="true" 
+						 placeholder="DDD"
+						 maxlength="2"
+						 id="DDDTelefone" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.telefone}"
+						 required="true" 
+						 maxlength="8"
+						 placeholder="Telefone"
+						 id="Telefone" />
+					</div>
+					<div class="col-lg-1 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.dddCelular}"
+						 placeholder="DDD"
+						 maxlength="2"
+						 id="DDDCelular" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.celular}"
+						 placeholder="Celular"
+						 maxlength="9"
+						 id="Celular" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.usuario}"
+						 placeholder="Usuário"
+						 required='true'
+						 maxlength="30"
+						 id="Usuario" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:password style="width: 100%" 
+						 value="#{empresaController.empresa.senha}"
+						 required='true'
+						 redisplay="true"
+						 maxlength="20"
+						 placeholder="Senha"
+						 id="Senha" />
+					</div>
+					
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.rua}"
+						 placeholder="Rua"
+						 id="Rua" />
+					</div>
+					
+					<div class="col-lg-2 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.bairro}"
+						 placeholder="Bairro"
+						 id="Bairro" />
+					</div>
+					<div class="col-lg-1 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.cep}"
+						 placeholder="CEP"
+						 id="CEP" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.cidade}"
+						 placeholder="Cidade"
+						 id="Cidade" />
+					</div>
+					
+					<div class="col-lg-1 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.numEnd}"
+						 placeholder="Número"
+						 id="Numero" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.complemento}"
+						 placeholder="Complemento"
+						 id="Complemento" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.emailEmpresa}"
+						 placeholder="Email Empresa"
+						 id="EmailEmpresa" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{empresaController.empresa.emailResponsavel}"
+						 placeholder="Email Responsável"
+						 id="EmailResponsavel" />
+					</div>
+					<div  class="col-lg-12 form-group">
+						
+						  <p:commandButton value= "Salvar" update="messages gridEmpresa" styleClass="ui-button-primary btn btn-success" action="#{empresaController.adicionarEmpresa}" >
+						  </p:commandButton>
+						  <p:commandButton immediate="true" value="Limpar" actionListener="#{empresaController.limparDados}"  update="@form:formulario"  styleClass="ui-button-primary btn btn-primary" >
+				          	 <p:resetInput target="formulario" />
+				          </p:commandButton>
+					</div>
+				</h:form>
+			</div>
+			
+			<p:dataTable id='gridEmpresa' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="empresa" 
+			scrollHeight="50%"
+			selection="#{empresaController.selecionaEmpresa}"
+			rowKey="#{empresa.codigo}"
+			value="#{empresaController.listaEmpresas}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{empresaController.trazerDados}"/>
+				
+   				<p:column headerText="Codigo"
+   					style="width: 90px;text-align: center" 
+   					sortBy="#{empresa.codigo}">
+   					<h:outputText value="#{empresa.codigo}" />
+   				</p:column>
+
+   				<p:column headerText="Nome Fantasia" 
+   					style="width:100%"
+   					sortBy="#{empresa.nomeFantasia}">
+   					<h:outputText value="#{empresa.nomeFantasia}" />
+   				</p:column>
+   				
+   				<p:column headerText="Razão Social" 
+   					style="width:100%"
+   					sortBy="#{empresa.razaoSocial}">
+   					<h:outputText value="#{empresa.razaoSocial}" />
+   				</p:column>
+
+   				<p:column headerText="CNPJ"
+   					style="width: 160px;text-align: center"
+   					sortBy="#{empresa.cnpj}">
+   					<h:outputText styleClass="text-center" value="#{empresa.cnpj}" />
+   				</p:column>
+
+   				<p:column headerText="DDD (Celular)"
+   					style='width: 140px;text-align: center' sortBy="#{empresa.dddCelular}">
+   					<h:outputText value="#{empresa.dddCelular}" />
+   				</p:column>
+
+   				<p:column headerText="Celular"
+   					style='width: 140px;text-align: center' sortBy="#{empresa.celular}">
+   					<h:outputText value="#{empresa.celular}"/>
+   				</p:column>
+   				
+   				<p:column headerText="E-mail Responsável"
+   					style='width: 200px;text-align: center' sortBy="#{empresa.emailResponsavel}">
+   					<h:outputText value="#{empresa.emailResponsavel}"/>
+   				</p:column>
+   				
+   				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton update="gridEmpresa" action="#{empresaController.excluirEmpresa(empresa)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   					
+   				</p:column>
+
+   			</p:dataTable>
+  </h:body>
+</html>  
