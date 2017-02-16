@@ -10,5 +10,7 @@
 	<mapping class="webrefeicoes.model.Funcionario" />
 	<mapping class="webrefeicoes.model.Cliente" />
 	<mapping class="webrefeicoes.model.Empresa" />
+	<mapping class="webrefeicoes.model.Produto" />
+	<mapping class="webrefeicoes.model.Prato" />
 </session-factory>
 </hibernate-configuration>

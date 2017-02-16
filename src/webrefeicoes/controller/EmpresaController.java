@@ -32,27 +32,6 @@ public class EmpresaController implements Serializable{
 	private Empresa empresa;
 	private DataModel listaEmpresas;
 	private Empresa selecionaEmpresa;
-	private List<Empresa> trazEmpresas;
-	
-	
-	public List<Empresa> listaEmpresas(){
-		 EmpresaDAO dao =  new  EmpresaDAO();
-	     List<Empresa> lista;
-	     lista = dao.list();//Carrega a lista do Banco de dados
-	     return lista;
-	}
-	
-//	@PostConstruct
-//    public void init(){
-//        empresa = new Empresa();
-//        EmpresaDAO dao =  new  EmpresaDAO();
-//        trazEmpresas = new ArrayList<Empresa>();
-//        trazEmpresas.addAll(dao.list());
-//    }
-//
-//    public String getClasseEscolhida(){
-//        return empresa!=null && empresa.getCodigo()!=null ? empresa.toString():"Classe não escolhida";
-//    }
 	
 	public DataModel getListaEmpresas() {
 		List<Empresa> lista = new EmpresaDAO().list();

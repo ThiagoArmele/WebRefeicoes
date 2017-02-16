@@ -2,7 +2,8 @@
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html">
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"> 
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
     <title>
@@ -10,9 +11,10 @@
     </title>
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
-        <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
       
     <script>
 	    function carregar(pagina){
@@ -23,59 +25,107 @@
 </h:head>
 <h:body>
 	<div class="container-fluid" style="height: 100%;">
-		<div class="row" style="height: 100%;">
-		    <div class="col-lg-2" id='menu' style="height: 100%; padding: 0px">
-			   <nav class="navbar navbar-default sidebar" role="navigation">
-			    <div class="container-fluid">
-			    <div class="navbar-header">
-			      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-			        <span class="sr-only">Toggle navigation</span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			      </button>      
-			    </div>
-			    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-			      <ul class="nav navbar-nav" style='    width: 100%;'>
-			      	<li class="dropdown">
-			      		
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret" style='margin-right: 10px;'></span>Funcionário </a>
-			          <ul class="dropdown-menu forAnimate" role="menu" style='background: rgba(68, 68, 68, 0.73);'>
-			            <li><a href='#' onclick="carregar('CadastroFuncionario.xhtml')">Cadastro</a></li>
-			            <li><a href="#">Permissão</a></li>
-			          </ul>
-			        </li>      
-				    <li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret" style='    margin-right: 10px;'></span>Cliente </a>
-			          <ul class="dropdown-menu forAnimate" role="menu"  style='background: rgba(68, 68, 68, 0.73);'>
-			            <li><a href='#' onclick="carregar('CadastroCliente.xhtml')">Cadastro</a></li>
-			          </ul>
-			        </li>  
-			        <li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret" style='margin-right: 10px;'></span>Conênio</a>
-			          <ul class="dropdown-menu forAnimate" role="menu"  style='background: rgba(68, 68, 68, 0.73);'>
-			            <li><a onclick="">Cadastro</a></li>
-			            <li><a onclick="">Consultar</a></li>
-			          </ul>
-			        </li>  
-			         <li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret" style='margin-right: 10px;'>
-			          </span>Refeiçõe</a>
-			          <ul class="dropdown-menu forAnimate" role="menu"  style='background: rgba(68, 68, 68, 0.73);'>
-			            <li><a onclick="">Cadastro</a></li>
-			            <li><a onclick="">Cardápio</a></li>
-			          </ul>
-			        </li>  
-			      </ul>
-			    </div>
-			  </div>
-			</nav>
-		   </div>
-		   <div id="conteudo" class="col-lg-10">
-		</div>
-		</div>
-		
-	</div>
+			<div class="row">
+				<div style="width: 100%; height: 80px;background: #680404;">
+					 <img src="resources/images/logo_teste.png" style="height: 75px;margin-right: 10px;"  alt="webrefeicoes"  class="img-respondive"/>
+					 <span style="color: white">WebRefeições</span>
+			 	 	<h:outputText id="display" styleClass="pull-right" style="color: #b03030;font-size: 19px; padding: 3px 9px;" value="#{loginController.funcionario.usuario}" />
+		 	 		<h:outputText id="display" styleClass="pull-right" style="color: white;font-size: 22px; padding-right: 10px;"  value="Bem Vindo: " />
+				</div>
+			</div>
+		    <div class="row" style="height: 100%;    background: #eeeeee;">
+		        <div class="col-lg-2 col-md-2" style="height: 100%;    background: #2b2727; padding: 0px">
+		            <div class="panel-group" id="accordion">
+		                <div class="panel panel-default">
+		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+		                        <h4 class="panel-title">
+		                          	<i class="fa fa-user" style="    padding-right: 10px;" aria-hidden="true"></i>Funcionário
+		                        </h4>
+		                    </div>
+		                    <div id="collapseOne" class="panel-collapse collapse in">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tr>
+		                                    <td onclick="carregar('CadastroFuncionario.xhtml')">
+		                                       Cadastro
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>
+		                                       Permissão
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+		                        <h4 class="panel-title">
+		                          <i class="fa fa-users" aria-hidden="true"></i> Cliente
+		                        </h4>
+		                    </div>
+		                    <div id="collapseTwo" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tr>
+		                                    <td onclick="carregar('CadastroCliente.xhtml')">
+		                                    	Cadastro
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+		                        <h4 class="panel-title">
+		                             <i class="fa fa-cutlery" style="padding-right: 10px;" aria-hidden="true"></i>Refeição
+		                        </h4>
+		                    </div>
+		                    <div id="collapseThree" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tr>
+		                                    <td onclick="carregar('CadastroProduto.xhtml')">
+		                                    	 Cadastro de Produto
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td onclick="carregar('CadastroPrato.xhtml')">
+		                                    	 Cadastro de Prato
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+		                <div class="panel panel-default">
+		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+		                        <h4 class="panel-title">
+		                           <i class="fa fa-building" style="padding-right: 5px;" aria-hidden="true"></i> Empresa
+		                        </h4>
+		                    </div>
+		                    <div id="collapseFour" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tr>
+		                                    <td onclick="carregar('CadastroEmpresa.xhtml')">
+		                                        Cadastro
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		        <div id="conteudo" class="col-lg-10 col-md-10" style="padding: 10px;background: #eeeeee;">
+				</div>
+		    </div>
+		    
+	  </div>
+		   
 	
 </h:body>
 </html>

@@ -11,6 +11,9 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 import org.primefaces.event.SelectEvent;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import webrefeicoes.dao.FuncionarioDAO;
 import webrefeicoes.model.Funcionario;
@@ -38,6 +41,7 @@ public class funcionarioController implements Serializable{
 	
 	public funcionarioController() {
 		funcionario = new Funcionario();
+		
 	}
 	
 	public Funcionario getFuncionario() {

@@ -5,6 +5,8 @@
 		<class>webrefeicoes.model.Funcionario</class>
 		<class>webrefeicoes.model.Cliente</class>
 		<class>webrefeicoes.model.Empresa</class>
+		<class>webrefeicoes.model.Produto</class>
+		<class>webrefeicoes.model.Prato</class>
 		<properties>
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		<property name="hibernate.hbm2ddl.auto" value="update" />

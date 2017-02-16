@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+			<div class="row">
+			
+				<h:form id="formulario">
+					<p:messages id="messages" />
+					
+					<div class="col-lg-1 form-group">
+						<p:inputText style="width: 100%" 
+						id="Codigo"
+						 value="#{pratoController.prato.codigo}"
+						placeholder="Codigo" />
+					</div>
+					<div class="col-lg-8 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{pratoController.prato.descricao}"
+						 required="true" 
+						 placeholder="Nome"
+						 id="NomePrato" />
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{pratoController.prato.preco}"
+						 required="true" 
+						 placeholder="Preço"
+						 id="Preco" />
+					</div>
+					<div class="col-lg-5 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{pratoController.prato.composicaoProduto}"
+						 required="true" 
+						 placeholder="Composição do Prato"
+						 id="ComposicaoPrato" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:selectOneMenu id="desconto" value="#{pratoController.prato.comDesconto}"  placeholder="Desconto" style="width: 100%">
+							  <f:selectItem itemLabel='Não' itemValue="nao"/> 
+							  <f:selectItem itemLabel='Sim' itemValue="sim"/> 
+				        </p:selectOneMenu>
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:inputText style="width: 100%" 
+						 value="#{pratoController.prato.precoDesconto}"
+						 placeholder="Preço do Desconto"
+						 id="PrecoDesconto" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:selectOneMenu id="noCardapio" value="#{pratoController.prato.noCardapio}"   style="width: 100%">
+							  <f:selectItem itemLabel='Não' itemValue="nao"/> 
+							  <f:selectItem itemLabel='Sim' itemValue="sim"/> 
+				        </p:selectOneMenu>
+					</div>
+					<div  class="col-lg-12 form-group">
+						
+						  <p:commandButton value= "Salvar" update="messages gridPrato" styleClass="ui-button-primary btn btn-success" action="#{pratoController.adicionarPrato}" >
+						  </p:commandButton>
+						  <p:commandButton immediate="true" value="Limpar" actionListener="#{pratoController.limparDados}"  update="@form:formulario"  styleClass="ui-button-primary btn btn-primary" >
+				          	 <p:resetInput target="formulario" />
+				          </p:commandButton>
+					</div>
+					
+				</h:form>
+			</div>
+			
+			<p:dataTable id='gridPrato' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="prato" 
+			scrollHeight="50%"
+			selection="#{pratoController.selecionaPrato}"
+			rowKey="#{prato.codigo}"
+			value="#{pratoController.listaPratos}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{pratoController.trazerDados}"/>
+				
+   				<p:column headerText="Codigo"
+   					style="width: 90px;text-align: center" 
+   					sortBy="#{prato.codigo}">
+   					<h:outputText value="#{prato.codigo}" />
+   				</p:column>
+
+   				<p:column headerText="Descrição" 
+   					style="width:100%"
+   					sortBy="#{prato.nome}">
+   					<h:outputText value="#{prato.descricao}" />
+   				</p:column>
+   				<p:column headerText="Preço" 
+   					style="width: 100px"
+   					sortBy="#{prato.precos}">
+   					<h:outputText value="#{prato.preco}"/>
+   				</p:column>
+   				<p:column headerText="Preço Desconto" 
+   					style="width: 160px"
+   					sortBy="#{prato.precos}">
+   					<h:outputText value="#{prato.precoDesconto}"/>
+   				</p:column>
+   				<p:column headerText="Está no Cardápio" 
+   					style="width: 170px"
+   					sortBy="#{prato.noCardapio}">
+   					<h:outputText value="" rendered="#{prato.noCardapio == ''}"/>
+   					<h:outputText value="Sim" rendered="#{prato.noCardapio == 'sim'}"/>
+   					<h:outputText value="Não" rendered="#{prato.noCardapio == 'nao'}"/>
+   				</p:column>
+   				
+   				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton update="gridPrato" action="#{pratoController.excluirPrato(prato)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   					
+   				</p:column>
+
+   			</p:dataTable>
+  </h:body>
+</html>  

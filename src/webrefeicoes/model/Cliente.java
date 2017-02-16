@@ -91,7 +91,7 @@ public class Cliente implements Serializable{
 	private String numEndEntrega;
 	
 	@Column (name="idEmpresa")
-	private Empresa empresa;
+	private Integer empresa;
 	
 	
 	public int getCodigo() {
@@ -234,8 +234,12 @@ public class Cliente implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 	
-	
-	
+	public Integer getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(Integer empresa) {
+		this.empresa = empresa;
+	}
 	public Cliente() {
 		
 	}
@@ -243,7 +247,7 @@ public class Cliente implements Serializable{
 			Date dataNascimento, Integer dddCelular, Integer celular, String usuario, String senha, String rua,
 			String bairro, String complemento, String cidade, Integer cep, Integer numEnd, String ruaEntrega,
 			String bairroEntrega, String cidadeEntrega, String complementoEntrega, String cepEntrega,
-			String numEndEntrega) {
+			String numEndEntrega, Integer empresa) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
@@ -268,7 +272,10 @@ public class Cliente implements Serializable{
 		this.complementoEntrega = complementoEntrega;
 		this.cepEntrega = cepEntrega;
 		this.numEndEntrega = numEndEntrega;
+		this.empresa = empresa;
 	}
+	
+	
 	
 	
 	

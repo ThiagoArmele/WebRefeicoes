@@ -1,16 +1,22 @@
 package webrefeicoes.controller;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import webrefeicoes.dao.LoginDAO;
 import webrefeicoes.model.Funcionario;
 
 @ManagedBean(name = "loginController")
-@ViewScoped
-public class LoginController {
+@SessionScoped
+public class LoginController implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private LoginDAO loginDao = new LoginDAO();
     private Funcionario funcionario;
     

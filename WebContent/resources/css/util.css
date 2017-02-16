@@ -6,7 +6,38 @@
     width: 23px !important;
 }
 
-
 .ui-selectonemenu {
     padding-right: inherit !important;
+}
+
+button[disabled], html input[disabled] {
+    cursor: no-drop;
+    background: #f0f0f0;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #0088cc;
+    background-color: #680404;
+    background-position: 0px;
+    background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+    background-image: -webkit-linear-gradient(top, #c92323, #d52c2c);
+    background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+    background-image: linear-gradient(to bottom, #c92323, #d52c2c);
+    background-repeat: repeat-x;
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+
+.ui-datatable-scrollable-body::-webkit-scrollbar-thumb {
+    border-radius: 0px !important;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.ui-datatable .ui-datatable-scrollable-body {
+    background: rgb(255, 255, 255) !important;
+    outline: none;
+    border-top: none ;
 }

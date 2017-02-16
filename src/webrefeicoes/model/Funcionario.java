@@ -2,11 +2,13 @@ package webrefeicoes.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -67,6 +69,9 @@ public class Funcionario implements Serializable{
 	
 	@Column (name="dataNascimento")
 	private Date dataNascimento;
+	
+	@Column (name="permissao")
+	private String permissao;
 	
 	public int getCodigo() {
 		return codigo;
@@ -195,15 +200,23 @@ public class Funcionario implements Serializable{
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
 	
+	
+	public String getPermissao() {
+		return permissao;
+	}
+
+	public void setPermissao(String permissao) {
+		this.permissao = permissao;
+	}
+
 	public Funcionario() {
 		
 	}
 
 	public Funcionario(int codigo, String nome, String cpf, String rg, Integer dddTelefone, Integer telefone,
 			Integer dddCelular, Integer celular, String usuario, String senha, String rua, String bairro, String cidade,
-			Integer cep, Integer numEnd, Date dataNascimento) {
+			Integer cep, Integer numEnd, Date dataNascimento, String permissao) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
@@ -221,7 +234,9 @@ public class Funcionario implements Serializable{
 		this.cep = cep;
 		this.numEnd = numEnd;
 		this.dataNascimento = dataNascimento;
+		this.permissao = permissao;
 	}
+
 	
 	
 	

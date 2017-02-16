@@ -17,7 +17,7 @@
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
 <h:body>
-			<div class="row">
+			<div class="container-fluid" style="    padding: 0px;">
 			
 				<h:form id="formulario">
 					<p:messages id="messages" />
@@ -37,9 +37,11 @@
 						 
 					</div>
 					<div class="col-lg-2 form-group">
-						<p:inputText  style="width: 100%"  placeholder="CPF" 
+						<p:inputMask mask="999.999.999-99"
+						style="width: 100%"  placeholder="CPF" 
 						required="true" 
 						id="CPF" 
+						maxlength="11"
 						value="#{FuncionarioController.funcionario.cpf}"
 						/>
 					</div>
@@ -47,6 +49,7 @@
 						<p:inputText style="width: 100%"  placeholder="RG" 
 						required="true" 
 						id="RG"
+						maxlength="9"
 						value="#{FuncionarioController.funcionario.rg}"
 						/>
 					</div>
@@ -64,6 +67,7 @@
 					<div class="col-lg-1 form-group">
 						<p:inputMask style="width: 100%"  
 						id="DDDTelefone" 
+						mask="(99)"
 						maxlength="2"
 						value="#{FuncionarioController.funcionario.dddTelefone}"
 						placeholder="DDD" />
@@ -72,6 +76,7 @@
 						<p:inputMask style="width: 100%" 
 						id="Telefone" 
 						maxlength="8"
+						mask="9999-9999"
 						placeholder="Telefone" 
 						value="#{FuncionarioController.funcionario.telefone}"
 						/>
@@ -80,6 +85,7 @@
 						<p:inputMask style="width: 100%" 
 						id="DDDCelular"
 						maxlength="2"
+						mask="(99)"
 						placeholder="DDD"
 						value="#{FuncionarioController.funcionario.dddCelular}"
 						 />
@@ -140,8 +146,10 @@
 						/>
 					</div>
 					<div class="col-lg-1 form-group">
-						<p:inputText style="width: 100%"  
+						<p:inputMask  style="width: 100%"  
 						id="CEP"
+						mask="99999-999"
+						maxlength="8"
 						placeholder="CEP" 
 						value="#{FuncionarioController.funcionario.cep}"
 						/>
@@ -160,6 +168,7 @@
 			
 			<p:dataTable id='gridFuncionario' emptyMessage="Nenhum Registro Encontrado"
 			scrollable="true"
+			style="    padding: 0px 15px;"
 			selectionMode="single"
 			var="funcionario" 
 			scrollHeight="50%"

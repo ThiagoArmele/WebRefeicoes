@@ -1,19 +1,27 @@
 package webrefeicoes.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
 
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.primefaces.event.SelectEvent;
 
 import webrefeicoes.dao.ClienteDAO;
+import webrefeicoes.dao.HibernateUtil;
 import webrefeicoes.model.Cliente;
+import webrefeicoes.model.Empresa;
 
 @ManagedBean(name = "clienteController")
 @SessionScoped
@@ -24,19 +32,26 @@ public class ClienteController implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Cliente cliente;
-	
-	private DataModel listaClientes;
+	private List<Cliente> listaClientes;
 	private Cliente selecionaCliente;
+	private List<SelectItem> empresas;
+	private boolean checkEntrega;
 	
 	
-	public DataModel getListaClientes() {
-		List<Cliente> lista = new ClienteDAO().list();
-		listaClientes = new ListDataModel(lista);
+	public List<Cliente> listaClientes() {
+		listaClientes = new ClienteDAO().list();
 		return listaClientes;
 	}
 	
-	public ClienteController() {
+	@PostConstruct
+	private void construct() {
 		cliente = new Cliente();
+		setEmpresas(new ArrayList<SelectItem>());
+		listaClientes();
+	}
+	
+	public ClienteController() {
+		setCheckEntrega(false);
 	}
 	
 	public Cliente getCliente() {
@@ -82,20 +97,65 @@ public class ClienteController implements Serializable{
 	
 	public void adicionarCliente(){
 		ClienteDAO dao = new ClienteDAO();
-		
-		if (cliente.getCodigo() == 0L) {
-			dao.save(cliente);
-			FacesContext.getCurrentInstance().addMessage(
-	                null, new FacesMessage(
-	              		  FacesMessage.SEVERITY_INFO,"Cliente cadastrado com sucesso!", 
-	              		  ""));
+		if(!isCheckEntrega()) {
+			if (cliente.getCodigo() == 0L) {
+				dao.save(cliente);
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_INFO,"Cliente cadastrado com sucesso!", 
+		              		  ""));
+			} else {
+				dao.update(cliente);
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_INFO,"Cliente alterado com sucesso!", 
+		              		  ""));
+			}
 		} else {
-			dao.update(cliente);
-			FacesContext.getCurrentInstance().addMessage(
-	                null, new FacesMessage(
-	              		  FacesMessage.SEVERITY_INFO,"Cliente alterado com sucesso!", 
-	              		  ""));
+			if (cliente.getCodigo() == 0L) {
+				cliente.setRuaEntrega(cliente.getRua());
+				dao.save(cliente);
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_INFO,"Cliente cadastrado com sucesso!", 
+		              		  ""));
+			} else {
+				dao.update(cliente);
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_INFO,"Cliente alterado com sucesso!", 
+		              		  ""));
+			}
 		}
+		
 	
 	}
+
+	public List<SelectItem> getEmpresas() {
+		empresas.clear();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query q = session.createQuery("from Empresa");
+		List<Empresa> listaEmpresas = q.list(); 
+		 for(Empresa emp : listaEmpresas){  
+			 SelectItem  s = new SelectItem();  
+			 s.setValue(emp.getCodigo());  
+			 s.setLabel(emp.getNomeFantasia());  
+			 empresas.add(s);  
+		 }  
+		 
+		return empresas;
+	}
+
+	public void setEmpresas(List<SelectItem> empresas) {
+		this.empresas = empresas;
+	}
+
+	public boolean isCheckEntrega() {
+		return checkEntrega;
+	}
+
+	public void setCheckEntrega(boolean checkEntrega) {
+		this.checkEntrega = checkEntrega;
+	}
+
 }
