@@ -1,7 +1,6 @@
 package webrefeicoes.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -34,19 +33,19 @@ public class Cliente implements Serializable{
 	private String rg;
 	
 	@Column (name="dddTelefone")
-	private Integer dddTelefone;
+	private String dddTelefone;
 	
 	@Column (name="telefone")
-	private Integer telefone;
+	private String telefone;
 	
 	@Column (name="dataNascimento")
 	private Date dataNascimento;
 	
 	@Column (name="dddCelular")
-	private Integer dddCelular;
+	private String dddCelular;
 	
 	@Column (name="celular")
-	private Integer celular;
+	private String celular;
 	
 	@Column (name="usuario")
 	private String usuario;
@@ -67,7 +66,7 @@ public class Cliente implements Serializable{
 	private String cidade;
 	
 	@Column (name="cep")
-	private Integer cep;
+	private String cep;
 	
 	@Column (name="numResidencia")
 	private Integer numEnd;
@@ -88,7 +87,7 @@ public class Cliente implements Serializable{
 	private String cepEntrega;
 	
 	@Column (name="numeroEntrega")
-	private String numEndEntrega;
+	private Integer numEndEntrega;
 	
 	@Column (name="idEmpresa")
 	private Integer empresa;
@@ -118,28 +117,28 @@ public class Cliente implements Serializable{
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public Integer getDddTelefone() {
+	public String getDddTelefone() {
 		return dddTelefone;
 	}
-	public void setDddTelefone(Integer dddTelefone) {
+	public void setDddTelefone(String dddTelefone) {
 		this.dddTelefone = dddTelefone;
 	}
-	public Integer getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
-	public void setTelefone(Integer telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public Integer getDddCelular() {
+	public String getDddCelular() {
 		return dddCelular;
 	}
-	public void setDddCelular(Integer dddCelular) {
+	public void setDddCelular(String dddCelular) {
 		this.dddCelular = dddCelular;
 	}
-	public Integer getCelular() {
+	public String getCelular() {
 		return celular;
 	}
-	public void setCelular(Integer celular) {
+	public void setCelular(String celular) {
 		this.celular = celular;
 	}
 	public String getUsuario() {
@@ -178,10 +177,10 @@ public class Cliente implements Serializable{
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 	public Integer getNumEnd() {
@@ -220,10 +219,10 @@ public class Cliente implements Serializable{
 	public void setCepEntrega(String cepEntrega) {
 		this.cepEntrega = cepEntrega;
 	}
-	public String getNumEndEntrega() {
+	public Integer getNumEndEntrega() {
 		return numEndEntrega;
 	}
-	public void setNumEndEntrega(String numEndEntrega) {
+	public void setNumEndEntrega(Integer numEndEntrega) {
 		this.numEndEntrega = numEndEntrega;
 	}
 	
@@ -243,11 +242,11 @@ public class Cliente implements Serializable{
 	public Cliente() {
 		
 	}
-	public Cliente(int codigo, String nome, String cpf, String rg, Integer dddTelefone, Integer telefone,
-			Date dataNascimento, Integer dddCelular, Integer celular, String usuario, String senha, String rua,
-			String bairro, String complemento, String cidade, Integer cep, Integer numEnd, String ruaEntrega,
+	public Cliente(int codigo, String nome, String cpf, String rg, String dddTelefone, String telefone,
+			Date dataNascimento, String dddCelular, String celular, String usuario, String senha, String rua,
+			String bairro, String complemento, String cidade, String cep, Integer numEnd, String ruaEntrega,
 			String bairroEntrega, String cidadeEntrega, String complementoEntrega, String cepEntrega,
-			String numEndEntrega, Integer empresa) {
+			Integer numEndEntrega, Integer empresa) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;

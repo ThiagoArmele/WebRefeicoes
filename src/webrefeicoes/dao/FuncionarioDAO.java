@@ -21,6 +21,7 @@ public class FuncionarioDAO {
 		return (Funcionario) session.load(Funcionario.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Funcionario> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();

@@ -5,47 +5,43 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import webrefeicoes.model.Empresa;
+import webrefeicoes.model.Embalagem;
 
-public class EmpresaDAO {
+public class EmbalagemDAO {
 
-	public void save(Empresa empresa) {
+	public void save(Embalagem embalagem) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.save(empresa);
+		session.save(embalagem);
 		t.commit();
 	}
 
-	public Empresa getEmpresa(long id) {
+	public Embalagem getEmbalagem(long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		return (Empresa) session.load(Empresa.class, id);
+		return (Embalagem) session.load(Embalagem.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Empresa> list() {
+	public List<Embalagem> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List<Empresa> lista = session.createQuery("from Empresa").list();
+		List<Embalagem> lista = session.createQuery("from Embalagem").list();
 		t.commit();
 		return lista;
 	}
 
-	public void remove(Empresa empresa) {
+	public void remove(Embalagem embalagem) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.delete(empresa);
+		session.delete(embalagem);
 		t.commit();
 	}
 
-	public void update(Empresa empresa) {
+	public void update(Embalagem embalagem) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.update(empresa);
+		session.update(embalagem);
 		t.commit();
 		
 	}
-
 }
-
-
-

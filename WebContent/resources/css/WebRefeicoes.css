@@ -1,0 +1,55 @@
+.btn-primary,
+.btn-success {
+    box-shadow: none;
+    height: 30px;
+}
+
+.btn-danger {
+    background-color: #d9534f !important;
+    border-color: #d43f3a !important;
+    box-shadow: none !important;
+    background-image: none !important;
+    text-shadow: none !important;
+    color: white !important;
+}
+
+.btn-success {
+    background-color: #5cb85c !important;
+    border-color: #4cae4c !important;
+    box-shadow: none !important;
+    background-image: none !important;
+    text-shadow: none !important;
+    color: white !important;
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active {
+    background-color: #449d44 !important;
+    border-color: #398439 !important;
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active {
+    background-color: #c9302c !important;
+    border-color: #ac2925 !important;
+}
+
+
+#listaGuarnicao ul,
+#listaMistura ul {
+    padding: 0px;
+    list-style-type: none;
+    background: #fa9090;
+    margin-bottom: 0px;
+    display: block;
+}
+
+#listaGuarnicao ul > li,
+#listaMistura ul > li {
+   padding: 10px;
+    color: white;
+    font-weight: bold;
+    border-bottom: 1px solid #df7070;
+}

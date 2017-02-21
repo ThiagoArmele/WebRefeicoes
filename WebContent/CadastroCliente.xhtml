@@ -13,206 +13,217 @@
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
     <script>
-			var camposHabilitados = "nao";
+			var sHabilitados = "nao";
 			
-			function habilitarCampos() {
-				if(camposHabilitados === "nao"){
+			function habilitars() {
+				if(sHabilitados === "nao"){
 					document.getElementById("formulario:RuaEntrega").disabled = true;
 					document.getElementById("formulario:NumeroEntrega").disabled = true;
 					document.getElementById("formulario:BairroEntrega").disabled = true;
 					document.getElementById("formulario:CidadeEntrega").disabled = true;
 					document.getElementById("formulario:CEPEntrega").disabled = true;
-					camposHabilitados = "sim";
+					sHabilitados = "sim";
 				} else {
 					document.getElementById("formulario:RuaEntrega").disabled = false;
 					document.getElementById("formulario:NumeroEntrega").disabled = false;
 					document.getElementById("formulario:BairroEntrega").disabled = false;
 					document.getElementById("formulario:CidadeEntrega").disabled = false;
 					document.getElementById("formulario:CEPEntrega").disabled = false;
-					camposHabilitados = "nao";
+					sHabilitados = "nao";
 				}
 			}
 	    </script>
 </h:head>
 
 <h:body>
-			<div class="row">
+			<div class="container-fluid" style="padding: 0px;">
 			
 				<h:form id="formulario">
-					<p:messages id="messages" style="padding: 5px"/>
+					<p:growl id="messages" life="5000"/>
 					
 					<div class="col-lg-1 form-group">
+						<p:outputLabel for="Codigo" value="Código " /><br/>
 						<p:inputText style="width: 100%" 
 						id="Codigo"
-						 value="#{clienteController.cliente.codigo}"
-						placeholder="Codigo" />
+						value="#{clienteController.cliente.codigo}"/>
 					</div>
-					<div class="col-lg-5 form-group">
+					<div class="col-lg-4 form-group">
+						<p:outputLabel for="Nome" value="Nome " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{clienteController.cliente.nome}"
 						 required="true" 
-						 requiredMessage="Campo 'Nome' é obrigatório."
-						 placeholder="Nome"
+						 requiredMessage=" 'Nome' é obrigatório."
 						 id="Nome" />
 						 
 					</div>
 					<div class="col-lg-2 form-group">
-						<p:inputText  style="width: 100%"  placeholder="CPF" 
+						<p:outputLabel for="CPF" value="CPF " /><br/>
+						<p:inputMask  style="width: 100%"  
 						required="true" 
 						id="CPF" 
-						requiredMessage="Campo 'CPF' é obrigatório."
+						mask="999.999.999-99"
+						requiredMessage=" 'CPF' é obrigatório."
 						value="#{clienteController.cliente.cpf}"
 						/>
 					</div>
 					<div class="col-lg-2 form-group">
-						<p:inputText style="width: 100%"  placeholder="RG" 
+						<p:outputLabel for="RG" value="RG " /><br/>
+						<p:inputText style="width: 100%"
 						required="true" 
 						id="RG"
-						requiredMessage="Campo 'RG' é obrigatório."
+						requiredMessage=" 'RG' é obrigatório."
 						value="#{clienteController.cliente.rg}"
 						/>
 					</div>
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
+						<p:outputLabel for="DataNascimento" value="Data de Nascimento " /><br/>
 						<p:calendar 
-						placeholder="Data de Nascimento"  
 						value="#{clienteController.cliente.dataNascimento}"
 						pattern="dd/MM/yyyy"
 						locale="de" navigator="true"
-						requiredMessage="Campo 'Data de Nascimento' é obrigatório."
+						requiredMessage=" 'Data de Nascimento' é obrigatório."
 						style="width: 100%" 
 						required="true"  
 						id="DataNascimento"
 						 mask="true" />
 					</div>
 					<div class="col-lg-1 form-group">
-						<p:inputText style="width: 100%"  
+						<p:outputLabel for="DDDTelefone" value="DDD " /><br/>
+						<p:inputMask style="width: 100%"  
 						id="DDDTelefone" 
-						value="#{clienteController.cliente.dddTelefone}"
-						placeholder="DDD" />
+						mask="(99)"
+						value="#{clienteController.cliente.dddTelefone}"/>
 					</div>
 					<div class="col-lg-2 form-group">
-						<p:inputText style="width: 100%" 
+						<p:outputLabel for="Telefone" value="Telefone " /><br/>
+						<p:inputMask style="width: 100%" 
 						id="Telefone" 
-						placeholder="Telefone" 
+						mask="9999-9999"
 						value="#{clienteController.cliente.telefone}"
 						/>
 					</div>
 					<div class="col-lg-1 form-group">
-						<p:inputText style="width: 100%" 
+						<p:outputLabel for="DDDCelular" value="DDD " /><br/>
+						<p:inputMask style="width: 100%" 
 						id="DDDCelular"
-						placeholder="DDD"
+						mask="(99)"
 						value="#{clienteController.cliente.dddCelular}"
 						 />
 					</div>
 					<div class="col-lg-2 form-group">
+						<p:outputLabel for="Celular" value="Celular " /><br/>
 						<p:inputText style="width: 100%"
 						id="Celular"
-						placeholder="Celular" 
+						mask="(99)"
 						value="#{clienteController.cliente.celular}"
 						/>
 					</div>
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="Usuario" value="Usuario " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Usuario"
-						placeholder="Usuario" 
-						requiredMessage="Campo 'Usuário' é obrigatório."
+						requiredMessage=" 'Usuário' é obrigatório."
 						required="true" 
 						value="#{clienteController.cliente.usuario}"
 						/>
 					</div>
 					<div class="col-lg-3 form-group">
-						<p:password id='senha' style="width: 100%"  placeholder="Senha" 
+						<p:outputLabel for="senha" value="Senha " /><br/>
+						<p:password id='senha' style="width: 100%"
 						required="true" 
-						requiredMessage="Campo 'Senha' é obrigatório."
+						requiredMessage=" 'Senha' é obrigatório."
 						redisplay="true"
 						value="#{clienteController.cliente.senha}"
 						/>
 					</div>
 					<div class="col-lg-3 form-group">
-						<p:selectOneMenu id="empresa" value="#{clienteController.cliente.empresa}" placeholder="Empresa" style="width: 100%">
+						<p:outputLabel for="empresa" value="Empresa " /><br/>
+						<p:selectOneMenu id="empresa" value="#{clienteController.cliente.empresa}" style="width: 100%">
 							  <f:selectItems value="#{clienteController.empresas}"/>
 				        </p:selectOneMenu>
 					</div>
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="Rua" value="Rua " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Rua"
-						placeholder="Rua" 	
 						value="#{clienteController.cliente.rua}"
 						/>
 					</div>
 					<div class="col-lg-2 form-group">
+						<p:outputLabel for="Numero" value="Número " /><br/>
 						<p:inputText style="width: 100%" 
-						id="Número"
-						placeholder="Número" 
+						id="Numero"
 						value="#{clienteController.cliente.numEnd}"
 						/>
 					</div>
 					<div class="col-lg-4 form-group">
+						<p:outputLabel for="Bairro" value="Bairro " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Bairro"
-						placeholder="Bairro" 
 						value="#{clienteController.cliente.bairro}"
 						/>
 					</div>
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="Cidade" value="Cidade " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Cidade"
-						placeholder="Cidade" 
 						value="#{clienteController.cliente.cidade}"
 						/>
 					</div>
 					<div class="col-lg-1 form-group">
+						<p:outputLabel for="CEP" value="CEP " /><br/>
 						<p:inputText style="width: 100%"  
 						id="CEP"
-						placeholder="CEP" 
 						value="#{clienteController.cliente.cep}"
 						/>
 					</div>
-					<div class="col-lg-12 form-group">
-        				<p:selectBooleanCheckbox onchange="habilitarCampos()" value="#{clienteController.checkEntrega}" />
+					<div class="col-lg-4 form-group" style="margin-bottom: 0px; margin-top: 30px">
+        				<p:selectBooleanCheckbox style="margin-right: 10px;" onchange="habilitars()" value="#{clienteController.checkEntrega}" />
 						<h:outputText value="Usar endereço do cliente como entrega" />
 					</div>
 					
-					<div class="col-lg-3 form-group">
+					<div class="col-lg-4 form-group">
+						<p:outputLabel for="RuaEntrega" value="Rua para Entrega " /><br/>
 						<p:inputText style="width: 100%"  
 						id="RuaEntrega"
-						placeholder="Rua de Entrega"
 						value="#{clienteController.cliente.ruaEntrega}"
 						/>
 					</div>
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
+						<p:outputLabel for="NumeroEntrega" value="Número para Entrega " /><br/>
 						<p:inputText style="width: 100%" 
 						id="NumeroEntrega"
-						placeholder="Número de Entrega" 
 						value="#{clienteController.cliente.numEndEntrega}"
 						/>
 					</div>
-					<div class="col-lg-3 form-group">
+					<div class="col-lg-4 form-group">
+						<p:outputLabel for="BairroEntrega" value="Bairro para Entrega " /><br/>
 						<p:inputText style="width: 100%"  
 						id="BairroEntrega"
-						placeholder="Bairro de Entrega" 
 						value="#{clienteController.cliente.bairroEntrega}"
 						/>
 					</div>
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
+						<p:outputLabel for="CidadeEntrega" value="Cidade para Entrega " /><br/>
 						<p:inputText style="width: 100%"  
 						id="CidadeEntrega"
-						placeholder="Cidade de Entrega"
 						value="#{clienteController.cliente.cidadeEntrega}"
 						/>
 					</div>
 					<div class="col-lg-2 form-group">
+						<p:outputLabel for="CEPEntrega" value="CEP para Entrega " /><br/>
 						<p:inputText style="width: 100%"  
 						id="CEPEntrega"
-						placeholder="CEP de Entrega" 
 						value="#{clienteController.cliente.cepEntrega}"
 						/>
 					</div>
 					
-					<div  class="col-lg-12 form-group">
+					<div  class="col-lg-12 form-group" style="text-align: right;">
 						  <p:commandButton value= "Salvar" update="messages gridFuncionario" styleClass="ui-button-primary btn btn-success" action="#{clienteController.adicionarCliente}" >
 						  </p:commandButton>
 						  <p:commandButton immediate="true" value="Limpar" actionListener="#{clienteController.limparDados}"  update="@form:formulario"  styleClass="ui-button-primary btn btn-primary" >
@@ -227,11 +238,22 @@
 			scrollable="true"
 			selectionMode="single"
 			var="cliente" 
+			style="padding: 0px 15px;"
 			scrollHeight="50%"
 			selection="#{clienteController.selecionaCliente}"
 			rowKey="#{cliente.codigo}"
 			value="#{clienteController.listaClientes()}">
 				<p:ajax update="formulario"  event="rowSelect" listener="#{clienteController.trazerDados}"/>
+				
+				<p:column headerText=""
+   					style='width: 100px;text-align: center'>
+   					<h:form>
+	   					<p:commandButton 
+	   					styleClass="btn btn-danger"
+	   					update="gridFuncionario" action="#{clienteController.excluirCliente(cliente)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   				</p:column>
 				
    				<p:column headerText="Código"
    					style="width: 90px;text-align: center"
@@ -241,7 +263,7 @@
    				</p:column>
 
    				<p:column headerText="Nome" 
-   					style="width:100%">
+   					style="width: 300px">
    					<h:outputText value="#{cliente.nome}" />
    				</p:column>
 
@@ -270,17 +292,22 @@
    					<h:outputText value="#{cliente.celular}"/>
    				</p:column>
    				
-   				<p:column headerText=""
-   					style='width: 100px;text-align: center'>
-   					<h:form>
-	   					<p:commandButton update="gridFuncionario" action="#{clienteController.excluirCliente(cliente)}" value="Excluir">
-	   					</p:commandButton>
-   					</h:form>
-   					
-   				</p:column>
-
    			</p:dataTable>
 		
   </h:body>
-  
+  <script>
+	  $("#formulario\\:Celular").mask("(99) 9999-9999?9")
+	  .focusout(function (event) {  
+	      var target, phone, element;  
+	      target = (event.currentTarget) ? event.currentTarget : event.srcElement;  
+	      phone = target.value.replace(/\D/g, '');
+	      element = $(target);  
+	      element.unmask();  
+	      if(phone.length > 10) {  
+	          element.mask("(99) 99999-999?9");  
+	      } else {  
+	          element.mask("(99) 9999-9999?9");  
+	      }  
+	  });
+  </script>
 </html>  

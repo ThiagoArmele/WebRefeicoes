@@ -13,6 +13,8 @@
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
@@ -20,48 +22,53 @@
 			<div class="row">
 			
 				<h:form id="formulario">
-					<p:messages id="messages" />
+					<p:growl id="messages" life="5000"/>
 					
 					<div class="col-lg-1 form-group">
+						<p:outputLabel for="Codigo" value="Código " /><br/>
 						<p:inputText style="width: 100%" 
 						id="Codigo"
-						 value="#{pratoController.prato.codigo}"
-						placeholder="Codigo" />
+						value="#{pratoController.prato.codigo}"/>
 					</div>
 					<div class="col-lg-8 form-group">
+						<p:outputLabel for="NomePrato" value="Nome do Prato " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{pratoController.prato.descricao}"
 						 required="true" 
-						 placeholder="Nome"
+						 requiredMessage=" 'Nome do Prato' é obrigatório."
 						 id="NomePrato" />
 					</div>
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="Preco" value="Preço " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{pratoController.prato.preco}"
 						 required="true" 
-						 placeholder="Preço"
+						 requiredMessage=" 'Preço' é obrigatório."
 						 id="Preco" />
 					</div>
 					<div class="col-lg-5 form-group">
+						<p:outputLabel for="ComposicaoPrato" value="Composição do Prato " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{pratoController.prato.composicaoProduto}"
 						 required="true" 
-						 placeholder="Composição do Prato"
+						 requiredMessage=" 'Composição do Prato' é obrigatório."
 						 id="ComposicaoPrato" />
 					</div>
 					<div class="col-lg-2 form-group">
-						<p:selectOneMenu id="desconto" value="#{pratoController.prato.comDesconto}"  placeholder="Desconto" style="width: 100%">
+						<p:outputLabel for="desconto" value="Desconto " /><br/>
+						<p:selectOneMenu id="desconto" value="#{pratoController.prato.comDesconto}" style="width: 100%">
 							  <f:selectItem itemLabel='Não' itemValue="nao"/> 
 							  <f:selectItem itemLabel='Sim' itemValue="sim"/> 
 				        </p:selectOneMenu>
 					</div>
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="PrecoDesconto" value="Preço do Desconto " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{pratoController.prato.precoDesconto}"
-						 placeholder="Preço do Desconto"
 						 id="PrecoDesconto" />
 					</div>
 					<div class="col-lg-2 form-group">
+						<p:outputLabel for="noCardapio" value="Está no Cardápio " /><br/>
 						<p:selectOneMenu id="noCardapio" value="#{pratoController.prato.noCardapio}"   style="width: 100%">
 							  <f:selectItem itemLabel='Não' itemValue="nao"/> 
 							  <f:selectItem itemLabel='Sim' itemValue="sim"/> 
@@ -88,6 +95,14 @@
 			rowKey="#{prato.codigo}"
 			value="#{pratoController.listaPratos}">
 				<p:ajax update="formulario"  event="rowSelect" listener="#{pratoController.trazerDados}"/>
+				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton styleClass="btn btn-danger" update="gridPrato" action="#{pratoController.excluirPrato(prato)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   					
+   				</p:column>
 				
    				<p:column headerText="Codigo"
    					style="width: 90px;text-align: center" 
@@ -118,15 +133,6 @@
    					<h:outputText value="Não" rendered="#{prato.noCardapio == 'nao'}"/>
    				</p:column>
    				
-   				<p:column headerText=""
-   					style='width: 100px;text-align: center' sortBy="">
-   					<h:form>
-	   					<p:commandButton update="gridPrato" action="#{pratoController.excluirPrato(prato)}" value="Excluir">
-	   					</p:commandButton>
-   					</h:form>
-   					
-   				</p:column>
-
    			</p:dataTable>
   </h:body>
 </html>  

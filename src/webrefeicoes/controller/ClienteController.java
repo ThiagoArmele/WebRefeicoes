@@ -9,17 +9,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import javax.faces.view.ViewScoped;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.primefaces.event.SelectEvent;
 
 import webrefeicoes.dao.ClienteDAO;
-import webrefeicoes.dao.HibernateUtil;
+import webrefeicoes.dao.EmpresaDAO;
 import webrefeicoes.model.Cliente;
 import webrefeicoes.model.Empresa;
 
@@ -82,16 +77,19 @@ public class ClienteController implements Serializable{
 			
 	public Cliente selecionarDados(SelectEvent event) {
    	 Cliente f = (Cliente) event.getObject();
+   	 setCheckEntrega(false);
    	 return f;
     }
 	
 	 public void trazerDados(SelectEvent event) {
     	 Cliente f = (Cliente) event.getObject();
+    	 setCheckEntrega(false);
     	 setCliente(f); 
      }
 	 
 	 public void limparDados() {
 		 Cliente f = new Cliente();
+		 setCheckEntrega(false);
     	 setCliente(f); 
      }
 	
@@ -114,12 +112,21 @@ public class ClienteController implements Serializable{
 		} else {
 			if (cliente.getCodigo() == 0L) {
 				cliente.setRuaEntrega(cliente.getRua());
+				cliente.setBairroEntrega(cliente.getBairro());
+				cliente.setCidadeEntrega(cliente.getCidade());
+				cliente.setCepEntrega(cliente.getCep());
+				cliente.setNumEndEntrega(cliente.getNumEnd());
 				dao.save(cliente);
 				FacesContext.getCurrentInstance().addMessage(
 		                null, new FacesMessage(
 		              		  FacesMessage.SEVERITY_INFO,"Cliente cadastrado com sucesso!", 
 		              		  ""));
 			} else {
+				cliente.setRuaEntrega(cliente.getRua());
+				cliente.setBairroEntrega(cliente.getBairro());
+				cliente.setCidadeEntrega(cliente.getCidade());
+				cliente.setCepEntrega(cliente.getCep());
+				cliente.setNumEndEntrega(cliente.getNumEnd());
 				dao.update(cliente);
 				FacesContext.getCurrentInstance().addMessage(
 		                null, new FacesMessage(
@@ -133,9 +140,8 @@ public class ClienteController implements Serializable{
 
 	public List<SelectItem> getEmpresas() {
 		empresas.clear();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("from Empresa");
-		List<Empresa> listaEmpresas = q.list(); 
+		EmpresaDAO dao = new EmpresaDAO();
+		List<Empresa> listaEmpresas = dao.list(); 
 		 for(Empresa emp : listaEmpresas){  
 			 SelectItem  s = new SelectItem();  
 			 s.setValue(emp.getCodigo());  

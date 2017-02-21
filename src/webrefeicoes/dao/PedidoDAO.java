@@ -5,42 +5,41 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import webrefeicoes.model.Empresa;
+import webrefeicoes.model.Pedido;
 
-public class EmpresaDAO {
+public class PedidoDAO {
 
-	public void save(Empresa empresa) {
+	public void save(Pedido pedido) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.save(empresa);
+		session.save(pedido);
 		t.commit();
 	}
 
-	public Empresa getEmpresa(long id) {
+	public Pedido getPedido(long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		return (Empresa) session.load(Empresa.class, id);
+		return (Pedido) session.load(Pedido.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Empresa> list() {
+	public List<Pedido> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List<Empresa> lista = session.createQuery("from Empresa").list();
+		List<Pedido> lista = session.createQuery("from Pedido").list();
 		t.commit();
 		return lista;
 	}
 
-	public void remove(Empresa empresa) {
+	public void remove(Pedido pedido) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.delete(empresa);
+		session.delete(pedido);
 		t.commit();
 	}
 
-	public void update(Empresa empresa) {
+	public void update(Pedido pedido) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.update(empresa);
+		session.update(pedido);
 		t.commit();
 		
 	}

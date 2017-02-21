@@ -21,6 +21,7 @@ public class ClienteDAO {
 		return (Cliente) session.load(Cliente.class, id);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Cliente> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();

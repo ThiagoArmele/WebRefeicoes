@@ -13,103 +13,115 @@
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+    <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
 </h:head>
 <h:body>
 			<div class="container-fluid" style="    padding: 0px;">
 			
 				<h:form id="formulario">
-					<p:messages id="messages" />
+					<p:growl id="messages" life="5000"/>
 					
 					<div class="col-lg-1 form-group">
+						<p:outputLabel for="Codigo" value="Código " /><br/>
 						<p:inputText style="width: 100%" 
 						id="Codigo"
-						value="#{FuncionarioController.funcionario.codigo}"
-						placeholder="Codigo" />
+						value="#{FuncionarioController.funcionario.codigo}"/>
 					</div>
-					<div class="col-lg-5 form-group">
+					<div class="col-lg-4 form-group">
+						<p:outputLabel for="Nome" value="Nome " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{FuncionarioController.funcionario.nome}"
 						 required="true" 
-						 placeholder="Nome"
+						 requiredMessage=" 'Nome' é obrigatório."
 						 id="Nome" />
 						 
 					</div>
 					<div class="col-lg-2 form-group">
-						<p:inputMask mask="999.999.999-99"
-						style="width: 100%"  placeholder="CPF" 
+						<p:outputLabel for="CPF" value="CPF " /><br/>
+						<p:inputMask 
+						style="width: 100%" 
 						required="true" 
 						id="CPF" 
+						mask="999.999.999-99"
+						requiredMessage=" 'CPF' é obrigatório."
 						maxlength="11"
 						value="#{FuncionarioController.funcionario.cpf}"
 						/>
 					</div>
 					<div class="col-lg-2 form-group">
-						<p:inputText style="width: 100%"  placeholder="RG" 
+						<p:outputLabel for="RG" value="RG " /><br/>
+						<p:inputText style="width: 100%" 
 						required="true" 
 						id="RG"
+						requiredMessage=" 'RG' é obrigatório."
 						maxlength="9"
 						value="#{FuncionarioController.funcionario.rg}"
 						/>
 					</div>
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
+						<p:outputLabel for="DataNascimento" value="Data de Nascimento " /><br/>
 						<p:calendar 
-						placeholder="Data de Nascimento"  
 						value="#{FuncionarioController.funcionario.dataNascimento}"
 						pattern="dd/MM/yyyy"
 						locale="de" navigator="true"
 						style="width: 100%" 
 						required="true"  
+						requiredMessage=" 'Data de Nascimento' é obrigatório."
 						id="DataNascimento"
 						 mask="true" />
 					</div>
 					<div class="col-lg-1 form-group">
+						<p:outputLabel for="DDDTelefone" value="DDD " /><br/>
 						<p:inputMask style="width: 100%"  
 						id="DDDTelefone" 
 						mask="(99)"
 						maxlength="2"
-						value="#{FuncionarioController.funcionario.dddTelefone}"
-						placeholder="DDD" />
+						value="#{FuncionarioController.funcionario.dddTelefone}"/>
 					</div>
 					<div class="col-lg-2 form-group">
+						<p:outputLabel for="Telefone" value="Telefone " /><br/>
 						<p:inputMask style="width: 100%" 
 						id="Telefone" 
 						maxlength="8"
 						mask="9999-9999"
-						placeholder="Telefone" 
 						value="#{FuncionarioController.funcionario.telefone}"
 						/>
 					</div>
 					<div class="col-lg-1 form-group">
+						<p:outputLabel for="DDDCelular" value="DDD " /><br/>
 						<p:inputMask style="width: 100%" 
 						id="DDDCelular"
 						maxlength="2"
 						mask="(99)"
-						placeholder="DDD"
 						value="#{FuncionarioController.funcionario.dddCelular}"
 						 />
 					</div>
 					<div class="col-lg-2 form-group">
+						<p:outputLabel for="Celular" value="Celular " /><br/>
 						<p:inputText style="width: 100%"
 						id="Celular"
 						maxlength="9"
-						placeholder="Celular" 
 						value="#{FuncionarioController.funcionario.celular}"
 						/>
 					</div>
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="Usuario" value="Usuário " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Usuario"
-						placeholder="Usuario" 
 						required="true" 
 						maxlength="30"
+						requiredMessage=" 'Usuário' é obrigatório."
 						value="#{FuncionarioController.funcionario.usuario}"
 						/>
 					</div>
 					<div class="col-lg-3 form-group">
-						<p:password id='senha' style="width: 100%"  placeholder="Senha" 
+						<p:outputLabel for="senha" value="Senha " /><br/>
+						<p:password id='senha' style="width: 100%"  
 						required="true" 
+						requiredMessage=" 'Senha' é obrigatório."
 						redisplay="true"
 						maxlength="20"
 						value="#{FuncionarioController.funcionario.senha}"
@@ -117,44 +129,44 @@
 					</div>
 					
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="Rua" value="Rua " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Rua"
-						placeholder="Rua" 
 						value="#{FuncionarioController.funcionario.rua}"
 						/>
 					</div>
 					<div class="col-lg-2 form-group">
+						<p:outputLabel for="Numero" value="Número " /><br/>
 						<p:inputText style="width: 100%" 
-						id="Número"
-						placeholder="Número" 
+						id="Numero"
 						maxlength="8"
 						value="#{FuncionarioController.funcionario.numEnd}"
 						/>
 					</div>
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="Bairro" value="Bairro " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Bairro"
-						placeholder="Bairro" 
 						value="#{FuncionarioController.funcionario.bairro}"
 						/>
 					</div>
 					<div class="col-lg-3 form-group">
+						<p:outputLabel for="Cidade" value="Cidade " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Cidade"
-						placeholder="Cidade" 
 						value="#{FuncionarioController.funcionario.cidade}"
 						/>
 					</div>
 					<div class="col-lg-1 form-group">
+						<p:outputLabel for="CEP" value="CEP " /><br/>
 						<p:inputMask  style="width: 100%"  
 						id="CEP"
 						mask="99999-999"
 						maxlength="8"
-						placeholder="CEP" 
 						value="#{FuncionarioController.funcionario.cep}"
 						/>
 					</div>
-					<div  class="col-lg-12 form-group">
+					<div  class="col-lg-12 form-group " style="    text-align: right;">
 						
 						  <p:commandButton value= "Salvar" update="messages gridFuncionario" styleClass="btn btn-success" action="#{FuncionarioController.adicionarFuncionario}" >
 						  </p:commandButton>
@@ -168,7 +180,7 @@
 			
 			<p:dataTable id='gridFuncionario' emptyMessage="Nenhum Registro Encontrado"
 			scrollable="true"
-			style="    padding: 0px 15px;"
+			style="padding: 0px 15px;"
 			selectionMode="single"
 			var="funcionario" 
 			scrollHeight="50%"
@@ -176,6 +188,17 @@
 			rowKey="#{funcionario.codigo}"
 			value="#{FuncionarioController.listaFuncionarios}">
 				<p:ajax update="formulario"  event="rowSelect" listener="#{FuncionarioController.trazerDados}"/>
+   				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton 
+	   					styleClass="btn btn-danger"
+	   					update="gridFuncionario" action="#{FuncionarioController.excluirFuncionario(funcionario)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   					
+   				</p:column>
+
 				
    				<p:column headerText="Codigo"
    					style="width: 90px;text-align: center" 
@@ -184,7 +207,7 @@
    				</p:column>
 
    				<p:column headerText="Nome" 
-   					style="width:100%"
+   					style="width: 500px"
    					sortBy="#{funcionario.nome}">
    					<h:outputText value="#{funcionario.nome}" />
    				</p:column>
@@ -210,15 +233,23 @@
    					<h:outputText value="#{funcionario.celular}"/>
    				</p:column>
    				
-   				<p:column headerText=""
-   					style='width: 100px;text-align: center' sortBy="">
-   					<h:form>
-	   					<p:commandButton update="gridFuncionario" action="#{FuncionarioController.excluirFuncionario(funcionario)}" value="Excluir">
-	   					</p:commandButton>
-   					</h:form>
-   					
-   				</p:column>
-
    			</p:dataTable>
   </h:body>
+  
+  <script>
+  $("#formulario\\:Celular").mask("(99) 9999-9999?9")
+  .focusout(function (event) {  
+      var target, phone, element;  
+      target = (event.currentTarget) ? event.currentTarget : event.srcElement;  
+      phone = target.value.replace(/\D/g, '');
+      element = $(target);  
+      element.unmask();  
+      if(phone.length > 10) {  
+          element.mask("(99) 99999-999?9");  
+      } else {  
+          element.mask("(99) 9999-9999?9");  
+      }  
+  });
+  
+  </script>
 </html>  

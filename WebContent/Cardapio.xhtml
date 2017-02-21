@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+			<div class="container-fluid" id='cardapio'>
+			
+				 <p:tabView>
+				 	<p:tab title="Marmitex">
+				 		<h:panelGrid columns="2" cellpadding="10" style="    width: 100%;">
+					 		<h:form id="formularioMarmitex" >
+					 			<p:growl id="messages" life="5000"/>
+					
+					 			<div class="col-lg-12" style="padding: 0px">
+					 				<div class="col-lg-3 form-group"  id='listaGuarnicao'>
+										<p:outputLabel for="tamanho" value="Tamanho " /><br/>
+										<p:selectOneMenu id="tamanho" value="#{cardapioController.pedido.idEmbalagem}" 
+											style="width: 100%">
+										 	<f:selectItems value="#{cardapioController.embalagens}" />
+								        </p:selectOneMenu>
+								      </div>
+						       </div>
+					 			<div class="col-lg-4 form-group"  id='listaGuarnicao'>
+									<p:selectCheckboxMenu id='guarnicao' value="#{cardapioController.guarnicaoSelecionada}"
+			                            filter="true" filterMatchMode="startsWith" label="Guarnição"
+			                            style="width: 100%"
+			                            panelStyle="width: 350px">
+							            <f:selectItems value="#{cardapioController.produtoGuarnicao}" />
+							            <f:ajax render="listaGuarnicoes"></f:ajax>
+							        </p:selectCheckboxMenu>
+							        <br>
+							        </br>
+						         	<p:outputPanel id="display" style="width:100%;padding-left:0px;margin-top:10px">
+								        <p:dataList value="#{cardapioController.guarnicaoSelecionada}" id='listaGuarnicoes' var="guarnicaoSelecionada" 
+								       		emptyMessage="Nenhuma Guarnição Selecionada">
+								        #{guarnicaoSelecionada}
+							        	</p:dataList>
+								    </p:outputPanel>
+								</div>
+								
+								<div class="col-lg-4 form-group"  id='listaMistura'>
+									<p:selectCheckboxMenu id='mistura' value="#{cardapioController.misturaSelecionada}"
+			                            filter="true" filterMatchMode="startsWith" label="Mistura"
+			                            style="width: 100%"
+			                            panelStyle="width: 350px">
+							            <f:selectItems value="#{cardapioController.produtoMisturas}" />
+							            <f:ajax render="listaMisturas"></f:ajax>
+							        </p:selectCheckboxMenu>
+							        <br>
+							        </br>
+						         	<p:outputPanel style="width:100%;padding-left:0px;margin-top:10px">
+								        <p:dataList value="#{cardapioController.misturaSelecionada}" id='listaMisturas' var="misturaSelecionada" 
+								       		emptyMessage="Nenhuma Mistura Selecionada">
+								        #{misturaSelecionada}
+							        	</p:dataList>
+								    </p:outputPanel>
+								</div>
+								
+								<div class="col-lg-4 form-group"  id='listaMistura'>
+									<p:selectCheckboxMenu id='outro' value="#{cardapioController.outroSelecionada}"
+			                            filter="true" filterMatchMode="startsWith" label="Outros"
+			                            style="width: 100%"
+			                            panelStyle="width: 350px">
+							            <f:selectItems value="#{cardapioController.produtoOutros}" />
+							            <f:ajax render="listaOutros"></f:ajax>
+							        </p:selectCheckboxMenu>
+							        <br>
+							        </br>
+						         	<p:outputPanel style="width:100%;padding-left:0px;margin-top:10px">
+								        <p:dataList value="#{cardapioController.outroSelecionada}" id='listaOutros' var="outroSelecionada" 
+								       		emptyMessage="Nenhuma Selecionada" rows="2">
+								        #{outroSelecionada}
+							        	</p:dataList>
+								    </p:outputPanel>
+								</div>
+								<div  class="col-lg-12 form-group" style="text-align: right;">
+								  <p:commandButton value= "Fazer Pedido" update="messages" 
+								  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
+								  </p:commandButton>
+								</div>
+					 		</h:form>
+					 	</h:panelGrid>
+				 	</p:tab>
+				 	
+				 	<p:tab title="Pratos Prontos">
+				 	
+				 	</p:tab>
+				 </p:tabView>
+			</div>
+  </h:body>
+</html>  

@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
+</h:head>
+
+<h:body>
+			<div class="container-fluid" style="padding: 0px;">
+			
+				<h:form id="formulario">
+					<p:growl id="messages" life="5000"/>
+					
+					<div class="col-lg-1 form-group">
+						<p:outputLabel for="Codigo" value="Código " /><br/>
+						<p:inputText style="width: 100%" 
+						id="Codigo"
+						value="#{embalagemController.embalagem.codigo}"/>
+					</div>
+					<div class="col-lg-5 form-group">
+						<p:outputLabel for="tamanho" value="Tamanho " /><br/>
+						<p:inputText style="width: 100%" 
+						 value="#{embalagemController.embalagem.tamanho}"
+						 required="true" 
+						 requiredMessage=" 'Tamanho' é obrigatório."
+						 id="tamanho" />
+						 
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="preco" value="Preço " /><br/>
+						<p:inputText style="width: 100%"  
+						id="preco"
+						value="#{embalagemController.embalagem.preco}"
+						/>
+					</div>
+					
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="qtdeGuarnicao" value="Qtde de Guarnição " /><br/>
+						<p:inputText style="width: 100%"  
+						id="qtdeGuarnicao"
+						value="#{embalagemController.embalagem.qtdeGuarnicao}"
+						/>
+					</div>
+					
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="qtdeMistura" value="Qtde de Mistura " /><br/>
+						<p:inputText style="width: 100%"  
+						id="qtdeMistura"
+						value="#{embalagemController.embalagem.qtdeMistura}"
+						/>
+					</div>
+					
+					<div  class="col-lg-12 form-group" style="text-align: right;">
+						  <p:commandButton value= "Salvar" update="messages gridEmbalagem" styleClass="ui-button-primary btn btn-success" action="#{embalagemController.adicionarEmbalagem}" >
+						  </p:commandButton>
+						  <p:commandButton immediate="true" value="Limpar" actionListener="#{embalagemController.limparDados}"  update="@form:formulario"  styleClass="ui-button-primary btn btn-primary" >
+				          	 <p:resetInput target="formulario" />
+				          </p:commandButton>
+					</div>
+					</h:form>
+			</div>
+			
+				
+			<p:dataTable id='gridEmbalagem' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="embalagem" 
+			style="padding: 0px 15px;"
+			
+			scrollHeight="50%"
+			selection="#{embalagemController.selecionaEmbalagem}"
+			rowKey="#{embalagem.codigo}"
+			value="#{embalagemController.listaEmbalagems()}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{embalagemController.trazerDados}"/>
+				
+				<p:column headerText=""
+   					style='width: 100px;text-align: center'>
+   					<h:form>
+	   					<p:commandButton 
+	   					styleClass="btn btn-danger"
+	   					update="gridEmbalagem" action="#{embalagemController.excluirEmbalagem(embalagem)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   				</p:column>
+				
+   				<p:column headerText="Código"
+   					style="width: 90px;text-align: center"
+   					filterMatchMode="contains"
+   					sortBy="#{embalagem.codigo}">
+   					<h:outputText value="#{embalagem.codigo}" />
+   				</p:column>
+
+   				<p:column headerText="Tamanho" 
+   					style="width: 100%">
+   					<h:outputText value="#{embalagem.tamanho}" />
+   				</p:column>
+
+   				<p:column headerText="Preço"
+   					style="width: 160px;text-align: center">
+   					<h:outputText styleClass="text-center" value="#{embalagem.preco}" />
+   				</p:column>
+
+				<p:column headerText="Qtde de Guarnição"
+   					style="width: 160px;text-align: center">
+   					<h:outputText styleClass="text-center" value="#{embalagem.qtdeGuarnicao}" />
+   				</p:column>
+   				
+   				<p:column headerText="Qtde de Mistura"
+   					style="width: 160px;text-align: center">
+   					<h:outputText styleClass="text-center" value="#{embalagem.qtdeMistura}" />
+   				</p:column>
+   			</p:dataTable>
+		
+  </h:body>
+</html>  

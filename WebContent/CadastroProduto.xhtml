@@ -13,6 +13,7 @@
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
@@ -20,38 +21,41 @@
 			<div class="row">
 			
 				<h:form id="formulario">
-					<p:messages id="messages" />
+					<p:growl id="messages" />
+					
 					
 					<div class="col-lg-1 form-group">
+						<p:outputLabel for="Codigo" value="Código " /><br/>
 						<p:inputText style="width: 100%" 
 						id="Codigo"
-						 value="#{produtoController.produto.codigo}"
-						placeholder="Codigo" />
+						value="#{produtoController.produto.codigo}"/>
 					</div>
 					<div class="col-lg-7 form-group">
+						<p:outputLabel for="DescricaoProduto" value="Descrição do Produto " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{produtoController.produto.descricao}"
 						 required="true" 
-						 placeholder="Descrição do Produto"
 						 id="DescricaoProduto" />
 						 
 					</div>
 					<div class="col-lg-2 form-group">
-						<p:selectOneMenu id="tipo" value="#{produtoController.produto.tipo}"  placeholder="Empresa" style="width: 100%">
+						<p:outputLabel for="tipo" value="Tipo" /><br/>
+						<p:selectOneMenu id="tipo" value="#{produtoController.produto.tipo}" style="width: 100%">
 							  <f:selectItem itemLabel='' itemValue=""/> 
+							  <f:selectItem itemLabel='Outros' itemValue="Outros"/> 
 							  <f:selectItem itemLabel='Guarnição' itemValue="Guarnicao"/> 
 							  <f:selectItem itemLabel='Mistura' itemValue="Mistura"/> 
 				        </p:selectOneMenu>
 					</div>
 					
 					<div class="col-lg-2 form-group">
-						<p:selectOneMenu id="noCardapio" value="#{produtoController.produto.noCardapio}"  placeholder="Empresa" style="width: 100%">
+						<p:outputLabel for="noCardapio" value="Está no Cardápio" /><br/>
+						<p:selectOneMenu id="noCardapio" value="#{produtoController.produto.noCardapio}" style="width: 100%">
 							  <f:selectItem itemLabel='Não' itemValue="nao"/> 
 							  <f:selectItem itemLabel='Sim' itemValue="sim"/> 
 				        </p:selectOneMenu>
 					</div>
 					<div  class="col-lg-12 form-group">
-						
 						  <p:commandButton value= "Salvar" update="messages gridProduto" styleClass="ui-button-primary btn btn-success" action="#{produtoController.adicionarProduto}" >
 						  </p:commandButton>
 						  <p:commandButton immediate="true" value="Limpar" actionListener="#{produtoController.limparDados}"  update="@form:formulario"  styleClass="ui-button-primary btn btn-primary" >
@@ -71,7 +75,15 @@
 			rowKey="#{produto.codigo}"
 			value="#{produtoController.listaProdutos}">
 				<p:ajax update="formulario"  event="rowSelect" listener="#{produtoController.trazerDados}"/>
-				
+				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton update="gridProduto" action="#{produtoController.excluirProduto(produto)}" 
+	   					value="Excluir" styleClass="btn btn-danger">
+	   					</p:commandButton>
+   					</h:form>
+   					
+   				</p:column>
    				<p:column headerText="Codigo"
    					style="width: 90px;text-align: center" 
    					sortBy="#{produto.codigo}">
@@ -96,17 +108,9 @@
    					<h:outputText value="" rendered="#{produto.tipo == ''}"/>
    					<h:outputText value="Guarnição" rendered="#{produto.tipo == 'Guarnicao'}"/>
    					<h:outputText value="Mistura" rendered="#{produto.tipo == 'Mistura'}"/>
+   					<h:outputText value="Outros" rendered="#{produto.tipo == 'Outros'}"/>
    				</p:column>
    				
-   				<p:column headerText=""
-   					style='width: 100px;text-align: center' sortBy="">
-   					<h:form>
-	   					<p:commandButton update="gridProduto" action="#{produtoController.excluirProduto(produto)}" value="Excluir">
-	   					</p:commandButton>
-   					</h:form>
-   					
-   				</p:column>
-
    			</p:dataTable>
   </h:body>
 </html>  

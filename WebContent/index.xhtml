@@ -15,7 +15,7 @@
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
-      
+    <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
     <script>
 	    function carregar(pagina){
 	        $("#conteudo").load(pagina);
@@ -37,12 +37,28 @@
 		        <div class="col-lg-2 col-md-2" style="height: 100%;    background: #2b2727; padding: 0px">
 		            <div class="panel-group" id="accordion">
 		                <div class="panel panel-default">
-		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+		                   	<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#perfil">
 		                        <h4 class="panel-title">
-		                          	<i class="fa fa-user" style="    padding-right: 10px;" aria-hidden="true"></i>Funcionário
+		                          	<i class="fa fa-user" style="    padding-right: 15px;" aria-hidden="true"></i>Perfil
 		                        </h4>
 		                    </div>
-		                    <div id="collapseOne" class="panel-collapse collapse in">
+		                    <div id="perfil" class="panel-collapse collapse">
+		                        <div class="panel-body">
+		                            <table class="table">
+		                                <tr>
+		                                    <td>
+		                                       Configuração de Perfil
+		                                    </td>
+		                                </tr>
+		                            </table>
+		                        </div>
+		                    </div>
+		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+		                        <h4 class="panel-title">
+		                          	<i class="fa fa-users" style="    padding-right: 10px;" aria-hidden="true"></i>Funcionário
+		                        </h4>
+		                    </div>
+		                    <div id="collapseOne" class="panel-collapse collapse">
 		                        <div class="panel-body">
 		                            <table class="table">
 		                                <tr>
@@ -62,7 +78,7 @@
 		                <div class="panel panel-default">
 		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
 		                        <h4 class="panel-title">
-		                          <i class="fa fa-users" aria-hidden="true"></i> Cliente
+		                          <i class="fa fa-users" style="    padding-right: 5px;" aria-hidden="true"></i> Cliente
 		                        </h4>
 		                    </div>
 		                    <div id="collapseTwo" class="panel-collapse collapse">
@@ -80,12 +96,17 @@
 		                <div class="panel panel-default">
 		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
 		                        <h4 class="panel-title">
-		                             <i class="fa fa-cutlery" style="padding-right: 10px;" aria-hidden="true"></i>Refeição
+		                             <i class="fa fa-cutlery" style="padding-right: 15px;" aria-hidden="true"></i>Refeição
 		                        </h4>
 		                    </div>
 		                    <div id="collapseThree" class="panel-collapse collapse">
 		                        <div class="panel-body">
 		                            <table class="table">
+		                                <tr>
+		                                    <td onclick="carregar('CadastroEmbalagem.xhtml')">
+		                                    	 Cadastro de Embalagem
+		                                    </td>
+		                                </tr>
 		                                <tr>
 		                                    <td onclick="carregar('CadastroProduto.xhtml')">
 		                                    	 Cadastro de Produto
@@ -96,6 +117,16 @@
 		                                    	 Cadastro de Prato
 		                                    </td>
 		                                </tr>
+		                                <tr>
+		                                    <td onclick="carregar('Cardapio.xhtml')">
+		                                    	 Cardápio
+		                                    </td>
+		                                </tr>
+		                                 <tr>
+		                                    <td onclick="carregar('ConsultaPedidos.xhtml')">
+		                                    	 Consulta de Pedidos
+		                                    </td>
+		                                </tr>
 		                            </table>
 		                        </div>
 		                    </div>
@@ -103,7 +134,7 @@
 		                <div class="panel panel-default">
 		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
 		                        <h4 class="panel-title">
-		                           <i class="fa fa-building" style="padding-right: 5px;" aria-hidden="true"></i> Empresa
+		                           <i class="fa fa-building" style="padding-right: 10px;" aria-hidden="true"></i> Empresa
 		                        </h4>
 		                    </div>
 		                    <div id="collapseFour" class="panel-collapse collapse">

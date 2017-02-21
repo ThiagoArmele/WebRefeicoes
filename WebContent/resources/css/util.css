@@ -41,3 +41,55 @@ button[disabled], html input[disabled] {
     outline: none;
     border-top: none ;
 }
+
+.ui-outputlabel .ui-outputlabel-rfi {
+    color: red;
+}
+
+.ui-state-error {
+    background: #eeeeee 50% 50% repeat-x;
+    color: #000000;
+}
+
+.ui-growl-info {
+    background: #337ab7 !important;
+}
+
+#cardapio ul {
+   display: flex;
+}
+
+#cardapio .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header li.ui-state-active,
+#cardapio .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header li {
+    width: 50%;
+    margin-bottom: 1px;
+    align-items: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    margin-right: 0px;
+}
+
+#cardapio .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header li.ui-state-active,
+.ui-tabs .ui-tabs-nav.ui-widget-header li.ui-state-hover {
+    background: #680404;
+}
+
+#cardapio .ui-tabs.ui-tabs-top .ui-tabs-nav.ui-widget-header li {
+    background: #2b2727;
+}
+
+#cardapio .ui-tabs .ui-tabs-nav.ui-widget-header li a {
+	color: #ffffff;
+	outline: none;
+	font-weight: bold;
+	text-shadow: none;
+}
+
+
+#cardapio .ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger {
+    width: 23px;
+}

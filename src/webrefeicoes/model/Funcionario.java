@@ -2,13 +2,11 @@ package webrefeicoes.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -35,16 +33,16 @@ public class Funcionario implements Serializable{
 	private String rg;
 	
 	@Column (name="dddTelefone")
-	private Integer dddTelefone;
+	private String dddTelefone;
 	
 	@Column (name="telefone")
-	private Integer telefone;
+	private String telefone;
 	
 	@Column (name="dddCelular")
-	private Integer dddCelular;
+	private String dddCelular;
 
 	@Column (name="celular")
-	private Integer celular;
+	private String celular;
 	
 	@Column (name="usuario")
 	private String usuario;
@@ -105,35 +103,35 @@ public class Funcionario implements Serializable{
 		this.rg = rg;
 	}
 	
-	public Integer getDddTelefone() {
+	public String getDddTelefone() {
 		return dddTelefone;
 	}
 	
-	public void setDddTelefone(Integer dddTelefone) {
+	public void setDddTelefone(String dddTelefone) {
 		this.dddTelefone = dddTelefone;
 	}
 	
-	public Integer getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 	
-	public void setTelefone(Integer telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 	
-	public Integer getDddCelular() {
+	public String getDddCelular() {
 		return dddCelular;
 	}
 	
-	public void setDddCelular(Integer dddCelular) {
+	public void setDddCelular(String dddCelular) {
 		this.dddCelular = dddCelular;
 	}
 	
-	public Integer getCelular() {
+	public String getCelular() {
 		return celular;
 	}
 	
-	public void setCelular(Integer celular) {
+	public void setCelular(String celular) {
 		this.celular = celular;
 	}
 	
@@ -214,8 +212,8 @@ public class Funcionario implements Serializable{
 		
 	}
 
-	public Funcionario(int codigo, String nome, String cpf, String rg, Integer dddTelefone, Integer telefone,
-			Integer dddCelular, Integer celular, String usuario, String senha, String rua, String bairro, String cidade,
+	public Funcionario(int codigo, String nome, String cpf, String rg, String dddTelefone, String telefone,
+			String dddCelular, String celular, String usuario, String senha, String rua, String bairro, String cidade,
 			Integer cep, Integer numEnd, Date dataNascimento, String permissao) {
 		super();
 		this.codigo = codigo;

@@ -24,11 +24,12 @@ public class PratoController implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Prato prato;
-	
+	@SuppressWarnings("rawtypes")
 	private DataModel listaPratos;
 	private Prato selecionaPrato;
 	
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public DataModel getListaPratos() {
 		List<Prato> lista = new PratoDAO().list();
 		listaPratos = new ListDataModel(lista);
