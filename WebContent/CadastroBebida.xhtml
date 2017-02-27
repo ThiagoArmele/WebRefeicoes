@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+			<div class="row">
+			
+				<h:form id="formulario">
+					<p:growl id="messages" life="5000"/>
+					
+					<div class="col-lg-1 form-group">
+						<p:outputLabel for="Codigo" value="Código " /><br/>
+						<p:inputText style="width: 100%" 
+						id="Codigo"
+						value="#{bebidaController.bebida.codigo}"/>
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:outputLabel for="descricao" value="Descrição " /><br/>
+						<p:inputText style="width: 100%" 
+						 value="#{bebidaController.bebida.descricao}"
+						 required="true" 
+						 requiredMessage=" 'Descrição' é obrigatório."
+						 id="descricao" />
+					</div>
+					
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="tamanho" value="Tamanho " /><br/>
+						<p:inputText style="width: 100%" 
+						 value="#{bebidaController.bebida.tamanho}"
+						 required="true" 
+						 requiredMessage=" 'Tamanho' é obrigatório."
+						 id="tamanho" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="Preco" value="Preço " /><br/>
+						<p:inputText style="width: 100%" 
+						 value="#{bebidaController.bebida.preco}"
+						 required="true" 
+						 requiredMessage=" 'Preço' é obrigatório."
+						 id="Preco">
+						 	<f:convertNumber pattern="#0.00"/>
+						 </p:inputText>
+					</div>
+					
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="tipo" value="Tipo " /><br/>
+						<p:selectOneMenu id="tipo" value="#{bebidaController.bebida.tipo}"   style="width: 100%">
+							  <f:selectItem itemLabel='Refrigerante' itemValue="refrigerante"/> 
+							  <f:selectItem itemLabel='Suco' itemValue="suco"/>
+							  <f:selectItem itemLabel='Água' itemValue="agua"/>
+				        </p:selectOneMenu>
+					</div>
+					
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="noCardapio" value="Está no Cardápio " /><br/>
+						<p:selectOneMenu id="noCardapio" value="#{bebidaController.bebida.noCardapio}"   style="width: 100%">
+							  <f:selectItem itemLabel='Não' itemValue="nao"/> 
+							  <f:selectItem itemLabel='Sim' itemValue="sim"/> 
+				        </p:selectOneMenu>
+					</div>
+					<div  class="col-lg-12 form-group" style="text-align: right;">
+						
+						  <p:commandButton value= "Salvar" update="messages gridPrato" styleClass="btn btn-success" action="#{bebidaController.adicionarBebida}" >
+						  </p:commandButton>
+						  <p:commandButton immediate="true" value="Limpar" actionListener="#{bebidaController.limparDados}"  update="@form:formulario"  styleClass="btn btn-primary" >
+				          	 <p:resetInput target="formulario" />
+				          </p:commandButton>
+					</div>
+					
+				</h:form>
+			</div>
+			
+			<p:dataTable id='gridPrato' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="bebida" 
+			scrollHeight="200px"
+			selection="#{bebidaController.selecionaBebida}"
+			rowKey="#{bebida.codigo}"
+			value="#{bebidaController.listaBebidas}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{bebidaController.trazerDados}"/>
+				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton styleClass="btn btn-danger" update="gridPrato" action="#{bebidaController.excluirBebida(bebida)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   					
+   				</p:column>
+				
+   				<p:column headerText="Codigo"
+   					style="width: 90px;text-align: center" 
+   					sortBy="#{bebida.codigo}">
+   					<h:outputText value="#{bebida.codigo}" />
+   				</p:column>
+
+   				<p:column headerText="Descrição" 
+   					style="width:100%"
+   					sortBy="#{bebida.descricao}">
+   					<h:outputText value="#{bebida.descricao}" />
+   				</p:column>
+   				<p:column headerText="Preço" 
+   					style="width: 100px;text-align: center"
+   					sortBy="#{bebida.preco}">
+   					R$<h:outputText   styleClass="text-center" value="#{bebida.preco}">
+   						<f:convertNumber pattern="#0.00"/>
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Tamanho" 
+   					style="width: 100px;text-align: center"
+   					sortBy="#{bebida.tamanho}">
+   					<h:outputText styleClass="text-center" value="#{bebida.tamanho}"/>
+   				</p:column>
+   				<p:column headerText="Tipo" 
+   					style="width: 170px"
+   					sortBy="#{bebida.tipo}">
+ 					<h:outputText value='Refrigerante' rendered="#{bebida.tipo == 'refrigerante'}"/> 
+					<h:outputText value='Suco' rendered="#{bebida.tipo == 'suco'}"/>
+   					<h:outputText value="Água" rendered="#{bebida.tipo == 'agua'}"/>
+   				</p:column>
+   				<p:column headerText="Está no Cardápio" 
+   					style="width: 170px"
+   					sortBy="#{bebida.noCardapio}">
+   					<h:outputText value="" rendered="#{bebida.noCardapio == ''}"/>
+   					<h:outputText value="Sim" rendered="#{bebida.noCardapio == 'sim'}"/>
+   					<h:outputText value="Não" rendered="#{bebida.noCardapio == 'nao'}"/>
+   				</p:column>
+   				
+   			</p:dataTable>
+  </h:body>
+</html>  

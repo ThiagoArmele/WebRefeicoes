@@ -5,41 +5,42 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import webrefeicoes.model.Pedido;
+import webrefeicoes.model.Bebida;
 
-public class PedidoDAO {
+public class BebidaDAO {
 
-	public void save(Pedido pedido) {
+	public void save(Bebida bebida) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.save(pedido);
+		session.save(bebida);
 		t.commit();
 	}
 
-	public Pedido getPedido(long id) {
+	public Bebida getBebida(long id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		return (Pedido) session.load(Pedido.class, id);
+		return (Bebida) session.load(Bebida.class, id);
 	}
 
-	public List<Pedido> list() {
+	@SuppressWarnings("unchecked")
+	public List<Bebida> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List<Pedido> lista = session.createQuery("from Pedido p where  p.statusPedido <> 'Entregue'").list();
+		List<Bebida> lista = session.createQuery("from Bebida").list();
 		t.commit();
 		return lista;
 	}
 
-	public void remove(Pedido pedido) {
+	public void remove(Bebida bebida) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.delete(pedido);
+		session.delete(bebida);
 		t.commit();
 	}
 
-	public void update(Pedido pedido) {
+	public void update(Bebida bebida) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		session.update(pedido);
+		session.update(bebida);
 		t.commit();
 		
 	}

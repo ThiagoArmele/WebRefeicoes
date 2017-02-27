@@ -112,7 +112,9 @@
 
    				<p:column headerText="Preço"
    					style="width: 160px;text-align: center">
-   					<h:outputText styleClass="text-center" value="#{embalagem.preco}" />
+   					R$<h:outputText styleClass="text-center" value="#{embalagem.preco}">
+   						<f:convertNumber pattern="#0.00"/>
+   					</h:outputText>
    				</p:column>
 
 				<p:column headerText="Qtde de Guarnição"

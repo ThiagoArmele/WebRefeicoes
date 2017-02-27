@@ -9,31 +9,35 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="produto")
-public class Produto implements Serializable{
-
+@Table(name="bebidas")
+public class Bebida implements Serializable{
+	
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
-	@Column (name="idProduto")
+	@Column(name="id")
 	private int codigo;
 	
-	@Column (name="nomeProduto")
+	@Column(name="descricao")
 	private String descricao;
 	
-	@Column (name="tipoProduto")
+	@Column(name="tamanho")
+	private String tamanho;
+	
+	@Column(name="tipo")
 	private String tipo;
 	
-	@Column (name="noCardapio")
+	@Column(name="preco")
+	private Double preco;
+	
+	@Column(name="noCardapio")
 	private String noCardapio;
-	
-	@Column (name="noQuilo")
-	private String noQuilo;
-	
+
 	public int getCodigo() {
 		return codigo;
 	}
@@ -58,6 +62,14 @@ public class Produto implements Serializable{
 		this.tipo = tipo;
 	}
 
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
 	public String getNoCardapio() {
 		return noCardapio;
 	}
@@ -66,26 +78,28 @@ public class Produto implements Serializable{
 		this.noCardapio = noCardapio;
 	}
 	
-	public String getNoQuilo() {
-		return noQuilo;
+	public String getTamanho() {
+		return tamanho;
 	}
 
-	public void setNoQuilo(String noQuilo) {
-		this.noQuilo = noQuilo;
+	public void setTamanho(String tamanho) {
+		this.tamanho = tamanho;
 	}
 
-	public Produto() {
+	public Bebida() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Produto(int codigo, String descricao, String tipo, String noCardapio, String noQuilo) {
+	public Bebida(int codigo, String descricao, String tamanho, String tipo, Double preco, String noCardapio) {
 		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
+		this.tamanho = tamanho;
 		this.tipo = tipo;
+		this.preco = preco;
 		this.noCardapio = noCardapio;
-		this.noQuilo = noQuilo;
 	}
 
+	
 	
 }

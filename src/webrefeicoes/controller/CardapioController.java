@@ -2,23 +2,32 @@ package webrefeicoes.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
+import webrefeicoes.dao.BebidaDAO;
 import webrefeicoes.dao.CardapioDAO;
 import webrefeicoes.dao.EmbalagemDAO;
 import webrefeicoes.dao.HibernateUtil;
 import webrefeicoes.dao.PedidoDAO;
+import webrefeicoes.dao.PratoDAO;
+import webrefeicoes.model.Bebida;
+import webrefeicoes.model.Cliente;
 import webrefeicoes.model.Embalagem;
+import webrefeicoes.model.Funcionario;
 import webrefeicoes.model.Pedido;
+import webrefeicoes.model.Prato;
 import webrefeicoes.model.Produto;
 
 
@@ -37,18 +46,57 @@ public class CardapioController  implements Serializable{
 	private List<SelectItem> produtoOutros;
 	private String selecionados;
 	private Pedido pedido;
+	private List<Embalagem> listaEmbalagens;
 	private String[] guarnicaoSelecionada;  
 	private String[] misturaSelecionada;  
 	private String[] outroSelecionada;  
+	private String[] pratosSelecionados;  
+	private String[] bebidasSelecionados;  
+	private String[] quiloSelecionado;  
 	private List<SelectItem> embalagens;
+	private List<SelectItem> pratos;
+	private List<Prato> listaPratos;
+	private List<Bebida> listaBebidas;
+	private List<SelectItem> bebidasRefrigerantes;
+	private List<SelectItem> bebidasSucos;
+	private List<SelectItem> bebidasAgua;
+	private List<SelectItem> quilos;
+	
+	@ManagedProperty(value = "#{loginController}")
+	private LoginController clienteLogado;
 	
 	public CardapioController() {
 		produto = new Produto();
 		pedido = new Pedido();
+		
+		setBebidasRefrigerantes(new ArrayList<SelectItem>());
 		setProdutoGuarnicao(new ArrayList<SelectItem>());
 		setProdutoMisturas(new ArrayList<SelectItem>());
 		setProdutoOutros(new ArrayList<SelectItem>());
+		setBebidasSucos(new ArrayList<SelectItem>());
+		setBebidasAgua(new ArrayList<SelectItem>());
 		setEmbalagens(new ArrayList<SelectItem>());
+		setPratos(new ArrayList<SelectItem>());
+		setQuilos(new ArrayList<SelectItem>());
+		inicilizarListaEmbalagens();
+		iniciliazaListaPratos();
+		inicilizarListaBebidas();
+	}
+	
+	public void inicilizarListaBebidas() {
+		BebidaDAO dao = new BebidaDAO();
+		setListaBebidas(dao.list());
+	}
+	
+	
+	public void inicilizarListaEmbalagens() {
+		EmbalagemDAO dao = new EmbalagemDAO();
+		setListaEmbalagens(dao.list());
+	}
+	
+	public void iniciliazaListaPratos() {
+		PratoDAO dao = new PratoDAO();
+		setListaPratos(dao.list());
 	}
 
 	@SuppressWarnings("unused")
@@ -57,59 +105,218 @@ public class CardapioController  implements Serializable{
 		String guarnicoes = "";
 		String misturas = "";
 		String outros = "";
-		Double valorTotal = 0.0;
+		String pratos = "";
+		String bebidas = "";
+		String quilo = "";
+		Double valorTotal = 0.00;
 		
-		for (String g : guarnicaoSelecionada) {
-			guarnicoes +=  g + " / ";
+		if(pratosSelecionados != null) {
+			for (String p : pratosSelecionados) {
+				pratos += p + " / ";
+			}
 		}
 		
-		for (String m : misturaSelecionada) {
-			misturas +=  m + " / ";
+		if(bebidasSelecionados != null) {
+			for (String b : bebidasSelecionados) {
+				bebidas += b + " / ";
+			}
 		}
 		
-		for (String o : outroSelecionada) {
-			outros +=  o + " / ";
+		if(guarnicaoSelecionada != null) {
+			for (String g : guarnicaoSelecionada) {
+				guarnicoes +=  g + " / ";
+			}
 		}
 		
-		if(guarnicoes != "" ||  misturas != "" || outros != "") {
+		if(misturaSelecionada != null) {
+			for (String m : misturaSelecionada) {
+				misturas +=  m + " / ";
+			}
+		}
+		
+		if (outroSelecionada != null) {
+			for (String o : outroSelecionada) {
+				outros +=  o + " / ";
+			}
+		}
+		
+		if (quiloSelecionado != null) {
+			for (String q : quiloSelecionado) {
+				quilo +=  q + " / ";
+			}
+		}
+		
+		if (verificaMarmita(guarnicaoSelecionada, misturaSelecionada, outroSelecionada, pedido, 
+				pedido.getDescricaoPrato(), pedido.getBebida())){
+			if(guarnicoes != null) {
+				pedido.setGuarnicao(guarnicoes);
+			} else {
+				pedido.setGuarnicao(null);
+			}
+		
+			if(misturas != null) {
+				pedido.setMistura(misturas);
+			} else {
+				pedido.setMistura(null);
+			}
+			 
+			if(outros != null) {
+				pedido.setOutro(outros);
+			} else {
+				pedido.setOutro(null);
+			}
 			
-			if (verificaMarmita(guarnicaoSelecionada, misturaSelecionada, pedido )) {
-				
-				if(guarnicoes != null) {
-					pedido.setGuarnicao(guarnicoes);
-				} else {
-					pedido.setGuarnicao(null);
-				}
+			if(pratos != null){
+				pedido.setDescricaoPrato(pratos);
+			} else {
+				pedido.setDescricaoPrato(null);
+			}
 			
-				if(misturas != null) {
-					pedido.setMistura(misturas);
-				} else {
-					pedido.setMistura(null);
-				}
-				 
-				if(outros != null) {
-					pedido.setOutro(outros);
-				} else {
-					pedido.setOutro(null);
-				}
-				
-				pedido.setStatusPedido("Aguardando Visualização");
-				
-				valorTotal += calcularValorPedido(pedido);
-				pedido.setValorTotal(valorTotal);
-				dao.save(pedido);
+			if(bebidas != null){
+				pedido.setBebida(bebidas);
+			} else {
+				pedido.setBebida(null);
+			}
+			
+			if(quilo != null){
+				pedido.setQuilo(quilo);
+			} else {
+				pedido.setQuilo(null);
+			}
+			
+			pedido.setStatusPedido("Aguardando Visualização");
+			
+			valorTotal += calcularValorPedido(pedido);
+			valorTotal += calculaValorPrato(pratosSelecionados);
+			valorTotal += calculaValorBebida(bebidasSelecionados);
+			
+			if(pedido.getValorQuilo() != null){
+				valorTotal += pedido.getValorQuilo();
+			}
+			
+			
+			pedido.setValorTotal(valorTotal);
+			pedido.setDataPedido(new Date());
+			pedido.setCodigoCliente(clienteLogado.getFuncionario().getCodigo());
+			pedido.setEnderecoEntrega(clienteLogado.getFuncionario().getEndereco());
+			
+			dao.save(pedido);
+			FacesContext.getCurrentInstance().addMessage(
+	                null, new FacesMessage(
+	              		  FacesMessage.SEVERITY_INFO,"Pedido enviado com sucesso!", 
+	              		  ""));
+		}else {
+			if((guarnicaoSelecionada.length > 0 || misturaSelecionada.length > 0|| outroSelecionada.length > 0) 
+					&& (pedido.getIdEmbalagem() == null)) {
 				FacesContext.getCurrentInstance().addMessage(
 		                null, new FacesMessage(
-		              		  FacesMessage.SEVERITY_INFO,"Pedido enviado com sucesso!", 
+		              		  FacesMessage.SEVERITY_ERROR,"Você deve informar qual tamanho da marmitex", 
+		              		  ""));
+			} else if((pedido.getIdEmbalagem() != null) && ((guarnicaoSelecionada.length == 0 && misturaSelecionada.length == 0 && outroSelecionada.length == 0))){
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_WARN,"Você deve informar o que deseja colocar na marmitex.", 
 		              		  ""));
 			}
+		}
+	}
+	
+	
+	public boolean verificaMarmita(String[] guarnicaoSelecionada, String[] misturaSelecionada, String[] outros, Pedido pedido, String prato, String bebida) {
+		if(pedido.getIdEmbalagem() != null) {
+			if(guarnicaoSelecionada.length > 0 || misturaSelecionada.length > 0 || outros.length > 0) {
+				for(Embalagem emb : listaEmbalagens){  
+					 if(emb.getCodigo() == pedido.getIdEmbalagem()) {
+						 if(guarnicaoSelecionada.length <= emb.getQtdeGuarnicao()){
+							 if(misturaSelecionada.length > emb.getQtdeMistura()) {
+								 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+					              		  FacesMessage.SEVERITY_WARN,"Tamanho " + emb.getTamanho() + " só pode conter no máximo "
+					              		   + emb.getQtdeMistura()+" Misturas", ""));
+								 return false;
+							 }
+						 } else {
+							FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
+			              		  FacesMessage.SEVERITY_WARN,"Tamanho " + emb.getTamanho() + " só pode conter no máximo "
+			              		   + emb.getQtdeGuarnicao() 
+			              		   +" Guarnições", ""));
+							return false;
+					 	}			
+					 } 	
+				 }
+			} else {
+				return false;
+			}
+			
+		}
+		
+		if(pedido.getIdEmbalagem() != null || guarnicaoSelecionada.length > 0 ||  pratosSelecionados.length > 0 || bebidasSelecionados.length > 0||
+ 				misturaSelecionada.length > 0 || outros.length > 0 || quiloSelecionado.length > 0 ||pedido.getValorQuilo() != null) {
+			
+			if(pedido.getValorQuilo() == null && quiloSelecionado.length > 0) {
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_ERROR,"Para enviar o que foi escolhido no quilo precisa informar um valor no campo 'Valor'.", 
+		              		  ""));
+				return false;
+			}
+			
+			if(pedido.getValorQuilo() != null && quiloSelecionado.length == 0) {
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_ERROR,"Para enviar o pedido por favor escolha um dos itens do quilo no cardápio.", 
+		              		  ""));
+				return false;
+			}
+			
+			return true;
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
-	              		  FacesMessage.SEVERITY_ERROR,"Deve ser selecionado ao menos um item das opções!", 
+	              		  FacesMessage.SEVERITY_ERROR,"Você deve escolher algo do cardápio ", 
 	              		  ""));
+			return false;
 		}
-		
+	}
+	
+	public Double calcularValorPedido(Pedido pedido) {
+		if(verificaMarmita(guarnicaoSelecionada, misturaSelecionada, outroSelecionada, pedido, pedido.getDescricaoPrato(), pedido.getBebida())) {
+			if(pedido.getIdEmbalagem() != null) {
+				for(Embalagem emb : listaEmbalagens){  
+					 if(pedido.getIdEmbalagem() == emb.getCodigo()) {
+						 return emb.getPreco();
+					 }
+				 }
+			}
+		}
+		return 0.0;
+	}
+	
+	public Double calculaValorBebida(String[] bebidasSelecionados) {
+		Double valorBebidas = 0.0;
+		for (int i = 0; i < bebidasSelecionados.length; i++) {
+			for (Bebida bebida : listaBebidas) {
+				if(bebidasSelecionados[i].equals(bebida.getDescricao()+bebida.getTamanho())){
+					valorBebidas += bebida.getPreco();
+				}
+			}
+		}
+		return valorBebidas;
+	}
+	
+	public Double calculaValorPrato(String[] pratosSelecionados) {
+		Double valorPedidos = 0.0;
+		for (int i = 0; i < pratosSelecionados.length; i++) {
+			for (Prato prato : listaPratos) {
+				if(pratosSelecionados[i].equals(prato.getDescricao())){
+					if(prato.getPrecoDesconto() != null) {
+							valorPedidos += prato.getPrecoDesconto();
+						} else {
+							valorPedidos += prato.getPreco();
+					 }
+				}
+			}
+		}
+		return valorPedidos;
 	}
 	
 	public Produto getProduto() {
@@ -126,7 +333,6 @@ public class CardapioController  implements Serializable{
 		List<Produto> listaProdutos = dao.getProdutoGuarnicao("Guarnicao");
 		 for(Produto pro : listaProdutos){  
 			 SelectItem  s = new SelectItem();  
-			 
 			 s.setValue(pro.getDescricao());  
 			 s.setLabel(pro.getDescricao());  
 			 produtoGuarnicao.add(s);  
@@ -216,10 +422,7 @@ public class CardapioController  implements Serializable{
 
 	public List<SelectItem> getEmbalagens() {
 		embalagens.clear();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("from Embalagem");
-		List<Embalagem> listaEmbalagem = q.list();
-		 for(Embalagem emb : listaEmbalagem){  
+		 for(Embalagem emb : listaEmbalagens){  
 			 SelectItem  s = new SelectItem();  
 			 s.setValue(emb.getCodigo());  
 			 s.setLabel(emb.getTamanho());  
@@ -232,41 +435,186 @@ public class CardapioController  implements Serializable{
 		this.embalagens = embalagens;
 	}
 
-	public boolean verificaMarmita(String[] guarnicaoSelecionada, String[] misturaSelecionada, Pedido pedido) {
-		EmbalagemDAO dao = new EmbalagemDAO();
-		List<Embalagem> listaEmbalagem = dao.list();
-		 for(Embalagem emb : listaEmbalagem){  
-			 if(emb.getCodigo() == pedido.getIdEmbalagem()) {
-				 if(guarnicaoSelecionada.length <= emb.getQtdeGuarnicao()){
-					 if(misturaSelecionada.length <= emb.getQtdeMistura()) {
-						 return true;
-					 } else {
-						 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-			              		  FacesMessage.SEVERITY_WARN,"Tamanho " + emb.getTamanho() + " só pode conter no máximo "
-			              		   + emb.getQtdeMistura()+" Misturas", ""));
-							break;
-					 }
-				 } else {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(
-	              		  FacesMessage.SEVERITY_WARN,"Tamanho " + emb.getTamanho() + " só pode conter no máximo "
-	              		   + emb.getQtdeGuarnicao() 
-	              		   +" Guarnições", ""));
-					break;
-			 	}			
-			 } 	
+	public List<Embalagem> getListaEmbalagens() {
+		return listaEmbalagens;
+	}
+
+	public void setListaEmbalagens(List<Embalagem> listaEmbalagens) {
+		this.listaEmbalagens = listaEmbalagens;
+	}
+
+	public List<SelectItem> getPratos() {
+		pratos.clear();
+		 for(Prato prato : listaPratos){  
+			 SelectItem  s = new SelectItem();  
 			 
-		 }
-		return false;
+			 String descricaoPreço;
+			 if(prato.getPrecoDesconto() == null){
+				 descricaoPreço = "<span style='padding-left: 15px;font-size: 17px;color: #129133;'>R$" + String.format("%.2f",prato.getPreco())+"</span>";
+			 } else {
+				 descricaoPreço = "<span style='padding-left: 15px;font-size: 17px;color: #129133'>" 
+						 + "<span>R$" + String.format("%.2f", prato.getPrecoDesconto()) + "</span></span>"
+						 + "<span style='    color: red;text-decoration: line-through;padding-left: 15px'>R$" + String.format("%.2f",prato.getPreco()) + "</span>";
+			 }
+			 
+			 s.setValue(prato.getDescricao());  
+			 s.setLabel("<span style='width: 100%;float: left;'>" + prato.getDescricao() + "<span style='    float: right;'>"+ descricaoPreço + "</span>" + "</span>"
+			 		+ "<span style='font-weight: normal;text-transform: uppercase;font-style: italic;'>"
+			 		+ "(" + prato.getComposicaoProduto() + ")</span>");
+			 pratos.add(s);  
+		 }  
+		return pratos;
+	}
+
+	public void setPratos(List<SelectItem> pratos) {
+		this.pratos = pratos;
+	}
+
+	public List<Prato> getListaPratos() {
+		return listaPratos;
+	}
+
+	public void setListaPratos(List<Prato> listaPratos) {
+		this.listaPratos = listaPratos;
 	}
 	
-	public Double calcularValorPedido(Pedido pedido) {
-		EmbalagemDAO dao = new EmbalagemDAO();
-		List<Embalagem> listaEmbalagem = dao.list();
-		 for(Embalagem emb : listaEmbalagem){  
-			 if(pedido.getIdEmbalagem() == emb.getCodigo()) {
-				 return emb.getPreco();
-			 }
-		 }
-		return 0.0;
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	public List<SelectItem> getBebidasRefrigerantes() {
+		bebidasRefrigerantes.clear();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		List<Bebida> listaRefrigerantes = session.createQuery("from Bebida b where b.tipo = 'refrigerante'").list();
+		
+		for(Bebida bebida : listaRefrigerantes){  
+			 SelectItem  s = new SelectItem();  
+			 
+			 s.setValue(bebida.getDescricao()  + bebida.getTamanho());  
+			 s.setLabel("<span style='width: 100%;float: left;text-transform: uppercase;'>" + bebida.getDescricao() 
+			 			+ "<span style='float: right;padding-left: 15px;color: #129133;'> R$" + String.format("%.2f",bebida.getPreco()) + "</span>"
+			 			+ "<span style='float: right'>" + bebida.getTamanho() + "</span></span>"
+					 );  
+			 bebidasRefrigerantes.add(s);  
+		 }  
+		SelectItemGroup grupoRefri = new SelectItemGroup("Refrigerantes");
+		return bebidasRefrigerantes;
 	}
+
+	public void setBebidasRefrigerantes(List<SelectItem> bebidas) {
+		this.bebidasRefrigerantes = bebidas;
+	}
+
+	@SuppressWarnings({ "unchecked", "unused" })
+	public List<SelectItem> getBebidasSucos() {
+		bebidasSucos.clear();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		List<Bebida> listaSucos =  session.createQuery("from Bebida b where b.tipo = 'suco'").list();
+		
+		for(Bebida bebida : listaSucos){  
+			 SelectItem  s = new SelectItem();  
+			 s.setValue(bebida.getDescricao()  + bebida.getTamanho());  
+			 s.setLabel("<span style='width: 100%;float: left;text-transform: uppercase;'>" + bebida.getDescricao() 
+	 			+ "<span style='float: right;padding-left: 15px;color: #129133;'> R$" + String.format("%.2f",bebida.getPreco()) + "</span>"
+	 			+ "<span style='float: right'>" + bebida.getTamanho() + "</span></span>"
+	 			);  
+			 bebidasSucos.add(s);  
+		 }  
+		 
+		return bebidasSucos;
+	}
+
+	public void setBebidasSucos(List<SelectItem> bebidasSucos) {
+		this.bebidasSucos = bebidasSucos;
+	}
+
+	@SuppressWarnings("unused")
+	public List<SelectItem> getBebidasAgua() {
+		
+		bebidasAgua.clear();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Bebida> listaAgua =  session.createQuery("from Bebida b where b.tipo = 'agua'").list();
+		
+		for(Bebida bebida : listaAgua){  
+			 SelectItem  s = new SelectItem();  
+			 s.setValue(bebida.getDescricao()  + bebida.getTamanho());  
+			 s.setLabel("<span style='width: 100%;float: left;text-transform: uppercase;'>" + bebida.getDescricao() 
+	 			+ "<span style='float: right;padding-left: 15px;color: #129133;'> R$" + String.format("%.2f",bebida.getPreco()) + "</span>"
+	 			+ "<span style='float: right'>" + bebida.getTamanho() + "</span></span>"
+	 			);
+			 bebidasAgua.add(s);  
+		 }  
+		
+		return bebidasAgua;
+	}
+
+	public void setBebidasAgua(List<SelectItem> bebidasAgua) {
+		this.bebidasAgua = bebidasAgua;
+	}
+
+	public String[] getPratosSelecionados() {
+		return pratosSelecionados;
+	}
+
+	public void setPratosSelecionados(String[] pratosSelecionados) {
+		this.pratosSelecionados = pratosSelecionados;
+	}
+
+	public String[] getBebidasSelecionados() {
+		return bebidasSelecionados;
+	}
+
+	public void setBebidasSelecionados(String[] bebidasSelecionados) {
+		this.bebidasSelecionados = bebidasSelecionados;
+	}
+
+	public List<Bebida> getListaBebidas() {
+		return listaBebidas;
+	}
+
+	public void setListaBebidas(List<Bebida> listaBebidas) {
+		this.listaBebidas = listaBebidas;
+	}
+
+	public String[] getQuiloSelecionado() {
+		return quiloSelecionado;
+	}
+
+	public void setQuiloSelecionado(String[] quiloSelecionado) {
+		this.quiloSelecionado = quiloSelecionado;
+	}
+	
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	public List<SelectItem> getQuilos() {
+		quilos.clear();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		List<Produto> listaQuilo =  session.createQuery("from Produto p where p.noQuilo = 'sim'").list();
+		for(Produto quilo : listaQuilo){  
+			 SelectItem  s = new SelectItem();  
+			 s.setValue(quilo.getDescricao());  
+			 s.setLabel(quilo.getDescricao());
+			 quilos.add(s);  
+		 }  
+		
+		return quilos;
+	}
+
+	public void setQuilos(List<SelectItem> quilos) {
+		this.quilos = quilos;
+	}
+
+	
+	public LoginController getClienteLogado() {
+		return clienteLogado;
+	}
+
+	public void setClienteLogado(LoginController clienteLogado) {
+		this.clienteLogado = clienteLogado;
+	}
+	
+	
 }

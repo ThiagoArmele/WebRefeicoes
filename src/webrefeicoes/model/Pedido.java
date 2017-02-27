@@ -1,6 +1,7 @@
 package webrefeicoes.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,6 +49,21 @@ public class Pedido implements Serializable{
 	
 	@Column (name="statusPedido")
 	private String statusPedido;
+	
+	@Column (name="dataPedido")
+	private Date dataPedido;
+	
+	@Column (name="bebida")
+	private String bebida;
+	
+	@Column (name="quilo")
+	private String quilo;
+	
+	@Column (name="valorQuilo")
+	private Double valorQuilo;
+	
+	@Column (name="enderecoEntrega")
+	private String enderecoEntrega;
 	
 	public int getCodigo() {
 		return codigo;
@@ -129,8 +145,50 @@ public class Pedido implements Serializable{
 		this.statusPedido = statusPedido;
 	}
 
+	public Date getDataPedido() {
+		return dataPedido;
+	}
+
+	public void setDataPedido(Date dataPedido) {
+		this.dataPedido = dataPedido;
+	}
+
+	public String getBebida() {
+		return bebida;
+	}
+
+	public void setBebida(String bebida) {
+		this.bebida = bebida;
+	}
+	
+	public String getQuilo() {
+		return quilo;
+	}
+
+	public void setQuilo(String quilo) {
+		this.quilo = quilo;
+	}
+	
+	public Double getValorQuilo() {
+		return valorQuilo;
+	}
+
+	public void setValorQuilo(Double valorQuilo) {
+		this.valorQuilo = valorQuilo;
+	}
+
+	
+	public String getEnderecoEntrega() {
+		return enderecoEntrega;
+	}
+
+	public void setEnderecoEntrega(String enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
+	}
+
 	public Pedido(int codigo, Integer codigoCliente, String mistura, String guarnicao, String descricaoPrato,
-			String observacao, Double valorTotal, Integer idEmbalagem, String outro, String statusPedido) {
+			String observacao, Double valorTotal, Integer idEmbalagem, String outro, String statusPedido,
+			Date dataPedido, String bebida, String quilo, Double valorQuilo, String enderecoEntrega) {
 		super();
 		this.codigo = codigo;
 		this.codigoCliente = codigoCliente;
@@ -142,6 +200,11 @@ public class Pedido implements Serializable{
 		this.idEmbalagem = idEmbalagem;
 		this.outro = outro;
 		this.statusPedido = statusPedido;
+		this.dataPedido = dataPedido;
+		this.bebida = bebida;
+		this.quilo = quilo;
+		this.valorQuilo = valorQuilo;
+		this.enderecoEntrega = enderecoEntrega;
 	}
 
 	public Pedido() {

@@ -14,11 +14,12 @@
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputStylesheet library="css" name="util.css" />
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
 <h:body>
-			<div class="row">
+			<div class="container-fluid">
 			
 				<h:form id="formulario">
 					<p:growl id="messages" />
@@ -30,7 +31,7 @@
 						id="Codigo"
 						value="#{produtoController.produto.codigo}"/>
 					</div>
-					<div class="col-lg-7 form-group">
+					<div class="col-lg-5 form-group">
 						<p:outputLabel for="DescricaoProduto" value="Descrição do Produto " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{produtoController.produto.descricao}"
@@ -45,6 +46,14 @@
 							  <f:selectItem itemLabel='Outros' itemValue="Outros"/> 
 							  <f:selectItem itemLabel='Guarnição' itemValue="Guarnicao"/> 
 							  <f:selectItem itemLabel='Mistura' itemValue="Mistura"/> 
+				        </p:selectOneMenu>
+					</div>
+					
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="noQuilo" value="Está no Quilo" /><br/>
+						<p:selectOneMenu id="noQuilo" value="#{produtoController.produto.noQuilo}" style="width: 100%">
+							  <f:selectItem itemLabel='Não' itemValue="nao"/> 
+							  <f:selectItem itemLabel='Sim' itemValue="sim"/> 
 				        </p:selectOneMenu>
 					</div>
 					

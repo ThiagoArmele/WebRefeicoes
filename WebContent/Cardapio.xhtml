@@ -20,88 +20,157 @@
 </h:head>
 <h:body>
 			<div class="container-fluid" id='cardapio'>
-			
-				 <p:tabView>
-				 	<p:tab title="Marmitex">
-				 		<h:panelGrid columns="2" cellpadding="10" style="    width: 100%;">
-					 		<h:form id="formularioMarmitex" >
-					 			<p:growl id="messages" life="5000"/>
-					
-					 			<div class="col-lg-12" style="padding: 0px">
-					 				<div class="col-lg-3 form-group"  id='listaGuarnicao'>
-										<p:outputLabel for="tamanho" value="Tamanho " /><br/>
-										<p:selectOneMenu id="tamanho" value="#{cardapioController.pedido.idEmbalagem}" 
-											style="width: 100%">
-										 	<f:selectItems value="#{cardapioController.embalagens}" />
-								        </p:selectOneMenu>
-								      </div>
-						       </div>
-					 			<div class="col-lg-4 form-group"  id='listaGuarnicao'>
-									<p:selectCheckboxMenu id='guarnicao' value="#{cardapioController.guarnicaoSelecionada}"
-			                            filter="true" filterMatchMode="startsWith" label="Guarnição"
-			                            style="width: 100%"
-			                            panelStyle="width: 350px">
-							            <f:selectItems value="#{cardapioController.produtoGuarnicao}" />
-							            <f:ajax render="listaGuarnicoes"></f:ajax>
-							        </p:selectCheckboxMenu>
-							        <br>
-							        </br>
-						         	<p:outputPanel id="display" style="width:100%;padding-left:0px;margin-top:10px">
-								        <p:dataList value="#{cardapioController.guarnicaoSelecionada}" id='listaGuarnicoes' var="guarnicaoSelecionada" 
-								       		emptyMessage="Nenhuma Guarnição Selecionada">
-								        #{guarnicaoSelecionada}
-							        	</p:dataList>
-								    </p:outputPanel>
-								</div>
-								
-								<div class="col-lg-4 form-group"  id='listaMistura'>
-									<p:selectCheckboxMenu id='mistura' value="#{cardapioController.misturaSelecionada}"
-			                            filter="true" filterMatchMode="startsWith" label="Mistura"
-			                            style="width: 100%"
-			                            panelStyle="width: 350px">
-							            <f:selectItems value="#{cardapioController.produtoMisturas}" />
-							            <f:ajax render="listaMisturas"></f:ajax>
-							        </p:selectCheckboxMenu>
-							        <br>
-							        </br>
-						         	<p:outputPanel style="width:100%;padding-left:0px;margin-top:10px">
-								        <p:dataList value="#{cardapioController.misturaSelecionada}" id='listaMisturas' var="misturaSelecionada" 
-								       		emptyMessage="Nenhuma Mistura Selecionada">
-								        #{misturaSelecionada}
-							        	</p:dataList>
-								    </p:outputPanel>
-								</div>
-								
-								<div class="col-lg-4 form-group"  id='listaMistura'>
-									<p:selectCheckboxMenu id='outro' value="#{cardapioController.outroSelecionada}"
-			                            filter="true" filterMatchMode="startsWith" label="Outros"
-			                            style="width: 100%"
-			                            panelStyle="width: 350px">
-							            <f:selectItems value="#{cardapioController.produtoOutros}" />
-							            <f:ajax render="listaOutros"></f:ajax>
-							        </p:selectCheckboxMenu>
-							        <br>
-							        </br>
-						         	<p:outputPanel style="width:100%;padding-left:0px;margin-top:10px">
-								        <p:dataList value="#{cardapioController.outroSelecionada}" id='listaOutros' var="outroSelecionada" 
-								       		emptyMessage="Nenhuma Selecionada" rows="2">
-								        #{outroSelecionada}
-							        	</p:dataList>
-								    </p:outputPanel>
-								</div>
-								<div  class="col-lg-12 form-group" style="text-align: right;">
-								  <p:commandButton value= "Fazer Pedido" update="messages" 
-								  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
-								  </p:commandButton>
-								</div>
-					 		</h:form>
-					 	</h:panelGrid>
-				 	</p:tab>
-				 	
-				 	<p:tab title="Pratos Prontos">
-				 	
-				 	</p:tab>
-				 </p:tabView>
+				<h:form id='cardapio'>
+					 <p:growl id="messages" life="5000"/>
+					 <p:tabView>
+					 	<p:tab title="Marmitex" >
+				 			<div class="col-lg-4" id='valores'>
+					 			<p:dataList value="#{cardapioController.listaEmbalagens}" var="emb" type="ordered">
+							        <f:facet name="header">
+							            Valores
+							        </f:facet>
+   									R$<h:outputText value="#{emb.preco}">
+				   						<f:convertNumber pattern="#0.00"/>
+				   					</h:outputText>
+   									 - 
+   									<h:outputText value="#{emb.tamanho}" />
+									
+				   					
+							        
+							    </p:dataList>
+				 			</div>
+				 		
+				 			<div class="col-lg-12" style="padding: 0px">
+				 				<div class="col-lg-4 form-group"  id='listaGuarnicao'>
+									<p:outputLabel for="tamanho" value="Tamanho " /><br/>
+									<p:selectOneMenu id="tamanho" value="#{cardapioController.pedido.idEmbalagem}" 
+										style="width: 100%">
+										<f:selectItem itemLabel="" itemValue="" />
+									 	<f:selectItems value="#{cardapioController.embalagens}" />
+							        </p:selectOneMenu>
+							      </div>
+					       </div>
+				 			<div class="col-lg-4 form-group"  id='listaGuarnicao'>
+								<p:selectCheckboxMenu id='guarnicao' value="#{cardapioController.guarnicaoSelecionada}"
+		                            filter="true" filterMatchMode="startsWith" label="Guarnição"
+		                            style="width: 100%"
+		                            panelStyle="width: 350px">
+						            <f:selectItems value="#{cardapioController.produtoGuarnicao}" />
+						            <f:ajax render="listaGuarnicoes"></f:ajax>
+						        </p:selectCheckboxMenu>
+						        <br>
+						        </br>
+					         	<p:outputPanel id="display" style="width:100%;padding-left:0px;margin-top:10px">
+							        <p:dataList value="#{cardapioController.guarnicaoSelecionada}" id='listaGuarnicoes' var="guarnicaoSelecionada" 
+							       		emptyMessage="Nenhuma Guarnição Selecionada">
+							        #{guarnicaoSelecionada}
+						        	</p:dataList>
+							    </p:outputPanel>
+							</div>
+							
+							<div class="col-lg-4 form-group"  id='listaMistura'>
+								<p:selectCheckboxMenu id='mistura' value="#{cardapioController.misturaSelecionada}"
+		                            filter="true" filterMatchMode="startsWith" label="Mistura"
+		                            style="width: 100%"
+		                            panelStyle="width: 350px">
+						            <f:selectItems value="#{cardapioController.produtoMisturas}" />
+						            <f:ajax render="listaMisturas"></f:ajax>
+						        </p:selectCheckboxMenu>
+						        <br>
+						        </br>
+					         	<p:outputPanel style="width:100%;padding-left:0px;margin-top:10px">
+							        <p:dataList value="#{cardapioController.misturaSelecionada}" id='listaMisturas' var="misturaSelecionada" 
+							       		emptyMessage="Nenhuma Mistura Selecionada">
+							        #{misturaSelecionada}
+						        	</p:dataList>
+							    </p:outputPanel>
+							</div>
+							
+							<div class="col-lg-4 form-group"  id='listaMistura'>
+								<p:selectCheckboxMenu id='outro' value="#{cardapioController.outroSelecionada}"
+		                            filter="true" filterMatchMode="startsWith" label="Outros"
+		                            style="width: 100%"
+		                            panelStyle="width: 350px">
+						            <f:selectItems value="#{cardapioController.produtoOutros}" />
+						            <f:ajax render="listaOutros"></f:ajax>
+						        </p:selectCheckboxMenu>
+						        <br>
+						        </br>
+					         	<p:outputPanel style="width:100%;padding-left:0px;margin-top:10px">
+							        <p:dataList value="#{cardapioController.outroSelecionada}" id='listaOutros' var="outroSelecionada" 
+							       		emptyMessage="Nenhum Selecionado" rows="2">
+							        #{outroSelecionada}
+						        	</p:dataList>
+							    </p:outputPanel>
+							</div>
+							<div  class="col-lg-12 form-group" style="text-align: right;">
+							  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
+							  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
+							  </p:commandButton>
+							</div>
+					 	</p:tab>
+					 	
+					 	<p:tab title="Pratos Prontos">
+					 		<div class="col-lg-12  form-group">
+			 					<p:outputLabel for="Observacao" value="Observação " /><br/>
+								<h:inputText id="Observacao" value="#{cardapioController.pedido.observacao}">
+			   					</h:inputText>
+		 					</div>
+			 				<div id='pratosfeitos' >
+				 				<p:selectManyCheckbox layout="grid" columns="1" id='pratosfeitos' value="#{cardapioController.pratosSelecionados}">
+				 						<f:selectItems  value="#{cardapioController.pratos}" />
+				 				</p:selectManyCheckbox><br></br>
+			 				</div>
+			 				<div  class="col-lg-12 form-group" style="text-align: right;">
+							  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
+							  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
+							  </p:commandButton>
+							</div>
+					 	</p:tab>
+					 	
+					 	 <p:tab title="Bebidas">
+			 				<div id='bebidas' class="container-fluid">
+				 				<div class="col-lg-8">
+					 				<p:selectManyCheckbox layout="grid" columns="1" value="#{cardapioController.bebidasSelecionados}">
+					 						
+					 						<f:selectItems  value="#{cardapioController.bebidasRefrigerantes}" />
+					 						<f:selectItems  value="#{cardapioController.bebidasSucos}" />
+					 						<f:selectItems  value="#{cardapioController.bebidasAgua}" />
+					 				</p:selectManyCheckbox><br></br>
+				 				</div>
+				 				
+			 				</div>
+			 				
+			 				<div  class="col-lg-12 form-group" style="text-align: right;">
+							  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
+							  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
+							  </p:commandButton>
+							</div>
+					 	</p:tab>
+					 	
+					 	 <p:tab title="Quilo">
+			 				<div id='quilo' class="container-fluid">
+				 				<div class="col-lg-8  form-group">
+				 					<p:outputLabel for="valor" value="Valor " /><br/>
+									<h:inputText id='valor' value="#{cardapioController.pedido.valorQuilo}">
+				   						<f:convertNumber pattern="#0.00"/>
+				   					</h:inputText>
+					 				<p:selectManyCheckbox layout="grid" columns="1" value="#{cardapioController.quiloSelecionado}">
+					 						<f:selectItems  value="#{cardapioController.quilos}" />
+					 				</p:selectManyCheckbox><br></br>
+				 				</div>
+				 				
+			 				</div>
+			 				
+			 				<div  class="col-lg-12 form-group" style="text-align: right;">
+							  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
+							  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
+							  </p:commandButton>
+							</div>
+					 	</p:tab>
+					 </p:tabView>
+				 	</h:form>
+				 
 			</div>
   </h:body>
 </html>  

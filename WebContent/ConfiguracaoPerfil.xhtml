@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
+</h:head>
+
+<h:body>
+	<div class="container-fluid" style="padding: 0px;">
+		<p:outputLabel for="usuario" value="Usuário: "/>
+		<h:outputText id="usuario" style="padding: 3px 9px;" value="#{loginController.funcionario.usuario}" /><br></br>
+		<p:outputLabel for="Nome" value="Nome: " />
+		<h:outputText id="Nome" style="padding: 3px 9px;" value="#{loginController.funcionario.nome}" /><br></br>
+		<p:outputLabel for="telefone" value="Telefone: " />
+		<h:outputText id="dddTelefone" style="padding: 3px 9px;" value="#{loginController.funcionario.dddTelefone}" />
+		<h:outputText id="telefone" style="padding: 3px 0px;" value="#{loginController.funcionario.telefone}" /><br></br>
+		<p:outputLabel for="celular" value="Celular: " />
+		<h:outputText id="dddCelular" style="padding: 3px 9px;" value="#{loginController.funcionario.dddCelular}" />
+		<h:outputText id="celular" style="padding: 3px 0px;" value="#{loginController.funcionario.celular}" /><br></br>
+		<p:outputLabel for="permissao" value="Permissão: " />
+		<h:outputText id="permissao" style="padding: 3px 9px;" value="#{loginController.funcionario.permissao}" /><br></br>
+	</div>
+
+</h:body>
+</html>
+

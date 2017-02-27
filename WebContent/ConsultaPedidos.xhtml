@@ -21,91 +21,121 @@
 </h:head>
 
 <h:body>
-			<div class="container-fluid" style="padding: 0px;">
+			<div class="container-fluid" id='cardapio' style="padding: 0px;">
 			
 				<h:form id="formulario">
 					<p:growl id="messages" life="5000"/>
 					
-					<div class="col-lg-1 form-group">
-						<p:outputLabel for="Codigo" value="Código " /><br/>
-						<p:inputText style="width: 100%" 
-						id="Codigo"
-						disabled="true"
-						value="#{pedidoController.pedido.codigo}"/>
-					</div>
-					
-					<div class="col-lg-11 form-group">
-						<p:outputLabel for="cliente" value="Nome do Cliente " /><br/>
-						<p:inputText style="width: 100%" 
-						disabled="true"
-						id="cliente"/>
-					</div>
-					
-					<div class="col-lg-6 form-group">
-						<p:outputLabel for="Mistura" value="Misturas " /><br/>
-						<p:inputText style="width: 100%" 
-						id="Mistura"
-						disabled="true"
-						value="#{pedidoController.pedido.mistura}"/>
-					</div>
-					
-					<div class="col-lg-6 form-group">
-						<p:outputLabel for="Guarnicao" value="Guarnições " /><br/>
-						<p:inputText style="width: 100%" 
-						id="Guarnicao"
-						disabled="true"
-						value="#{pedidoController.pedido.guarnicao}"/>
-					</div>
-					
-					<div class="col-lg-2 form-group">
-						<p:outputLabel for="descricaoPrato" value="Prato " /><br/>
-						<p:inputText style="width: 100%" 
-						id="descricaoPrato"
-						disabled="true"
-						value="#{pedidoController.pedido.descricaoPrato}"/>
-					</div>
-					
-					<div class="col-lg-2 form-group">
-						<p:outputLabel for="observacao" value="Observaçõo " /><br/>
-						<p:inputText style="width: 100%" 
-						id="observacao"
-						disabled="true"
-						value="#{pedidoController.pedido.observacao}"/>
-					</div>
-					
-					<div class="col-lg-2 form-group">
-						<p:outputLabel for="outro" value="Outros " /><br/>
-						<p:inputText style="width: 100%" 
-						id="outro"
-						disabled="true"
-						value="#{pedidoController.pedido.outro}"/>
-					</div>
-					
-					<div class="col-lg-2 form-group">
-						<p:outputLabel for="tipo" value="Tipo" /><br/>
-						<p:selectOneMenu id="tipo" value="#{pedidoController.pedido.statusPedido}" style="width: 100%">
-							  <f:selectItem itemLabel='Aguardando Verificação' itemValue="Aguardando Verificação"/> 
-							  <f:selectItem itemLabel='Aguardando Preparo' itemValue="Aguardando Preparo"/> 
-							  <f:selectItem itemLabel='Aguardando Encaminhamento' itemValue="Aguardando Encaminhamento"/> 
-							  <f:selectItem itemLabel='Entregue' itemValue="Entregue"/> 
-				        </p:selectOneMenu>
-					</div>
-					
-					<div  class="col-lg-12 form-group" style="text-align: right;">
-						  <p:commandButton value= "Alterar Pedido" update="messages gridPedido" styleClass="ui-button-primary btn btn-success" action="#{pedidoController.adicionarPedido}" >
-						  </p:commandButton>
-					</div>
+					<p:tabView>
+						<p:tab title="Pedido" >
+					 		<div class="col-lg-1 form-group">
+								<p:outputLabel for="Codigo" value="Código " /><br/>
+								<p:inputText style="width: 100%" 
+								id="Codigo"
+								disabled="true"
+								value="#{pedidoController.pedido.codigo}"/>
+							</div>
+							<div class="col-lg-5 form-group">
+								<p:outputLabel for="Mistura" value="Misturas " /><br/>
+								<p:inputText style="width: 100%" 
+								id="Mistura"
+								disabled="true"
+								value="#{pedidoController.pedido.mistura}"/>
+							</div>
+							
+							<div class="col-lg-6 form-group">
+								<p:outputLabel for="Guarnicao" value="Guarnições " /><br/>
+								<p:inputText style="width: 100%" 
+								id="Guarnicao"
+								disabled="true"
+								value="#{pedidoController.pedido.guarnicao}"/>
+							</div>
+							
+							<div class="col-lg-5 form-group">
+								<p:outputLabel for="outro" value="Outros " /><br/>
+								<p:inputText style="width: 100%" 
+								id="outro"
+								disabled="true"
+								value="#{pedidoController.pedido.outro}"/>
+							</div>
+							
+							<div class="col-lg-7 form-group">
+								<p:outputLabel for="descricaoPrato" value="Prato " /><br/>
+								<p:inputText style="width: 100%" 
+								id="descricaoPrato"
+								disabled="true"
+								value="#{pedidoController.pedido.descricaoPrato}"/>
+							</div>
+							
+							<div class="col-lg-10 form-group">
+								<p:outputLabel for="observacao" value="Observação " /><br/>
+								<p:inputText style="width: 100%" 
+								id="observacao"
+								disabled="true"
+								value="#{pedidoController.pedido.observacao}"/>
+							</div>
+							
+							<div class="col-lg-2 form-group">
+								<p:outputLabel for="valor" value="Valor Total " /><br/>
+								<p:inputText style="width: 100%" 
+								id="valor"
+								disabled="true"
+								value="#{pedidoController.pedido.valorTotal}">
+								<f:convertNumber pattern="#0.00"/>
+								</p:inputText>
+							</div>
+							<div class="col-lg-7 form-group">
+								<p:outputLabel for="quilo" value="Quilo " /><br/>
+								<p:inputText style="width: 100%" 
+								id="quilo"
+								disabled="true"
+								value="#{pedidoController.pedido.quilo}"/>
+							</div>
+							<div class="col-lg-2 form-group">
+								<p:outputLabel for="valorQuilo" value="Valor do Quilo " /><br/>
+								<p:inputText style="width: 100%" 
+								id="valorQuilo"
+								disabled="true"
+								value="#{pedidoController.pedido.valorQuilo}">
+								<f:convertNumber pattern="#0.00"/>
+								</p:inputText>
+							</div>
+							<div class="col-lg-2 form-group">
+								<p:outputLabel for="tipo" value="Status" /><br/>
+								<p:selectOneMenu id="tipo" value="#{pedidoController.pedido.statusPedido}" style="width: 100%">
+									  <f:selectItem itemLabel='Aguardando Verificação' itemValue="Aguardando Verificação"/> 
+									  <f:selectItem itemLabel='Aguardando Preparo' itemValue="Aguardando Preparo"/> 
+									  <f:selectItem itemLabel='Aguardando Encaminhamento' itemValue="Aguardando Encaminhamento"/> 
+									  <f:selectItem itemLabel='Entregue' itemValue="Entregue"/> 
+						        </p:selectOneMenu>
+							</div>
+							
+							<div  class="col-lg-12 form-group" style="text-align: right;">
+							  <p:commandButton value= "Alterar Pedido" update="formulario:messages gridPedido" styleClass=" btn btn-success" action="#{pedidoController.adicionarPedido}" >
+							  </p:commandButton>
+							</div>
+					 	</p:tab>
+					 	<p:tab title="Cliente" >
+					 		<div class="col-lg-11 form-group">
+								<p:outputLabel for="cliente" value="Nome do Cliente " /><br/>
+								<p:inputText style="width: 100%" 
+								disabled="true"
+								value="#{funcionarioController.funcionario.nome}"
+								id="cliente"/>
+							</div>
+					 	</p:tab>
+					 	
+				 	</p:tabView>
 					</h:form>
 			</div>
 			
-				
-			<p:dataTable id='gridPedido' emptyMessage="Nenhum Registro Encontrado"
+			<p:dataTable id='gridPedido' emptyMessage="Nenhum Pedido Encontrado"
 			scrollable="true"
 			selectionMode="single"
 			var="pedido" 
+			lazy="false"
 			style="padding: 0px 15px;"
-			
-			scrollHeight="200px"
+			scrollHeight="150px"
 			selection="#{pedidoController.selecionaPedido}"
 			rowKey="#{pedido.codigo}"
 			value="#{pedidoController.listaPedidos()}">
@@ -137,7 +167,7 @@
 
 
 				<p:column headerText="Tamanho"
-   					style="width: 90px;text-align: center"
+   					style="width: 100px;text-align: center"
    					filterMatchMode="contains"
    					sortBy="#{pedido.tamanho}">
    					<h:outputText value="Pequena" rendered="#{pedido.idEmbalagem == 1}"/>
@@ -147,35 +177,35 @@
 				
 				
 				<p:column headerText="Guarnições"
-   					style="width: 250px;text-align: left"
+   					style="width: 300px;text-align: center"
    					filterMatchMode="contains"
    					sortBy="#{pedido.guarnicao}">
    					<h:outputText value="#{pedido.guarnicao}"/>
    				</p:column>
 				
 				<p:column headerText="Misturas"
-   					style="width: 250px;text-align: left"
+   					style="width: 300px;text-align: center"
    					filterMatchMode="contains"
    					sortBy="#{pedido.mistura}">
    					<h:outputText value="#{pedido.mistura}"/>
    				</p:column>
    				
    				<p:column headerText="Outros"
-   					style="width: 150px;text-align: left"
+   					style="width: 250px;text-align: left"
    					filterMatchMode="contains"
    					sortBy="#{pedido.outro}">
    					<h:outputText value="#{pedido.outro}"/>
    				</p:column>
    				
 				<p:column headerText="Prato Pronto"
-   					style="width: 150px;text-align: center"
+   					style="width: 350px;text-align: center"
    					filterMatchMode="contains"
    					sortBy="#{pedido.descricaoPrato}">
    					<h:outputText value="#{pedido.descricaoPrato}"/>
    				</p:column>
    				
    				<p:column headerText="Observação"
-   					style="width: 150px;text-align: center"
+   					style="width: 250px;text-align: center"
    					filterMatchMode="contains"
    					sortBy="#{pedido.observacao}">
    					<h:outputText value="#{pedido.observacao}"/>
@@ -185,7 +215,9 @@
    					style="width: 150px;text-align: center"
    					filterMatchMode="contains"
    					sortBy="#{pedido.valorTotal}">
-   					<h:outputText value="#{pedido.valorTotal}"/>
+   					R$<h:outputText value="#{pedido.valorTotal}">
+   					 	<f:convertNumber pattern="#0.00"/>
+   					</h:outputText>
    				</p:column>
    				
    				

@@ -44,7 +44,9 @@
 						 value="#{pratoController.prato.preco}"
 						 required="true" 
 						 requiredMessage=" 'Preço' é obrigatório."
-						 id="Preco" />
+						 id="Preco">
+						 	<f:convertNumber pattern="#0.00"/>
+						 </p:inputText>
 					</div>
 					<div class="col-lg-5 form-group">
 						<p:outputLabel for="ComposicaoPrato" value="Composição do Prato " /><br/>
@@ -65,7 +67,11 @@
 						<p:outputLabel for="PrecoDesconto" value="Preço do Desconto " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{pratoController.prato.precoDesconto}"
-						 id="PrecoDesconto" />
+						 id="PrecoDesconto">
+						 
+						 	<f:convertNumber pattern="#0.00"/>
+						 	
+					 	</p:inputText>
 					</div>
 					<div class="col-lg-2 form-group">
 						<p:outputLabel for="noCardapio" value="Está no Cardápio " /><br/>
@@ -116,14 +122,18 @@
    					<h:outputText value="#{prato.descricao}" />
    				</p:column>
    				<p:column headerText="Preço" 
-   					style="width: 100px"
+   					style="width: 100px;text-align: center"
    					sortBy="#{prato.precos}">
-   					<h:outputText value="#{prato.preco}"/>
+   					R$<h:outputText   styleClass="text-center" value="#{prato.preco}">
+   						<f:convertNumber pattern="#0.00"/>
+   					</h:outputText>
    				</p:column>
    				<p:column headerText="Preço Desconto" 
-   					style="width: 160px"
+   					style="width: 160px;text-align: center"
    					sortBy="#{prato.precos}">
-   					<h:outputText value="#{prato.precoDesconto}"/>
+   					R$<h:outputText  styleClass="text-center" value="#{prato.precoDesconto}">
+   						<f:convertNumber pattern="#0.00"/>
+   					</h:outputText>
    				</p:column>
    				<p:column headerText="Está no Cardápio" 
    					style="width: 170px"

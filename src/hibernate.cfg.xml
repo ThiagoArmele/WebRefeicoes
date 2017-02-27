@@ -14,5 +14,6 @@
 	<mapping class="webrefeicoes.model.Prato" />
 	<mapping class="webrefeicoes.model.Pedido" />
 	<mapping class="webrefeicoes.model.Embalagem" />
+	<mapping class="webrefeicoes.model.Bebida" />
 </session-factory>
 </hibernate-configuration>

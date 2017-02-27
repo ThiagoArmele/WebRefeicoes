@@ -12,7 +12,6 @@
 
 button[disabled], html input[disabled] {
     cursor: no-drop;
-    background: #f0f0f0;
 }
 
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
@@ -92,4 +91,27 @@ button[disabled], html input[disabled] {
 
 #cardapio .ui-selectcheckboxmenu .ui-selectcheckboxmenu-trigger {
     width: 23px;
+}
+
+#valores .ui-widget-header {
+    border: 1px solid #eeeeee;
+    background: #bf2424;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.ui-tabs.ui-tabs-top {
+    border-bottom: 1px solid #eeeeee;
+}
+
+#pratosfeitos tr,
+#bebidas tr{
+	border-bottom: 1px solid #d7d7d7;
+}
+
+
+#bebidas tr > td:LAST-CHILD,
+#bebidas td > label,
+#pratosfeitos td > label{
+	width: 100%;
 }

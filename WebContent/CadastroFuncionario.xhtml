@@ -128,7 +128,7 @@
 						/>
 					</div>
 					
-					<div class="col-lg-3 form-group">
+					<div class="col-lg-2 form-group">
 						<p:outputLabel for="Rua" value="Rua " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Rua"
@@ -157,7 +157,7 @@
 						value="#{FuncionarioController.funcionario.cidade}"
 						/>
 					</div>
-					<div class="col-lg-1 form-group">
+					<div class="col-lg-2 form-group">
 						<p:outputLabel for="CEP" value="CEP " /><br/>
 						<p:inputMask  style="width: 100%"  
 						id="CEP"
@@ -165,6 +165,13 @@
 						maxlength="8"
 						value="#{FuncionarioController.funcionario.cep}"
 						/>
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="permissao" value="Permissão" /><br/>
+						<p:selectOneMenu id="permissao" value="#{FuncionarioController.funcionario.permissao}" style="width: 100%">
+							  <f:selectItem itemLabel='Normal' itemValue="normal"/> 
+							  <f:selectItem itemLabel='Admin' itemValue="administrador"/> 
+				        </p:selectOneMenu>
 					</div>
 					<div  class="col-lg-12 form-group " style="    text-align: right;">
 						
@@ -174,7 +181,6 @@
 				          	 <p:resetInput target="formulario" />
 				          </p:commandButton>
 					</div>
-					
 				</h:form>
 			</div>
 			
@@ -232,12 +238,11 @@
    					style='width: 140px;text-align: center' sortBy="#{funcionario.celular}">
    					<h:outputText value="#{funcionario.celular}"/>
    				</p:column>
-   				
    			</p:dataTable>
   </h:body>
   
   <script>
-  $("#formulario\\:Celular").mask("(99) 9999-9999?9")
+  $("#formulario\\:Celular").mask("9999-9999?9")
   .focusout(function (event) {  
       var target, phone, element;  
       target = (event.currentTarget) ? event.currentTarget : event.srcElement;  
