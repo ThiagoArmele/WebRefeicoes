@@ -20,7 +20,6 @@ public class LoginDAO {
                            "SELECT f from Funcionario f where f.usuario = :name and f.senha = :senha")
                .setParameter("name", nomeFuncionario)
                .setParameter("senha", senha).getSingleResult();
-
             return funcionario;
       } catch (NoResultException e) {
             return null;

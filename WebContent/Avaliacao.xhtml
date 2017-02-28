@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+	<div class="container-fluid" id='avaliacao' style="padding: 0px;">
+		<h:form>
+			<p:growl id="messages" life="5000"/>
+			<div class="col-lg-12" style="    display: -webkit-box;">
+				<span><img src="resources/images/comida.png"></img></span><h2>Refeição</h2>
+			</div>
+			<div class="container-fluid">
+				<div class="col-lg-12">
+					<h3>Qual sua avaliação?</h3>
+				</div>
+				
+				<div class="col-lg-12 pontuacao" >
+					<i class="fa fa-frown-o" aria-hidden="true"></i>
+					<i class="fa fa-meh-o" aria-hidden="true"></i>
+					<i class="fa fa-smile-o" aria-hidden="true"></i>
+					<div>
+				
+					<p:selectOneRadio  value="#{avaliacaoController.avaliacao.pontuacaoComida}">
+			            <f:selectItem itemLabel="Ruim" itemValue="1" />
+			            <f:selectItem itemLabel="Médio" itemValue="2" />
+			            <f:selectItem itemLabel="Bom" itemValue="3" />
+			        </p:selectOneRadio>
+					
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12"  style="    display: -webkit-box;">
+				<span><img src="resources/images/tempo.png"></img></span><h2>Tempo</h2>
+			</div>
+			<div class="container-fluid">
+				<div class="col-lg-12">
+					<h3>Qual sua avaliação?</h3>
+				</div>
+				
+				<div class="col-lg-12 pontuacao" >
+					<i class="fa fa-frown-o" aria-hidden="true"></i>
+					<i class="fa fa-meh-o" aria-hidden="true"></i>
+					<i class="fa fa-smile-o" aria-hidden="true"></i>
+					<div>
+				
+					<p:selectOneRadio  value="#{avaliacaoController.avaliacao.pontuacaoTempo}">
+			            <f:selectItem itemLabel="Ruim" itemValue="1" />
+			            <f:selectItem itemLabel="Médio" itemValue="2" />
+			            <f:selectItem itemLabel="Bom" itemValue="3" />
+			        </p:selectOneRadio>
+						
+					
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12" style="    display: -webkit-box;">
+				<span><img src="resources/images/entrega.png"></img></span><h2>Entrega</h2>
+			</div>
+			<div class="container-fluid">
+				<div class="col-lg-12">
+					<h3>Qual sua avaliação?</h3>
+				</div>
+				
+				<div class="col-lg-12 pontuacao" >
+					<i class="fa fa-frown-o" aria-hidden="true"></i>
+					<i class="fa fa-meh-o" aria-hidden="true"></i>
+					<i class="fa fa-smile-o" aria-hidden="true"></i>
+					<div>
+						<p:selectOneRadio  value="#{avaliacaoController.avaliacao.pontuacaoEntrega}">
+				            <f:selectItem itemLabel="Ruim" itemValue="1" />
+				            <f:selectItem itemLabel="Médio" itemValue="2" />
+				            <f:selectItem itemLabel="Bom" itemValue="3" />
+				        </p:selectOneRadio>
+					</div>
+				</div>
+				<div class="col-lg-5 form-group">
+					<p:inputTextarea rows="4" style="width: 100%" value="#{avaliacaoController.avaliacao.comentario}" />
+				</div>
+			</div>
+			<div  class="col-lg-12 form-group" style="text-align: right;">
+				  <p:commandButton value= "Enviar Avaliação" update="messages" styleClass="btn btn-success" action="#{avaliacaoController.adicionarAvaliacao}" >
+				  </p:commandButton>
+			</div>
+		</h:form>
+		
+	</div>
+
+
+</h:body>
+</html>

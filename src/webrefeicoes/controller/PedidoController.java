@@ -8,6 +8,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.primefaces.event.SelectEvent;
 
@@ -25,7 +28,10 @@ public class PedidoController implements Serializable{
 	private Pedido pedido;
 	private List<Pedido> listaPedidos;
 	private Pedido selecionaPedido;
-	
+	private EntityManagerFactory factory = Persistence
+            .createEntityManagerFactory("WebRefeicoes");
+	private EntityManager em = factory.createEntityManager();
+	private String nomeCliente;
 	
 	public List<Pedido> listaPedidos() {
 		listaPedidos = new PedidoDAO().list();
@@ -74,6 +80,10 @@ public class PedidoController implements Serializable{
 	
 	 public void trazerDados(SelectEvent event) {
     	 Pedido f = (Pedido) event.getObject();
+    	 setNomeCliente((String) em
+		           .createQuery(
+	                       "SELECT f.nome from Funcionario f where f.codigo = :codigo ")
+	           .setParameter("codigo", f.getCodigoCliente()).getSingleResult());
     	 setPedido(f); 
      }
 	 
@@ -84,7 +94,6 @@ public class PedidoController implements Serializable{
 	
 	public void adicionarPedido(){
 		PedidoDAO dao = new PedidoDAO();
-		System.out.println("Guarnição escolhida: " + pedido.getGuarnicao());
 			if (pedido.getCodigo() == 0L) {
 				dao.save(pedido);
 				FacesContext.getCurrentInstance().addMessage(
@@ -101,6 +110,12 @@ public class PedidoController implements Serializable{
 	
 	}
 
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
 
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
 
 }

@@ -74,8 +74,6 @@ public class Funcionario implements Serializable{
 	@Column (name="estado")
 	private String estado;
 	
-	private String endereco;
-	
 	public int getCodigo() {
 		return codigo;
 	}
@@ -224,11 +222,6 @@ public class Funcionario implements Serializable{
 	public String getEndereco() {
 		return rua + " " + numEnd + " - " + bairro + ", " +  cidade + "(" + cep + ")" + ", " + estado;
 	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
 	
 	public Funcionario() {
 		

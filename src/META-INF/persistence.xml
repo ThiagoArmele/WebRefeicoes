@@ -10,6 +10,8 @@
 		<class>webrefeicoes.model.Pedido</class>
 		<class>webrefeicoes.model.Embalagem</class>
 		<class>webrefeicoes.model.Bebida</class>
+		<class>webrefeicoes.model.Convenio</class>
+		<class>webrefeicoes.model.Avaliacao</class>
 		<properties>
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 		<property name="hibernate.hbm2ddl.auto" value="update" />

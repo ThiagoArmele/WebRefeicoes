@@ -23,9 +23,7 @@ import webrefeicoes.dao.HibernateUtil;
 import webrefeicoes.dao.PedidoDAO;
 import webrefeicoes.dao.PratoDAO;
 import webrefeicoes.model.Bebida;
-import webrefeicoes.model.Cliente;
 import webrefeicoes.model.Embalagem;
-import webrefeicoes.model.Funcionario;
 import webrefeicoes.model.Pedido;
 import webrefeicoes.model.Prato;
 import webrefeicoes.model.Produto;
@@ -61,6 +59,7 @@ public class CardapioController  implements Serializable{
 	private List<SelectItem> bebidasSucos;
 	private List<SelectItem> bebidasAgua;
 	private List<SelectItem> quilos;
+	
 	
 	@ManagedProperty(value = "#{loginController}")
 	private LoginController clienteLogado;
@@ -197,8 +196,11 @@ public class CardapioController  implements Serializable{
 			
 			pedido.setValorTotal(valorTotal);
 			pedido.setDataPedido(new Date());
-			pedido.setCodigoCliente(clienteLogado.getFuncionario().getCodigo());
-			pedido.setEnderecoEntrega(clienteLogado.getFuncionario().getEndereco());
+			
+			if (clienteLogado != null) {
+				pedido.setCodigoCliente(clienteLogado.getFuncionario().getCodigo());
+				pedido.setEnderecoEntrega(clienteLogado.getFuncionario().getEndereco());
+			}
 			
 			dao.save(pedido);
 			FacesContext.getCurrentInstance().addMessage(
@@ -615,6 +617,6 @@ public class CardapioController  implements Serializable{
 	public void setClienteLogado(LoginController clienteLogado) {
 		this.clienteLogado = clienteLogado;
 	}
-	
+
 	
 }

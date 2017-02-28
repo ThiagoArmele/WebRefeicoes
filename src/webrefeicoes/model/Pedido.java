@@ -5,8 +5,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 
 @Entity
@@ -186,6 +189,7 @@ public class Pedido implements Serializable{
 		this.enderecoEntrega = enderecoEntrega;
 	}
 
+	
 	public Pedido(int codigo, Integer codigoCliente, String mistura, String guarnicao, String descricaoPrato,
 			String observacao, Double valorTotal, Integer idEmbalagem, String outro, String statusPedido,
 			Date dataPedido, String bebida, String quilo, Double valorQuilo, String enderecoEntrega) {

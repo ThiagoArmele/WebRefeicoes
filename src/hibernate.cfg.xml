@@ -15,5 +15,7 @@
 	<mapping class="webrefeicoes.model.Pedido" />
 	<mapping class="webrefeicoes.model.Embalagem" />
 	<mapping class="webrefeicoes.model.Bebida" />
+	<mapping class="webrefeicoes.model.Convenio" />
+	<mapping class="webrefeicoes.model.Avaliacao" />
 </session-factory>
 </hibernate-configuration>

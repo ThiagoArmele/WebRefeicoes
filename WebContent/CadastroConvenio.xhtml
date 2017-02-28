@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+			<div class="row">
+			
+				<h:form id="formulario">
+					<p:growl id="messages" life="5000"/>
+					
+					<div class="col-lg-1 form-group">
+						<p:outputLabel for="Codigo" value="Código " /><br/>
+						<p:inputText style="width: 100%" 
+						id="Codigo"
+						value="#{convenioController.convenio.codigo}"/>
+					</div>
+					<div class="col-lg-3 form-group">
+						<p:outputLabel for="dataInicial" value="Data Inicial " /><br/>
+						<p:calendar 
+						value="#{convenioController.convenio.dataInicial}"
+						pattern="dd/MM/yyyy"
+						locale="de" navigator="true"
+						style="width: 100%" 
+						required="true"  
+						requiredMessage=" 'Data Inicial' é obrigatório."
+						id="dataInicial"
+						 mask="true" />
+					</div>
+					
+					<div class="col-lg-3 form-group">
+						<p:outputLabel for="dataFinal" value="Data Final " /><br/>
+						<p:calendar 
+						value="#{convenioController.convenio.dataFinal}"
+						pattern="dd/MM/yyyy"
+						locale="de" navigator="true"
+						style="width: 100%" 
+						required="true"  
+						requiredMessage=" 'Data Final' é obrigatório."
+						id="dataFinal"
+						 mask="true" />
+					</div>
+					
+					<div class="col-lg-5 form-group">
+						<p:outputLabel for="cliente" value="Cliente" /><br/>
+						<p:selectOneMenu id="cliente" value="#{FuncionarioController.funcionario.permissao}" style="width: 100%">
+							  <f:selectItems value="#{convenioController.clientes}"/> 
+				        </p:selectOneMenu>
+					</div>
+					
+					<div  class="col-lg-12 form-group " style="    text-align: right;">
+						  <p:commandButton value= "Salvar" update="messages gridConvenio" styleClass="btn btn-success" action="#{convenioController.adicionarConvenio}" >
+						  </p:commandButton>
+						  <p:commandButton immediate="true" value="Limpar" actionListener="#{convenioController.limparDados}"  update="@form:formulario"  styleClass="btn btn-primary" >
+				          	 <p:resetInput target="formulario" />
+				          </p:commandButton>
+					</div>
+				</h:form>
+			</div>
+			
+			<p:dataTable id='gridConvenio' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="convenio" 
+			scrollHeight="50%"
+			selection="#{convenioController.selecionaConvenio}"
+			rowKey="#{convenio.codigo}"
+			value="#{convenioController.listaConvenios}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{convenioController.trazerDados}"/>
+				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton styleClass="btn btn-danger" update="gridConvenio" action="#{convenioController.excluirConvenio(convenio)}" value="Excluir">
+	   					</p:commandButton>
+   					</h:form>
+   					
+   				</p:column>
+				
+   				<p:column headerText="Codigo"
+   					style="width: 90px;text-align: center" 
+   					sortBy="#{convenio.codigo}">
+   					<h:outputText value="#{convenio.codigo}" />
+   				</p:column>
+   				
+   				<p:column headerText="Data Inicial"
+   					style="text-align: center" 
+   					sortBy="#{convenio.dataInicial}">
+   					<h:outputText value="#{convenio.dataInicial}" />
+   				</p:column>
+   				
+   				<p:column headerText="Data Final"
+   					style="text-align: center" 
+   					sortBy="#{convenio.dataFinal}">
+   					<h:outputText  value="#{convenio.dataFinal}" />
+   				</p:column>
+   				
+   				<p:column headerText="Cliente"
+   					style="text-align: center">
+   					<h:outputText />
+   				</p:column>
+   				
+   			</p:dataTable>
+  </h:body>
+</html>  
