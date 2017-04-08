@@ -92,6 +92,10 @@ public class Cliente implements Serializable{
 	@Column (name="idEmpresa")
 	private Integer empresa;
 	
+	@Column (name="email", unique = true)
+	private String email;
+	
+	private String enderecoEntrega, endereco;
 	
 	public int getCodigo() {
 		return codigo;
@@ -239,6 +243,32 @@ public class Cliente implements Serializable{
 	public void setEmpresa(Integer empresa) {
 		this.empresa = empresa;
 	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public String getEnderecoEntrega() {
+		return getRuaEntrega() + ", " + getNumEndEntrega() + " " + getBairroEntrega() + " - " + getCidadeEntrega()
+			+ ", " + getCepEntrega();
+	}
+	
+	public void setEnderecoEntrega(String enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
+	}
+	
+	public String getEndereco() {
+		return getRua() + ", " + getNumEnd() + " " + getBairro() + " - " + getCidade()
+			+ ", " + getCep();
+	}
+	
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+	
 	public Cliente() {
 		
 	}
@@ -246,7 +276,7 @@ public class Cliente implements Serializable{
 			Date dataNascimento, String dddCelular, String celular, String usuario, String senha, String rua,
 			String bairro, String complemento, String cidade, String cep, Integer numEnd, String ruaEntrega,
 			String bairroEntrega, String cidadeEntrega, String complementoEntrega, String cepEntrega,
-			Integer numEndEntrega, Integer empresa) {
+			Integer numEndEntrega, Integer empresa, String email) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
@@ -272,9 +302,19 @@ public class Cliente implements Serializable{
 		this.cepEntrega = cepEntrega;
 		this.numEndEntrega = numEndEntrega;
 		this.empresa = empresa;
+		this.email = email;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Cliente [codigo=" + codigo + ", nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", dddTelefone="
+				+ dddTelefone + ", telefone=" + telefone + ", dataNascimento=" + dataNascimento + ", dddCelular="
+				+ dddCelular + ", celular=" + celular + ", usuario=" + usuario + ", senha=" + senha + ", rua=" + rua
+				+ ", bairro=" + bairro + ", complemento=" + complemento + ", cidade=" + cidade + ", cep=" + cep
+				+ ", numEnd=" + numEnd + ", ruaEntrega=" + ruaEntrega + ", bairroEntrega=" + bairroEntrega
+				+ ", cidadeEntrega=" + cidadeEntrega + ", complementoEntrega=" + complementoEntrega + ", cepEntrega="
+				+ cepEntrega + ", numEndEntrega=" + numEndEntrega + ", empresa=" + empresa + ", email=" + email
+				+ ", enderecoEntrega=" + enderecoEntrega + ", endereco=" + endereco + "]";
+	}
 	
 	
 	

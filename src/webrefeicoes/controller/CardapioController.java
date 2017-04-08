@@ -22,6 +22,7 @@ import webrefeicoes.dao.EmbalagemDAO;
 import webrefeicoes.dao.HibernateUtil;
 import webrefeicoes.dao.PedidoDAO;
 import webrefeicoes.dao.PratoDAO;
+import webrefeicoes.model.BandeiraCartao;
 import webrefeicoes.model.Bebida;
 import webrefeicoes.model.Embalagem;
 import webrefeicoes.model.Pedido;
@@ -59,10 +60,18 @@ public class CardapioController  implements Serializable{
 	private List<SelectItem> bebidasSucos;
 	private List<SelectItem> bebidasAgua;
 	private List<SelectItem> quilos;
-	
-	
+	private List<SelectItem> cartoes;
 	@ManagedProperty(value = "#{loginController}")
 	private LoginController clienteLogado;
+	
+//	Variaveis globais para armazenar qualquer produto selecionado no cardapio
+	String guarnicoes = "";
+	String misturas = "";
+	String outros = "";
+	String prato = "";
+	String bebidas = "";
+	String quilo = "";
+	private Double valorTotal = 0.00;
 	
 	public CardapioController() {
 		produto = new Produto();
@@ -75,8 +84,10 @@ public class CardapioController  implements Serializable{
 		setBebidasSucos(new ArrayList<SelectItem>());
 		setBebidasAgua(new ArrayList<SelectItem>());
 		setEmbalagens(new ArrayList<SelectItem>());
+		setCartoes(new ArrayList<SelectItem>());
 		setPratos(new ArrayList<SelectItem>());
 		setQuilos(new ArrayList<SelectItem>());
+	
 		inicilizarListaEmbalagens();
 		iniciliazaListaPratos();
 		inicilizarListaBebidas();
@@ -98,20 +109,99 @@ public class CardapioController  implements Serializable{
 		setListaPratos(dao.list());
 	}
 
-	@SuppressWarnings("unused")
+	public void resetarValores() {
+		guarnicoes = "";
+		misturas = "";
+		outros = "";
+		prato = "";
+		bebidas = "";
+		quilo = "";
+		valorTotal = 0.00;
+	}
+	
 	public void adicionarPedido(){
 		PedidoDAO dao = new PedidoDAO();
-		String guarnicoes = "";
-		String misturas = "";
-		String outros = "";
-		String pratos = "";
-		String bebidas = "";
-		String quilo = "";
-		Double valorTotal = 0.00;
+		resetarValores();
+		validaProdutosSelecionados();
+		if (verificaMarmita(guarnicaoSelecionada, misturaSelecionada, outroSelecionada, pedido) && !pedido.getFormaPagamento().equals(" ")){
+			if(guarnicoes != null) {
+				pedido.setGuarnicao(guarnicoes);
+			} else {
+				pedido.setGuarnicao(null);
+			}
+		
+			if(misturas != null) {
+				pedido.setMistura(misturas);
+			} else {
+				pedido.setMistura(null);
+			}
+			 
+			if(outros != null) {
+				pedido.setOutro(outros);
+			} else {
+				pedido.setOutro(null);
+			}
+			
+			if(prato != null){
+				pedido.setDescricaoPrato(prato);
+			} else {
+				pedido.setDescricaoPrato(null);
+			}
+			
+			if(bebidas != null){
+				pedido.setBebida(bebidas);
+			} else {
+				pedido.setBebida(null);
+			}
+			
+			if(quilo != null){
+				pedido.setQuilo(quilo);
+			} else {
+				pedido.setQuilo(null);
+			}
+			
+			pedido.setStatusPedido("Aguardando Visualização");
+			
+			pedido.setValorTotal(geraValorTotal());
+			pedido.setDataPedido(new Date());
+			
+			if (clienteLogado.getCliente().getCodigo() != 0) {
+				pedido.setCodigoCliente(clienteLogado.getCliente().getCodigo());
+				pedido.setEnderecoEntrega(clienteLogado.getCliente().getEnderecoEntrega());
+			}
+			
+			dao.save(pedido);
+			FacesContext.getCurrentInstance().addMessage(
+	                null, new FacesMessage(
+	              		  FacesMessage.SEVERITY_INFO,"Pedido enviado com sucesso!", 
+	              		  ""));
+		}else {
+			if((guarnicaoSelecionada.length > 0 || misturaSelecionada.length > 0|| outroSelecionada.length > 0) 
+					&& (pedido.getIdEmbalagem() == null)) {
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_ERROR,"Você deve informar qual tamanho da marmitex", 
+		              		  ""));
+			} else if((pedido.getIdEmbalagem() != null) && ((guarnicaoSelecionada.length == 0 && misturaSelecionada.length == 0 && outroSelecionada.length == 0))){
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_WARN,"Você deve informar o que deseja colocar na marmitex.", 
+		              		  ""));
+			} else if(pedido.getFormaPagamento().equals(" ")) {
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_WARN,"Você deve informar a forma de pagamento", 
+		              		  ""));
+			}
+		}
+	}
+	
+	
+	public void validaProdutosSelecionados() {
 		
 		if(pratosSelecionados != null) {
 			for (String p : pratosSelecionados) {
-				pratos += p + " / ";
+				prato += p + " / ";
 			}
 		}
 		
@@ -145,86 +235,10 @@ public class CardapioController  implements Serializable{
 			}
 		}
 		
-		if (verificaMarmita(guarnicaoSelecionada, misturaSelecionada, outroSelecionada, pedido, 
-				pedido.getDescricaoPrato(), pedido.getBebida())){
-			if(guarnicoes != null) {
-				pedido.setGuarnicao(guarnicoes);
-			} else {
-				pedido.setGuarnicao(null);
-			}
-		
-			if(misturas != null) {
-				pedido.setMistura(misturas);
-			} else {
-				pedido.setMistura(null);
-			}
-			 
-			if(outros != null) {
-				pedido.setOutro(outros);
-			} else {
-				pedido.setOutro(null);
-			}
-			
-			if(pratos != null){
-				pedido.setDescricaoPrato(pratos);
-			} else {
-				pedido.setDescricaoPrato(null);
-			}
-			
-			if(bebidas != null){
-				pedido.setBebida(bebidas);
-			} else {
-				pedido.setBebida(null);
-			}
-			
-			if(quilo != null){
-				pedido.setQuilo(quilo);
-			} else {
-				pedido.setQuilo(null);
-			}
-			
-			pedido.setStatusPedido("Aguardando Visualização");
-			
-			valorTotal += calcularValorPedido(pedido);
-			valorTotal += calculaValorPrato(pratosSelecionados);
-			valorTotal += calculaValorBebida(bebidasSelecionados);
-			
-			if(pedido.getValorQuilo() != null){
-				valorTotal += pedido.getValorQuilo();
-			}
-			
-			
-			pedido.setValorTotal(valorTotal);
-			pedido.setDataPedido(new Date());
-			
-			if (clienteLogado != null) {
-				pedido.setCodigoCliente(clienteLogado.getFuncionario().getCodigo());
-				pedido.setEnderecoEntrega(clienteLogado.getFuncionario().getEndereco());
-			}
-			
-			dao.save(pedido);
-			FacesContext.getCurrentInstance().addMessage(
-	                null, new FacesMessage(
-	              		  FacesMessage.SEVERITY_INFO,"Pedido enviado com sucesso!", 
-	              		  ""));
-		}else {
-			if((guarnicaoSelecionada.length > 0 || misturaSelecionada.length > 0|| outroSelecionada.length > 0) 
-					&& (pedido.getIdEmbalagem() == null)) {
-				FacesContext.getCurrentInstance().addMessage(
-		                null, new FacesMessage(
-		              		  FacesMessage.SEVERITY_ERROR,"Você deve informar qual tamanho da marmitex", 
-		              		  ""));
-			} else if((pedido.getIdEmbalagem() != null) && ((guarnicaoSelecionada.length == 0 && misturaSelecionada.length == 0 && outroSelecionada.length == 0))){
-				FacesContext.getCurrentInstance().addMessage(
-		                null, new FacesMessage(
-		              		  FacesMessage.SEVERITY_WARN,"Você deve informar o que deseja colocar na marmitex.", 
-		              		  ""));
-			}
-		}
 	}
 	
-	
-	public boolean verificaMarmita(String[] guarnicaoSelecionada, String[] misturaSelecionada, String[] outros, Pedido pedido, String prato, String bebida) {
+	public boolean verificaMarmita(String[] guarnicaoSelecionada, String[] misturaSelecionada, String[] outros, Pedido pedido) {
+		
 		if(pedido.getIdEmbalagem() != null) {
 			if(guarnicaoSelecionada.length > 0 || misturaSelecionada.length > 0 || outros.length > 0) {
 				for(Embalagem emb : listaEmbalagens){  
@@ -281,7 +295,7 @@ public class CardapioController  implements Serializable{
 	}
 	
 	public Double calcularValorPedido(Pedido pedido) {
-		if(verificaMarmita(guarnicaoSelecionada, misturaSelecionada, outroSelecionada, pedido, pedido.getDescricaoPrato(), pedido.getBebida())) {
+		if(verificaMarmita(guarnicaoSelecionada, misturaSelecionada, outroSelecionada, pedido)) {
 			if(pedido.getIdEmbalagem() != null) {
 				for(Embalagem emb : listaEmbalagens){  
 					 if(pedido.getIdEmbalagem() == emb.getCodigo()) {
@@ -292,6 +306,30 @@ public class CardapioController  implements Serializable{
 		}
 		return 0.0;
 	}
+	
+	public Double geraValorTotal() {
+		resetarValores();
+		
+		if(pedido != null) {
+			setValorTotal(calcularValorPedido(pedido));
+		}
+		
+		if(pratosSelecionados != null) {
+			setValorTotal(calculaValorPrato(pratosSelecionados));
+		}
+		
+		if(bebidasSelecionados != null) {
+			setValorTotal(calculaValorBebida(bebidasSelecionados));
+		}
+		
+		if(pedido.getValorQuilo() != null){
+			setValorTotal(pedido.getValorQuilo());
+		}
+		
+		return getValorTotal();
+		
+	}
+	
 	
 	public Double calculaValorBebida(String[] bebidasSelecionados) {
 		Double valorBebidas = 0.0;
@@ -617,6 +655,36 @@ public class CardapioController  implements Serializable{
 	public void setClienteLogado(LoginController clienteLogado) {
 		this.clienteLogado = clienteLogado;
 	}
+
+	public List<SelectItem> getCartoes() {
+		cartoes.clear();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		List<BandeiraCartao> listaCartoes =  session.createQuery("from BandeiraCartao b where b.status = 'disponivel'").list();
+		for(BandeiraCartao quilo : listaCartoes){  
+			 SelectItem  s = new SelectItem();  
+			 s.setValue(quilo.getDescricaoBandeira());  
+			 s.setLabel(quilo.getDescricaoBandeira());
+			 cartoes.add(s);  
+		 }  
+		
+		return cartoes;
+	}
+
+	public void setCartoes(List<SelectItem> cartoes) {
+		
+		this.cartoes = cartoes;
+	}
+
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal += valorTotal;
+	}
+	
+	
 
 	
 }

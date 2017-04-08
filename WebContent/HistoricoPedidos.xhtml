@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+	<div class="container-fluid" style="padding: 0px;">
+			
+				<h:form id="formulario">
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="idPed" value="Código Pedido" /><br/>
+						<p:inputText style="width: 100%" 
+						 value="#{historicoPedidoController.id}"
+						 id="idPed" />
+					</div>
+   					<div class="col-lg-4 form-group">
+						<p:outputLabel for="idCliente" value="Cliente" /><br/>
+						<p:selectOneMenu id="idCliente" value="#{historicoPedidoController.idCliente}" style="width: 100%">
+							  <f:selectItem itemLabel="" itemValue="" />
+							  <f:selectItems value="#{historicoPedidoController.clientes}"/>
+				        </p:selectOneMenu>
+					</div>
+					<div class="col-lg-4 form-group">
+						<p:outputLabel for="idEmpresa" value="Empresa" /><br/>
+						<p:selectOneMenu id="idEmpresa" value="#{historicoPedidoController.idEmpresa}" style="width: 100%">
+							  <f:selectItem itemLabel="" itemValue="" />
+							  <f:selectItems value="#{historicoPedidoController.empresas}"/>
+				        </p:selectOneMenu>
+					</div>
+					
+					<div class="col-lg-12 form-group" >
+						 <p:commandButton value= "Listar" update="gridhistoricoPedido" 
+						 styleClass="btn btn-success" action="#{historicoPedidoController.listar}" >
+						 </p:commandButton>
+					</div>
+					
+				</h:form>
+			</div>		
+			<p:dataTable id='gridhistoricoPedido' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="historicoPedido" 
+			scrollHeight="200px"
+			style="padding: 0px 15px;"
+			selection="#{historicoPedidoController.selecionaHistoricoPedido}"
+			rowKey="#{historicoPedido.codigo}"
+			value="#{historicoPedidoController.listaHistoricoPedidos}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{historicoPedidoController.trazerDados}"/>
+				<p:column headerText="Pedido"
+   					style="width: 90px;text-align: center" >
+   					<h:outputText value="#{historicoPedido.codigo}" />
+   				</p:column>
+   				<p:column headerText="Nome"
+   					style="width: 300px;text-align: center" >
+   					<h:outputText value="#{historicoPedido.nome}" />
+   				</p:column>
+   				<p:column headerText="Usuário"
+   					style="width: 90px;text-align: center" >
+   					<h:outputText value="#{historicoPedido.usuario}" />
+   				</p:column>
+   				<p:column headerText="CPF"
+   					style="width: 160px;text-align: center" >
+   					<h:outputText value="#{historicoPedido.cpf}" />
+   				</p:column>
+   				<p:column headerText="Data do Pedido"
+   					style="width: 120px;text-align: center" >
+   					<h:outputText value="#{historicoPedido.dataPedido}">
+   						<f:convertDateTime locale="pt_BR"></f:convertDateTime>
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Valor Total"
+   					style="width: 90px;text-align: center" >
+   					R$<h:outputText value="#{historicoPedido.valorTotal}">
+   						<f:convertNumber pattern="#0.00"/>
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Valor do Quilo"
+   					style="width: 120px;text-align: center" >
+   					R$<h:outputText value="#{historicoPedido.valorQuilo}">
+   						<f:convertNumber pattern="#0.00"/>
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Tamanho"
+   					style="width: 100px;text-align: center"
+   					filterMatchMode="contains">
+   					<h:outputText value="Pequena" rendered="#{historicoPedido.idEmbalagem == 1}"/>
+   					<h:outputText value="Média" rendered="#{historicoPedido.idEmbalagem == 2}"/>
+   					<h:outputText value="Grande" rendered="#{historicoPedido.idEmbalagem == 3}"/>
+   				</p:column>
+   				<p:column headerText="Mistura"
+   					style="width: 200px;text-align: center" >
+   					<h:outputText value="#{historicoPedido.mistura}">
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Guarnição"
+   					style="width: 120px;text-align: center" >
+   					<h:outputText value="#{historicoPedido.guarnicao}">
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Outros"
+   					style="width: 120px;text-align: center" >
+   					<h:outputText value="#{historicoPedido.outro}">
+   					</h:outputText>
+   				</p:column>
+   			</p:dataTable>
+   			
+   	
+  </h:body>
+</html>  

@@ -142,11 +142,16 @@
 						value="#{clienteController.cliente.senha}"
 						/>
 					</div>
-					<div class="col-lg-3 form-group">
+					<div class="col-lg-4 form-group">
 						<p:outputLabel for="empresa" value="Empresa " /><br/>
 						<p:selectOneMenu id="empresa" value="#{clienteController.cliente.empresa}" style="width: 100%">
 							  <f:selectItems value="#{clienteController.empresas}"/>
 				        </p:selectOneMenu>
+					</div>
+					<div class="col-lg-5 form-group">
+						<p:outputLabel for="email" value="Email " /><br/>
+						<p:inputText id="email" value="#{clienteController.cliente.email}" style="width: 100%">
+				        </p:inputText>
 					</div>
 					<div class="col-lg-3 form-group">
 						<p:outputLabel for="Rua" value="Rua " /><br/>
@@ -162,14 +167,14 @@
 						value="#{clienteController.cliente.numEnd}"
 						/>
 					</div>
-					<div class="col-lg-4 form-group">
+					<div class="col-lg-5 form-group">
 						<p:outputLabel for="Bairro" value="Bairro " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Bairro"
 						value="#{clienteController.cliente.bairro}"
 						/>
 					</div>
-					<div class="col-lg-3 form-group">
+					<div class="col-lg-4 form-group">
 						<p:outputLabel for="Cidade" value="Cidade " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Cidade"

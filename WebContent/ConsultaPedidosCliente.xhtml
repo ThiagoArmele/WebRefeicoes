@@ -14,6 +14,7 @@
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputStylesheet library="css" name="util.css" />
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet library="css" name="Avaliacao.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
@@ -31,7 +32,7 @@
 										<p:outputLabel for="nome" value="Nome:   " />
 										<h:outputText style="width: 100%" 
 										id="nome"
-										value="#{pedidoController.nomeCliente}"
+										value="#{pedidoClienteController.nomeCliente}"
 										/>
 									</div>
 							 		<div class="col-lg-7 form-group">
@@ -39,7 +40,7 @@
 										<h:outputText style="width: 100%" 
 										id="entrega"
 										disabled="true"
-										value="#{pedidoController.pedido.enderecoEntrega}"/>
+										value="#{pedidoClienteController.pedido.enderecoEntrega}"/>
 									</div>
 						 		</div>
 						 		<div  class="col-lg-12">
@@ -48,7 +49,7 @@
 										<h:outputText style="width: 100%" 
 										id="Codigo"
 										disabled="true"
-										value="#{pedidoController.pedido.codigo}"/>
+										value="#{pedidoClienteController.pedido.codigo}"/>
 									</div>
 						 		</div>
 						 		
@@ -58,14 +59,14 @@
 										<h:outputText style="width: 100%" 
 										id="Mistura"
 										disabled="true"
-										value="#{pedidoController.pedido.mistura}"/>
+										value="#{pedidoClienteController.pedido.mistura}"/>
 									</div>
 									<div class="col-lg-6 form-group">
 										<p:outputLabel for="Guarnicao" value="Guarnições:  " />
 										<h:outputText style="width: 100%" 
 										id="Guarnicao"
 										disabled="true"
-										value="#{pedidoController.pedido.guarnicao}"/>
+										value="#{pedidoClienteController.pedido.guarnicao}"/>
 									</div>
 								</div>
 								
@@ -75,7 +76,7 @@
 										<h:outputText style="width: 100%" 
 										id="outro"
 										disabled="true"
-										value="#{pedidoController.pedido.outro}"/>
+										value="#{pedidoClienteController.pedido.outro}"/>
 									</div>
 								</div>
 								
@@ -85,7 +86,7 @@
 										<h:outputText style="width: 100%" 
 										id="descricaoPrato"
 										disabled="true"
-										value="#{pedidoController.pedido.descricaoPrato}"/>
+										value="#{pedidoClienteController.pedido.descricaoPrato}"/>
 									</div>
 									
 									<div class="col-lg-5 form-group">
@@ -93,7 +94,7 @@
 										<h:outputText style="width: 100%" 
 										id="observacao"
 										disabled="true"
-										value="#{pedidoController.pedido.observacao}"/>
+										value="#{pedidoClienteController.pedido.observacao}"/>
 									</div>
 								</div>
 								
@@ -103,14 +104,14 @@
 										<h:outputText style="width: 100%" 
 										id="quilo"
 										disabled="true"
-										value="#{pedidoController.pedido.quilo}"/>
+										value="#{pedidoClienteController.pedido.quilo}"/>
 									</div>
 									<div class="col-lg-3 form-group"  style="color: #088308;font-size: 17px;">
 										<p:outputLabel for="valorQuilo" value="Valor do Quilo: " />
 										R$<h:outputText style="width: 100%" 
 										id="valorQuilo"
 										disabled="true"
-										value="#{pedidoController.pedido.valorQuilo}">
+										value="#{pedidoClienteController.pedido.valorQuilo}">
 										<f:convertNumber pattern="#0.00"/>
 										</h:outputText>
 									</div>
@@ -119,52 +120,18 @@
 										R$<h:outputText style="width: 100%" 
 										id="valor"
 										disabled="true"
-										value="#{pedidoController.pedido.valorTotal}">
+										value="#{pedidoClienteController.pedido.valorTotal}">
 										<f:convertNumber pattern="#0.00"/>
 										</h:outputText>
 									</div>
 								</div>
 								<div  class="col-lg-12">
-									<div class="col-lg-3 form-group">
+									<div class="col-lg-4 form-group">
 										<p:outputLabel for="tipo" value="Status: " />
-										<p:selectOneMenu id="tipo" value="#{pedidoController.pedido.statusPedido}" style="width: 100%">
-											  <f:selectItem itemLabel='Aguardando Verificação' itemValue="Aguardando Verificação"/> 
-											  <f:selectItem itemLabel='Aguardando Preparo' itemValue="Aguardando Preparo"/> 
-											  <f:selectItem itemLabel='Aguardando Encaminhamento' itemValue="Aguardando Encaminhamento"/> 
-											  <f:selectItem itemLabel='Entregue' itemValue="Entregue"/> 
-								        </p:selectOneMenu>
-									</div>
-									
-									<div class="col-lg-3 form-group">
-										<p:outputLabel for="pagamento" value="Forma de Pagamento: " />
-										<h:outputText style="width: 100%" 
-										id="pagamento"
-										disabled="true"
-										value="#{pedidoController.pedido.formaPagamento}"/>
-									</div>
-									
-									<div class="col-lg-3 form-group">
-										<p:outputLabel for="bandeira" value="Bandeira do Cartão: " />
-										<h:outputText style="width: 100%" 
-										id="bandeira"
-										disabled="true"
-										value="#{pedidoController.pedido.bandeiraCartao}"/>
-									</div>
-									
-									<div class="col-lg-3 form-group">
-										<p:outputLabel for="pagamento" value="Trazer troco para:" />
-										R$<h:outputText style="width: 100%" 
-										id="troco"
-										disabled="true"
-										value="#{pedidoController.pedido.troco}">
-											<f:convertNumber pattern="#0.00"/>
-										</h:outputText>
+										<h:outputText id="tipo" value="#{pedidoClienteController.pedido.statusPedido}" style="width: 100%">
+								        </h:outputText>
 									</div>
 								</div>
-							</div>
-							<div  class="col-lg-12 form-group" style="text-align: right; padding-top: 10px">
-							  <p:commandButton value= "Alterar Pedido" update="formulario:messages gridPedido" styleClass=" btn btn-success" action="#{pedidoController.adicionarPedido}" >
-							  </p:commandButton>
 							</div>
 					</h:form>
 			</div>
@@ -176,17 +143,19 @@
 			lazy="false"
 			style="padding: 0px 15px;"
 			scrollHeight="150px"
-			selection="#{pedidoController.selecionaPedido}"
+			selection="#{pedidoClienteController.selecionaPedido}"
 			rowKey="#{pedido.codigo}"
-			value="#{pedidoController.listaPedidos()}">
-				<p:ajax update="formulario"  event="rowSelect" listener="#{pedidoController.trazerDados}"/>
+			value="#{pedidoClienteController.listaPedidos()}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{pedidoClienteController.trazerDados}"/>
 				
 				<p:column headerText=""
    					style='width: 100px;text-align: center'>
    					<h:form>
 	   					<p:commandButton 
-	   					styleClass="btn btn-danger"
-	   					update="gridPedido" action="#{pedidoController.excluirPedido(pedido)}" value="Excluir">
+	   					styleClass="btn btn-success"
+	   					disabled="#{pedido.avaliado}"
+	   					action="#{pedidoClienteController.adicionarPedido}"
+	   					update="gridPedido formulario:messages" value="Avaliar">
 	   					</p:commandButton>
    					</h:form>
    				</p:column>
@@ -260,14 +229,80 @@
    					</h:outputText>
    				</p:column>
    				
-   				<p:summaryRow>
-		            <p:column>
-		                <h:outputText value="#{pedido.valorTotal}">
-		                </h:outputText>
-		            </p:column>
-      		  	</p:summaryRow>
    				
    			</p:dataTable>
-		
+   			<p:dialog draggable="false" resizable="false" height="450px" width= "600px" responsive="true" header="Avaliação" widgetVar="dlg" modal="true" style="padding: 0px">
+		        <div class="container-fluid" id='avaliacao' style="padding: 0px;">
+					<h:form>
+						<p:growl id="messages" life="5000"/>
+						<div class="row">
+					        <div class="wizard">
+					            <div class="wizard-inner">
+					                <div class="connecting-line"></div>
+					                <ul class="nav nav-tabs" role="tablist">
+					                    <li role="presentation" class="active">
+					                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+					                            <span class="round-tab">
+					                             	<img src="resources/images/comida.png" height="50px" style="padding-top: 10px;"></img>
+					                            </span>
+					                        </a>
+					                    </li>
+					
+					                    <li role="presentation">
+					                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+					                            <span class="round-tab">
+					                                <img src="resources/images/tempo.png" height="50px" style="padding-top: 10px;"></img>
+					                            </span>
+					                        </a>
+					                    </li>
+					                    <li role="presentation" >
+					                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+					                            <span class="round-tab">
+					                                <img src="resources/images/entrega.png" height="50px" style="padding-top: 10px;"></img>
+					                            </span>
+					                        </a>
+					                    </li>
+					
+					                </ul>
+					            </div>
+					               <div class="tab-content">
+					                   <div class="tab-pane active" role="tabpanel" id="step1">
+					                   	  <p style="padding-left: 23px;font-weight: bold;padding-right: 23px;">O que achou da comida? :)</p>
+					                      <p:selectOneButton required="true" requiredMessage="Avaliação sobre comida é obrigatório" value="#{avaliacaoController.avaliacao.pontuacaoComida}">
+								            <f:selectItem itemLabel="Ruim" itemValue="1" />
+								            <f:selectItem itemLabel="Médio" itemValue="2" />
+								            <f:selectItem itemLabel="Bom" itemValue="3" />
+								          </p:selectOneButton>
+					                   </div>
+					                   <div class="tab-pane" role="tabpanel" id="step2">
+					                   	   <p style="padding-left: 23px;font-weight: bold;padding-right: 23px;">O que achou do tempo de preparo para sua comida? :)</p>
+					                       <p:selectOneButton required="true" requiredMessage="Avaliação sobre tempo é obrigatório" value="#{avaliacaoController.avaliacao.pontuacaoTempo}">
+								            <f:selectItem itemLabel="Ruim" itemValue="1" />
+								            <f:selectItem itemLabel="Médio" itemValue="2" />
+								            <f:selectItem itemLabel="Bom" itemValue="3" />
+								          </p:selectOneButton>
+					                   </div>
+					                   <div class="tab-pane" role="tabpanel" id="step3">
+					                   	   <p style="padding-left: 23px;font-weight: bold;padding-right: 23px;">O que achou sobre a entrega? :)</p>
+					                       <p:selectOneButton required="true" requiredMessage="Avaliação sobre entrega é obrigatório" value="#{avaliacaoController.avaliacao.pontuacaoEntrega}">
+								            <f:selectItem itemLabel="Ruim" itemValue="1" />
+								            <f:selectItem itemLabel="Médio" itemValue="2" />
+								            <f:selectItem itemLabel="Bom" itemValue="3" />
+								          </p:selectOneButton>
+					                   </div>
+					               </div>
+					               <div style="padding: 0px 20px">
+					               		<p:outputLabel value="Adorariamos saber o que pensa, compartilhe com a gente"></p:outputLabel>
+					               		<p:inputTextarea rows="4" style="width: 100%" value="#{avaliacaoController.avaliacao.comentario}" />
+					               </div>
+				                   <div style="text-align: right;padding: 3px 20px">
+				                	<p:commandButton value= "Enviar Avaliação" update="messages" styleClass="btn btn-success" action="#{avaliacaoController.adicionarAvaliacao}" >
+			 						</p:commandButton>
+				               	   </div>
+					        </div>
+					   </div>
+					</h:form>
+			</div>
+	    </p:dialog>
   </h:body>
 </html>  

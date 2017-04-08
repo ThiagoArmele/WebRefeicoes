@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
-import webrefeicoes.model.Funcionario;
+import webrefeicoes.model.Cliente;
 
 public class LoginDAO {
 	
@@ -13,18 +13,31 @@ public class LoginDAO {
             .createEntityManagerFactory("WebRefeicoes");
 	private EntityManager em = factory.createEntityManager();
 	
-	public Funcionario getFuncionario(String nomeFuncionario, String senha) {
+	public Cliente getCliente(String nomeFuncionario, String senha) {
 		try {
-            Funcionario funcionario = (Funcionario) em
+			Cliente cliente = (Cliente) em
                .createQuery(
-                           "SELECT f from Funcionario f where f.usuario = :name and f.senha = :senha")
+                           "SELECT c from Cliente c where c.usuario = :name and c.senha = :senha")
                .setParameter("name", nomeFuncionario)
                .setParameter("senha", senha).getSingleResult();
-            return funcionario;
+            return cliente;
       } catch (NoResultException e) {
             return null;
       }
 		
+	}
+	
+	public Cliente verificarEmailExistente(String email) {
+		try {
+			Cliente cliente = (Cliente) em
+	               .createQuery(
+	                           "SELECT c from Cliente c where c.email = :email")
+	               .setParameter("email", email).getSingleResult();
+			return cliente;
+		}	catch (NoResultException e) {
+            return null;
+      }		
+					
 	}
 	
 	

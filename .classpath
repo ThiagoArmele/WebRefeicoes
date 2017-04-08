@@ -9,11 +9,12 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="lib/MFontAwesome.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="lib/c3p0-0.9.1.jar"/>
 	<classpathentry kind="lib" path="lib/cglib-2.2.jar"/>
-	<classpathentry kind="lib" path="lib/commons-collections-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/font-awesome-4.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-testing.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate3.jar"/>
@@ -27,39 +28,16 @@
 	<classpathentry kind="lib" path="lib/proxool-0.8.3.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.6.1.jar"/>
-	<classpathentry kind="lib" path="lib/swarmcache-1.0RC2.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.aop-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.asm-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.aspects-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.beans-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.context-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.context.support-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.core-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.expression-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.instrument-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.instrument.tomcat-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.jdbc-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.jms-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.orm-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.oxm-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.test-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.transaction-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.web-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.web.portlet-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.web.servlet-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/org.springframework.web.struts-3.0.4.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-acl-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-cas-client-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-config-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-core-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-ldap-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-openid-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-taglibs-3.0.3.RELEASE.jar"/>
-	<classpathentry kind="lib" path="lib/spring-security-web-3.0.3.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/standard.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/MFontAwesome.jar"/>
-	<classpathentry kind="lib" path="lib/font-awesome-4.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/swarmcache-1.0RC2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-email-1.3.1.jar"/>
+	<classpathentry kind="lib" path="lib/activation-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/dsn.jar"/>
+	<classpathentry kind="lib" path="lib/gimap.jar"/>
+	<classpathentry kind="lib" path="lib/imap.jar"/>
+	<classpathentry kind="lib" path="lib/mail.jar"/>
+	<classpathentry kind="lib" path="lib/mailapi.jar"/>
+	<classpathentry kind="lib" path="lib/pop3.jar"/>
+	<classpathentry kind="lib" path="lib/smtp.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

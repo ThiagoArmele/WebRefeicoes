@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+			<div class="container-fluid" style="padding: 0px">
+			
+				<h:form id="formulario">
+					<p:growl id="messages" />
+					
+					
+					<div class="col-lg-1 form-group">
+						<p:outputLabel for="Codigo" value="Código " /><br/>
+						<p:inputText style="width: 100%" 
+						id="Codigo"
+						value="#{bandeiraCartaoController.bandeiraCartao.codigo}"/>
+					</div>
+					<div class="col-lg-9 form-group">
+						<p:outputLabel for="DescricaoBandeiraCartao" value="Descrição" /><br/>
+						<p:inputText style="width: 100%" 
+						 value="#{bandeiraCartaoController.bandeiraCartao.descricaoBandeira}"
+						 required="true" 
+						 requiredMessage="Campo 'Descrição' é obrigatório."
+						 id="DescricaoBandeiraCartao" />
+						 
+					</div>
+					
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="noCardapio" value="Status" /><br/>
+						<p:selectOneMenu id="noCardapio" value="#{bandeiraCartaoController.bandeiraCartao.status}" style="width: 100%">
+							  <f:selectItem itemLabel='Disponível' itemValue="disponivel"/> 
+							  <f:selectItem itemLabel='Em Manuntenção' itemValue="manutencao"/> 
+				        </p:selectOneMenu>
+					</div>
+					
+					<div  class="col-lg-12 form-group" style="text-align: right;">
+						  <p:commandButton value= "Salvar" update="messages gridBandeiraCartao" styleClass="btn btn-success" action="#{bandeiraCartaoController.adicionarBandeiraCartao}" >
+						  </p:commandButton>
+						  <p:commandButton immediate="true" value="Limpar" actionListener="#{bandeiraCartaoController.limparDados}"  update="@form:formulario"  styleClass="btn btn-primary" >
+				          	 <p:resetInput target="formulario" />
+				          </p:commandButton>
+					</div>
+					
+				</h:form>
+			</div>
+			
+			<p:dataTable id='gridBandeiraCartao' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="bandeiraCartao" 
+			scrollHeight="50%"
+			style="padding: 0px 15px;"
+			selection="#{bandeiraCartaoController.selecionaBandeiraCartao}"
+			rowKey="#{bandeiraCartao.codigo}"
+			value="#{bandeiraCartaoController.listaBandeiraCartoes}">
+				<p:ajax update="formulario"  event="rowSelect" listener="#{bandeiraCartaoController.trazerDados}"/>
+				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton update="gridBandeiraCartao" action="#{bandeiraCartaoController.excluirBandeiraCartao(bandeiraCartao)}" 
+	   					value="Excluir" styleClass="btn btn-danger">
+	   					</p:commandButton>
+   					</h:form>
+   					
+   				</p:column>
+   				<p:column headerText="Codigo"
+   					style="width: 90px;text-align: center" 
+   					sortBy="#{bandeiraCartao.codigo}">
+   					<h:outputText value="#{bandeiraCartao.codigo}" />
+   				</p:column>
+
+   				<p:column headerText="Descrição" 
+   					style="width:100%"
+   					sortBy="#{bandeiraCartao.nome}">
+   					<h:outputText value="#{bandeiraCartao.descricaoBandeira}" />
+   				</p:column>
+   				
+   				<p:column headerText="Status" 
+   					style="width:100%"
+   					sortBy="#{bandeiraCartao.starus}">
+   					<h:outputText value="Disponível" rendered="#{bandeiraCartao.status == 'disponivel'}"/>
+   					<h:outputText value="Em Manutenção" rendered="#{bandeiraCartao.status == 'manutencao'}"/>
+   				</p:column>
+   			</p:dataTable>
+  </h:body>
+</html>  

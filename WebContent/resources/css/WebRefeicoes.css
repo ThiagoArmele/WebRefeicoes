@@ -13,6 +13,15 @@
     color: white !important;
 }
 
+.btn-primary {
+   	background-color: #337ab7  !important;
+    border-color: #2e6da4  !important;
+    box-shadow: none !important;
+    background-image: none !important;
+    text-shadow: none !important;
+    color: white !important;
+}
+
 .btn-success {
     background-color: #5cb85c !important;
     border-color: #4cae4c !important;
@@ -35,6 +44,14 @@
     background-color: #c9302c !important;
     border-color: #ac2925 !important;
 }
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+    background-color: #286090 !important;
+    border-color: #204d74 !important;
+ }
+
 
 
 #listaGuarnicao ul,
@@ -113,4 +130,50 @@
 
 .pontuacao > i:NTH-CHILD(3) {
     color: #07b807;
+}
+
+.dadosPerfil > div:FIRST-CHILD,
+.dadosPerfil > div:LAST-CHILD {
+    padding: 20px;
+    background: #df5656;
+    color: white;
+    border-radius: 20px;
+}
+
+.dadosPerfil > div > i {
+    width: 100%;
+    font-size: 30px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.dadosPerfil > div > p,
+.dadosPerfil > div > p  {
+    font-weight: bold;
+    text-align: center;
+    margin: 0px;
+}
+
+.dadosPerfil > div > p:LAST-CHILD {
+    font-size: 20px;
+}
+
+   
+.headerWebRefeicoes {
+	background: #a82521;
+}
+
+.headerWebRefeicoes, 
+.headerWebRefeicoes button {
+    color: white;
+}
+
+a:hover, a:focus {
+	cursor: pointer;
+	text-decoration: none;
+	color: #d75959 !important;
 }

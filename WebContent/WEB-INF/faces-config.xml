@@ -10,5 +10,9 @@
 		<managed-bean-class>webrefeicoes.controller.funcionarioController</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-
+	<managed-bean>
+		<managed-bean-name>loginClontroller</managed-bean-name>
+		<managed-bean-class>webrefeicoes.controller.LoginController</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 </faces-config>

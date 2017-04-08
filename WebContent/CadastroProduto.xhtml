@@ -19,7 +19,7 @@
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
 <h:body>
-			<div class="container-fluid">
+			<div class="container-fluid" style="padding: 0px">
 			
 				<h:form id="formulario">
 					<p:growl id="messages" />
@@ -64,7 +64,7 @@
 							  <f:selectItem itemLabel='Sim' itemValue="sim"/> 
 				        </p:selectOneMenu>
 					</div>
-					<div  class="col-lg-12 form-group">
+					<div  class="col-lg-12 form-group" style="text-align: right;">
 						  <p:commandButton value= "Salvar" update="messages gridProduto" styleClass="ui-button-primary btn btn-success" action="#{produtoController.adicionarProduto}" >
 						  </p:commandButton>
 						  <p:commandButton immediate="true" value="Limpar" actionListener="#{produtoController.limparDados}"  update="@form:formulario"  styleClass="ui-button-primary btn btn-primary" >
@@ -80,6 +80,7 @@
 			selectionMode="single"
 			var="produto" 
 			scrollHeight="50%"
+			style="padding: 0px 15px;"
 			selection="#{produtoController.selecionaProduto}"
 			rowKey="#{produto.codigo}"
 			value="#{produtoController.listaProdutos}">

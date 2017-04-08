@@ -5,22 +5,19 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Persistence;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pedido")
-public class Pedido implements Serializable{
+@Table(name="historico_pedido")
+public class HistoricoPedido implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue
 	@Column (name="id")
@@ -80,6 +77,30 @@ public class Pedido implements Serializable{
 	@Column (name="bandeiraCartao")
 	private String bandeiraCartao;
 	
+	@Column (name="nome")
+	private String nome;
+	
+	@Column (name="dddTelefone")
+	private String dddTelefone;
+	
+	@Column (name="telefone")
+	private String telefone;
+	
+	@Column (name="dddCelular")
+	private String dddCelular;
+	
+	@Column (name="celular")
+	private String celular;
+	
+	@Column (name="usuario")
+	private String usuario;
+	
+	@Column (name="email", unique = true)
+	private String email;
+	
+	@Column (name="cpf")
+	private String cpf;
+
 	public int getCodigo() {
 		return codigo;
 	}
@@ -94,14 +115,6 @@ public class Pedido implements Serializable{
 
 	public void setCodigoCliente(Integer codigoCliente) {
 		this.codigoCliente = codigoCliente;
-	}
-
-	public Integer getIdEmbalagem() {
-		return idEmbalagem;
-	}
-
-	public void setIdEmbalagem(Integer idEmbalagem) {
-		this.idEmbalagem = idEmbalagem;
 	}
 
 	public String getMistura() {
@@ -143,7 +156,15 @@ public class Pedido implements Serializable{
 	public void setValorTotal(Double valorTotal) {
 		this.valorTotal = valorTotal;
 	}
-	
+
+	public Integer getIdEmbalagem() {
+		return idEmbalagem;
+	}
+
+	public void setIdEmbalagem(Integer idEmbalagem) {
+		this.idEmbalagem = idEmbalagem;
+	}
+
 	public String getOutro() {
 		return outro;
 	}
@@ -175,7 +196,7 @@ public class Pedido implements Serializable{
 	public void setBebida(String bebida) {
 		this.bebida = bebida;
 	}
-	
+
 	public String getQuilo() {
 		return quilo;
 	}
@@ -183,7 +204,7 @@ public class Pedido implements Serializable{
 	public void setQuilo(String quilo) {
 		this.quilo = quilo;
 	}
-	
+
 	public Double getValorQuilo() {
 		return valorQuilo;
 	}
@@ -192,7 +213,6 @@ public class Pedido implements Serializable{
 		this.valorQuilo = valorQuilo;
 	}
 
-	
 	public String getEnderecoEntrega() {
 		return enderecoEntrega;
 	}
@@ -201,7 +221,6 @@ public class Pedido implements Serializable{
 		this.enderecoEntrega = enderecoEntrega;
 	}
 
-	
 	public Boolean getAvaliado() {
 		return avaliado;
 	}
@@ -234,11 +253,79 @@ public class Pedido implements Serializable{
 		this.bandeiraCartao = bandeiraCartao;
 	}
 
+	public String getNome() {
+		return nome;
+	}
 
-	public Pedido(int codigo, Integer codigoCliente, String mistura, String guarnicao, String descricaoPrato,
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getDddTelefone() {
+		return dddTelefone;
+	}
+
+	public void setDddTelefone(String dddTelefone) {
+		this.dddTelefone = dddTelefone;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getDddCelular() {
+		return dddCelular;
+	}
+
+	public void setDddCelular(String dddCelular) {
+		this.dddCelular = dddCelular;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public HistoricoPedido() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public HistoricoPedido(int codigo, Integer codigoCliente, String mistura, String guarnicao, String descricaoPrato,
 			String observacao, Double valorTotal, Integer idEmbalagem, String outro, String statusPedido,
 			Date dataPedido, String bebida, String quilo, Double valorQuilo, String enderecoEntrega, Boolean avaliado,
-			Double troco, String formaPagamento, String bandeiraCartao) {
+			Double troco, String formaPagamento, String bandeiraCartao, String nome, String dddTelefone,
+			String telefone, String dddCelular, String celular, String usuario, String email, String cpf) {
 		super();
 		this.codigo = codigo;
 		this.codigoCliente = codigoCliente;
@@ -259,10 +346,17 @@ public class Pedido implements Serializable{
 		this.troco = troco;
 		this.formaPagamento = formaPagamento;
 		this.bandeiraCartao = bandeiraCartao;
+		this.nome = nome;
+		this.dddTelefone = dddTelefone;
+		this.telefone = telefone;
+		this.dddCelular = dddCelular;
+		this.celular = celular;
+		this.usuario = usuario;
+		this.email = email;
+		this.cpf = cpf;
 	}
-
-	public Pedido() {
-		// TODO Auto-generated constructor stub
-	}
-		
+	
+	
+	
+	
 }

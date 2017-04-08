@@ -1,0 +1,229 @@
+.wizard {
+    background: #fff;
+}
+
+.wizard .nav-tabs {
+    position: relative;
+    margin: 40px auto;
+    margin-bottom: 0;
+    border-bottom-color: #e0e0e0;
+}
+
+.wizard > div.wizard-inner {
+    position: relative;
+}
+
+.connecting-line {
+    height: 2px;
+    background: #e0e0e0;
+    position: absolute;
+    width: 75%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+    color: #555555;
+    cursor: default;
+    border: 0;
+    border-bottom-color: transparent;
+}
+
+span.round-tab {
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    display: inline-block;
+    border-radius: 100px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    font-size: 25px;
+}
+span.round-tab i{
+    color:#555555;
+}
+.wizard li.active span.round-tab {
+    background: #fff;
+    border: 2px solid #5bc0de;
+    
+}
+.wizard li.active span.round-tab i{
+    color: #5bc0de;
+}
+
+span.round-tab:hover {
+    color: #333;
+    border: 2px solid #333;
+}
+
+.wizard .nav-tabs > li {
+    width: 33%;
+}
+
+.wizard li:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 0;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 5px solid transparent;
+    border-bottom-color: #5bc0de;
+    transition: 0.1s ease-in-out;
+}
+
+.wizard li.active:after {
+    content: " ";
+    position: absolute;
+    left: 46%;
+    opacity: 1;
+    margin: 0 auto;
+    bottom: 0px;
+    border: 10px solid transparent;
+    border-bottom-color: #5bc0de;
+}
+
+.wizard .nav-tabs > li a {
+    width: 70px;
+    height: 70px;
+    margin: 20px auto;
+    border-radius: 100%;
+    padding: 0;
+}
+
+    .wizard .nav-tabs > li a:hover {
+        background: transparent;
+    }
+
+.wizard .tab-pane {
+    position: relative;
+    padding-top: 50px;
+}
+
+.wizard h3 {
+    margin-top: 0;
+}
+
+@media( max-width : 585px ) {
+
+    .wizard {
+        width: 90%;
+        height: auto !important;
+    }
+
+    span.round-tab {
+        font-size: 16px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .wizard .nav-tabs > li a {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .wizard li.active:after {
+        content: " ";
+        position: absolute;
+        left: 35%;
+    }
+}
+
+
+#step1 > div,
+#step2 > div,
+#step3 > div {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+div#step1 > div > div:NTH-CHILD(1),
+div#step1 > div > div:NTH-CHILD(2),
+div#step1 > div > div:NTH-CHILD(3),
+div#step2 > div > div:NTH-CHILD(1),
+div#step2 > div > div:NTH-CHILD(2),
+div#step2 > div > div:NTH-CHILD(3),
+div#step3 > div > div:NTH-CHILD(1),
+div#step3 > div > div:NTH-CHILD(2),
+div#step3 > div > div:NTH-CHILD(3) {
+	padding: 15px 25px;
+    border-radius: 6px;
+    background-image: none;
+    text-shadow: none;
+    color: white;
+    border: 1px solid white;
+    font-weight: bold;
+}
+
+div#step1 > div > div:NTH-CHILD(1),
+div#step2 > div > div:NTH-CHILD(1),
+div#step3 > div > div:NTH-CHILD(1) {
+ background: #a82521;
+}
+
+div#step1 > div > div:NTH-CHILD(2),
+div#step2 > div > div:NTH-CHILD(2),
+div#step3 > div > div:NTH-CHILD(2) {
+ background: #e2b03c;
+}
+
+div#step1 > div > div:NTH-CHILD(3),
+div#step2 > div > div:NTH-CHILD(3),
+div#step3 > div > div:NTH-CHILD(3) {
+ background: #2fa449;
+}
+
+div#step1 > div > div:NTH-CHILD(1):hover,
+div#step2 > div > div:NTH-CHILD(1):hover,
+div#step3 > div > div:NTH-CHILD(1):hover {
+	background: rgb(211, 64, 59);
+}
+
+div#step1 > div > div:NTH-CHILD(2):hover,
+div#step2 > div > div:NTH-CHILD(2):hover,
+div#step3 > div > div:NTH-CHILD(2):hover {
+	background: rgb(244, 196, 84);
+}
+
+div#step1 > div > div:NTH-CHILD(3):hover,
+div#step2 > div > div:NTH-CHILD(3):hover,
+div#step3 > div > div:NTH-CHILD(3):hover {
+	 background: rgb(73, 197, 100);
+} 
+    
+div#step1 > div > div:NTH-CHILD(1).ui-state-active,
+div#step2 > div > div:NTH-CHILD(1).ui-state-active,
+div#step3 > div > div:NTH-CHILD(1).ui-state-active {
+	background: white;
+	color: #a82521;
+    border: 1px solid #a82521;
+}        
+
+div#step1 > div > div:NTH-CHILD(2).ui-state-active,
+div#step2 > div > div:NTH-CHILD(2).ui-state-active,
+div#step3 > div > div:NTH-CHILD(2).ui-state-active {
+	background: white;
+	color: #e2b03c;
+    border: 1px solid #e2b03c;
+}   
+
+div#step1 > div > div:NTH-CHILD(3).ui-state-active,
+div#step2 > div > div:NTH-CHILD(3).ui-state-active,
+div#step3 > div > div:NTH-CHILD(3).ui-state-active {
+	background: white;
+	color: #2fa449;
+    border: 1px solid #2fa449;
+}   

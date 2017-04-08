@@ -34,8 +34,6 @@
 				   					</h:outputText>
    									 - 
    									<h:outputText value="#{emb.tamanho}" />
-									
-				   					
 							        
 							    </p:dataList>
 				 			</div>
@@ -103,29 +101,19 @@
 						        	</p:dataList>
 							    </p:outputPanel>
 							</div>
-							<div  class="col-lg-12 form-group" style="text-align: right;">
-							  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
-							  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
-							  </p:commandButton>
-							</div>
 					 	</p:tab>
 					 	
 					 	<p:tab title="Pratos Prontos">
 					 		<div class="col-lg-12  form-group">
 			 					<p:outputLabel for="Observacao" value="Observação " /><br/>
-								<h:inputText id="Observacao" value="#{cardapioController.pedido.observacao}">
-			   					</h:inputText>
+								<p:inputTextarea rows="3" style="width: 100%" id="Observacao" value="#{cardapioController.pedido.observacao}">
+			   					</p:inputTextarea>
 		 					</div>
 			 				<div id='pratosfeitos' >
 				 				<p:selectManyCheckbox layout="grid" columns="1" id='pratosfeitos' value="#{cardapioController.pratosSelecionados}">
 				 						<f:selectItems  value="#{cardapioController.pratos}" />
 				 				</p:selectManyCheckbox><br></br>
 			 				</div>
-			 				<div  class="col-lg-12 form-group" style="text-align: right;">
-							  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
-							  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
-							  </p:commandButton>
-							</div>
 					 	</p:tab>
 					 	
 					 	 <p:tab title="Bebidas">
@@ -141,11 +129,6 @@
 				 				
 			 				</div>
 			 				
-			 				<div  class="col-lg-12 form-group" style="text-align: right;">
-							  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
-							  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
-							  </p:commandButton>
-							</div>
 					 	</p:tab>
 					 	
 					 	 <p:tab title="Quilo">
@@ -162,7 +145,63 @@
 				 				
 			 				</div>
 			 				
+					 	</p:tab>
+					 	
+					 	<p:tab title="Forma de Pagamento">
+			 				<div id='pagamento' class="container-fluid">
+			 					<div class="col-lg-8  form-group">
+				 					<p:outputLabel for="pagamento" value="Forma de Pagamento " /><br/>
+				 					<p:selectOneMenu id="pagamento" 
+				 						required="true"  value="#{cardapioController.pedido.formaPagamento}" 
+										style="width: 100%">
+										<f:selectItem itemLabel="" itemValue=" " />
+										<f:selectItem itemLabel="Dinheiro" itemValue="Dinheiro" />
+										<f:selectItem itemLabel="Cartão de Crédito" itemValue="Cartão de Crédito" />
+										<f:ajax render="painelBandeiras"></f:ajax>
+							        </p:selectOneMenu>
+				 				</div>
+				 			
+				 				<p:panel id='painelBandeiras' style="border: none">
+				 					<div class="col-lg-3 form-group">
+				 						<p:outputLabel for="bandeiras" rendered="#{cardapioController.pedido.formaPagamento == 'Cartão de Crédito'}"
+				 						 value="Bandeiras Disponíveis" />
+					 					<p:selectOneMenu id="bandeiras" 
+					 						rendered="#{cardapioController.pedido.formaPagamento == 'Cartão de Crédito'}"
+					 						required="true"  value="#{cardapioController.pedido.bandeiraCartao}" 
+											style="width: 100%">
+											<f:selectItems value="#{cardapioController.cartoes}" />
+								        </p:selectOneMenu>
+								        
+								        <p:outputLabel for="troco" rendered="#{cardapioController.pedido.formaPagamento == 'Dinheiro'}"
+				 						 value="Trazer troco para" />
+					 					<p:inputText id="troco" 
+					 						rendered="#{cardapioController.pedido.formaPagamento == 'Dinheiro'}"
+					 						required="true"  value="#{cardapioController.pedido.troco}" 
+					 						requiredMessage="Campo 'Trazer troco para' é obrigatório"
+											style="width: 100%">
+												<f:convertNumber pattern="#0.00"/>
+								        </p:inputText>
+				 					</div>
+				 				
+				 				</p:panel>
+				 				
+				 				<div class="col-lg-12 form-group pull-right" style="    font-size: 22px;">
+				 					<p:outputLabel value="Valor Total: " for="total">
+				 					</p:outputLabel>
+			 				 		<span style="color: green;font-weight: bold;">R$</span><h:outputText style="width: 100%;color: green;font-weight: bold;" 
+										id="total"
+										disabled="true"
+										value="#{cardapioController.valorTotal}">
+											<f:convertNumber pattern="#0.00"/>
+									</h:outputText>
+				 				</div>
+				 				
+			 				</div>
+			 				
 			 				<div  class="col-lg-12 form-group" style="text-align: right;">
+			 				 	<p:commandButton value= "Calcular Valor Total" update="cardapio:messages total" 
+							  styleClass="btn btn-primary" actionListener="#{cardapioController.geraValorTotal}" >
+							  </p:commandButton>
 							  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
 							  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
 							  </p:commandButton>

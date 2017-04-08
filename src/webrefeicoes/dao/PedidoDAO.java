@@ -44,6 +44,15 @@ public class PedidoDAO {
 		
 	}
 
+	
+	public List<Pedido> listPedidoCliente(Integer codigoCliente) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		List<Pedido> lista = session.createQuery("from Pedido p where  p.codigoCliente = :codigoCliente").
+				setParameter("codigoCliente", codigoCliente).list();
+		t.commit();
+		return lista;
+	}
 }
 
 
