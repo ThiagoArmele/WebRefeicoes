@@ -16,8 +16,9 @@
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
-     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
+    <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
     <script>
 			var sHabilitados = "nao";
 			
@@ -139,7 +140,7 @@
 						required="true" 
 						requiredMessage=" 'Senha' é obrigatório."
 						redisplay="true"
-						value="#{clienteController.cliente.senha}"
+						value="#{clienteController.senha}"
 						/>
 					</div>
 					<div class="col-lg-4 form-group">
@@ -245,7 +246,7 @@
 			selectionMode="single"
 			var="cliente" 
 			style="padding: 0px 15px;"
-			scrollHeight="50%"
+			scrollHeight="600"
 			selection="#{clienteController.selecionaCliente}"
 			rowKey="#{cliente.codigo}"
 			value="#{clienteController.listaClientes()}">

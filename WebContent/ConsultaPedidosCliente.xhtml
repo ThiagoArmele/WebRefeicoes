@@ -17,8 +17,9 @@
     <h:outputStylesheet library="css" name="Avaliacao.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
-     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
+    <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
 </h:head>
 
 <h:body>
@@ -142,7 +143,7 @@
 			var="pedido" 
 			lazy="false"
 			style="padding: 0px 15px;"
-			scrollHeight="150px"
+			scrollHeight="600"
 			selection="#{pedidoClienteController.selecionaPedido}"
 			rowKey="#{pedido.codigo}"
 			value="#{pedidoClienteController.listaPedidos()}">
@@ -241,7 +242,7 @@
 					                <div class="connecting-line"></div>
 					                <ul class="nav nav-tabs" role="tablist">
 					                    <li role="presentation" class="active">
-					                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+					                        <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Comida">
 					                            <span class="round-tab">
 					                             	<img src="resources/images/comida.png" height="50px" style="padding-top: 10px;"></img>
 					                            </span>
@@ -249,14 +250,14 @@
 					                    </li>
 					
 					                    <li role="presentation">
-					                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+					                        <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Tempo">
 					                            <span class="round-tab">
 					                                <img src="resources/images/tempo.png" height="50px" style="padding-top: 10px;"></img>
 					                            </span>
 					                        </a>
 					                    </li>
 					                    <li role="presentation" >
-					                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+					                        <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Entrega">
 					                            <span class="round-tab">
 					                                <img src="resources/images/entrega.png" height="50px" style="padding-top: 10px;"></img>
 					                            </span>

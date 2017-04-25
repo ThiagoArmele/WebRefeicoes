@@ -16,47 +16,70 @@
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
 <h:body>
 	<div class="container-fluid" style="padding: 0px;">
 			
 				<h:form id="formulario">
+					<p:growl id="messages" life="5000"/>
 					<div class="col-lg-2 form-group">
 						<p:outputLabel for="idPed" value="Código Pedido" /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{historicoPedidoController.id}"
 						 id="idPed" />
 					</div>
-   					<div class="col-lg-4 form-group">
+   					<div class="col-lg-3 form-group">
 						<p:outputLabel for="idCliente" value="Cliente" /><br/>
 						<p:selectOneMenu id="idCliente" value="#{historicoPedidoController.idCliente}" style="width: 100%">
 							  <f:selectItem itemLabel="" itemValue="" />
 							  <f:selectItems value="#{historicoPedidoController.clientes}"/>
 				        </p:selectOneMenu>
 					</div>
-					<div class="col-lg-4 form-group">
+					<div class="col-lg-3 form-group">
 						<p:outputLabel for="idEmpresa" value="Empresa" /><br/>
 						<p:selectOneMenu id="idEmpresa" value="#{historicoPedidoController.idEmpresa}" style="width: 100%">
 							  <f:selectItem itemLabel="" itemValue="" />
 							  <f:selectItems value="#{historicoPedidoController.empresas}"/>
 				        </p:selectOneMenu>
 					</div>
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="dataInicial" value="Data Inicial" /><br/>
+						<p:calendar 
+						value="#{historicoPedidoController.dataInicial}"
+						pattern="dd/MM/yyyy"
+						locale="de" navigator="true"
+						style="width: 100%" 
+						id="dataInicial"
+						mask="true" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="dataFinal" value="Data Final" /><br/>
+						<p:calendar 
+						value="#{historicoPedidoController.dataFinal}"
+						pattern="dd/MM/yyyy"
+						locale="de" navigator="true"
+						style="width: 100%" 
+						id="dataFinal"
+						mask="true" />
+					</div>
 					
-					<div class="col-lg-12 form-group" >
-						 <p:commandButton value= "Listar" update="gridhistoricoPedido" 
+					<div class="col-lg-12 form-group" style="text-align: right;" >
+						 <p:commandButton value= "Listar" update="gridHistoricoPedido messages" 
 						 styleClass="btn btn-success" action="#{historicoPedidoController.listar}" >
 						 </p:commandButton>
 					</div>
 					
 				</h:form>
 			</div>		
-			<p:dataTable id='gridhistoricoPedido' emptyMessage="Nenhum Registro Encontrado"
+			<p:dataTable id='gridHistoricoPedido' emptyMessage="Nenhum Registro Encontrado"
 			scrollable="true"
 			selectionMode="single"
 			var="historicoPedido" 
-			scrollHeight="200px"
-			style="padding: 0px 15px;"
+			scrollRows="20"
+			scrollHeight="600"
+			style="padding: 0px 15px"
 			selection="#{historicoPedidoController.selecionaHistoricoPedido}"
 			rowKey="#{historicoPedido.codigo}"
 			value="#{historicoPedidoController.listaHistoricoPedidos}">

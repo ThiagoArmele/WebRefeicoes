@@ -16,8 +16,9 @@
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
-     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
+    <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
 </h:head>
 
 <h:body>
@@ -175,7 +176,7 @@
 			var="pedido" 
 			lazy="false"
 			style="padding: 0px 15px;"
-			scrollHeight="150px"
+			scrollHeight="600"
 			selection="#{pedidoController.selecionaPedido}"
 			rowKey="#{pedido.codigo}"
 			value="#{pedidoController.listaPedidos()}">

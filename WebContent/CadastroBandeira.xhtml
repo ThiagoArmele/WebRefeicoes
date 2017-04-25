@@ -16,6 +16,7 @@
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
 <h:body>
@@ -64,7 +65,7 @@
 			scrollable="true"
 			selectionMode="single"
 			var="bandeiraCartao" 
-			scrollHeight="50%"
+			scrollHeight="600"
 			style="padding: 0px 15px;"
 			selection="#{bandeiraCartaoController.selecionaBandeiraCartao}"
 			rowKey="#{bandeiraCartao.codigo}"

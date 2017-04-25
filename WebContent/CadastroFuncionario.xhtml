@@ -5,7 +5,7 @@
     xmlns:f="http://java.sun.com/jsf/core"  
     xmlns:p="http://primefaces.org/ui">  
 <h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>
        Web Refeicoes
     </title>
@@ -14,7 +14,9 @@
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputStylesheet library="css" name="util.css" />
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
-    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.min.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
 </h:head>
@@ -124,7 +126,7 @@
 						requiredMessage=" 'Senha' é obrigatório."
 						redisplay="true"
 						maxlength="20"
-						value="#{FuncionarioController.funcionario.senha}"
+						value="#{FuncionarioController.senha}"
 						/>
 					</div>
 					
@@ -189,7 +191,7 @@
 			style="padding: 0px 15px;"
 			selectionMode="single"
 			var="funcionario" 
-			scrollHeight="50%"
+			scrollHeight="600"
 			selection="#{FuncionarioController.selecionaFuncionario}"
 			rowKey="#{funcionario.codigo}"
 			value="#{FuncionarioController.listaFuncionarios}">

@@ -16,8 +16,8 @@
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
-      
     <script>
 	    function carregar(pagina){
 	        $("#conteudo").load(pagina);
@@ -177,7 +177,7 @@
 			scrollable="true"
 			selectionMode="single"
 			var="empresa" 
-			scrollHeight="50%"
+			scrollHeight="600"
 			selection="#{empresaController.selecionaEmpresa}"
 			rowKey="#{empresa.codigo}"
 			value="#{empresaController.listaEmpresas}">

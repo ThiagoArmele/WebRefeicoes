@@ -13,209 +13,237 @@
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
     <script>
-	    function carregar(pagina){
-	        $("#conteudo").load(pagina);
-	    }
+    
+	    function exitWebrefecoes(){
+	        location.href = location.pathname;
+	    };
+	    
+	    function load(view,moduloView,nameView){
+	    	$("#contents").load(view);
+	    	
+	    	if(moduloView != " "){
+	    		$("#iconFolderModulo").removeClass("hidden");
+	    		$("#moduloView").html(moduloView);
+		    	$("#nameView").html(nameView);
+	    	} else {
+	    		$("#iconFolderModulo").addClass("hidden");
+	    		$("#moduloView").html('');
+	    		$("#nameView").html(nameView);
+	    	}
+	    	
+	    	
+	    };
+	    
     </script>
       
 </h:head>
 <h:body>
-	<div class="container-fluid" style="height: 100%;">
-			<div class="row">
-				<div style="width: 100%; height: 80px;background: #680404;">
-					 <img src="resources/images/logo_teste.png" style="height: 75px;margin-right: 10px;"  alt="webrefeicoes"  class="img-respondive"/>
-					 <span style="color: white">WebRefeições</span>
-					<h:outputText id="display" styleClass="pull-right" style="color: white;font-size: 15px; padding: 3px 9px;" value="Sair" />
-			 	 	<h:outputText id="display" styleClass="pull-right" style="color: #b03030;font-size: 19px; padding: 3px 9px;" value="#{loginController.cliente.usuario}" />
-		 	 		<h:outputText id="display" styleClass="pull-right" style="color: white;font-size: 22px; padding-right: 10px;"  value="Bem Vindo: " />
+	<div class="wrapper">
+		<div class="header-webRefeicoes">
+			<span class="nameSystem">WebRefeições</span>
+			<span style="font-size: 17px;font-weight: bold;color: white;">
+				<i class="fa fa-chevron-right hidden" id='iconFolderModulo' aria-hidden="true" style="margin-right: 10px;"></i> 
+				<span id='moduloView' style="    margin-right: 10px;"></span>
+				<i class="fa fa-chevron-right" aria-hidden="true" style="margin-right: 10px;"></i> 
+				<span id='nameView'>Menu Principal</span>
+			</span>
+			<div class="dropdown" style="margin-right: 60px;float: right;">
+				<div class="painel-profile" data-toggle="dropdown">
+		 	 		<h:outputText id="display" styleClass="pull-right profileName" value="#{loginController.cliente.usuario}" />
+					<h:outputText id="display" styleClass="pull-right profileWelcome" value="Bem Vindo" />
 				</div>
-			</div>
-		    <div class="row" style="height: 100%;    background: #eeeeee;">
-		        <div class="col-lg-2 col-md-2" style="height: 100%;    background: #2b2727; padding: 0px">
-		            <div class="panel-group" id="accordion">
-		                <div class="panel panel-default">
-		                   	<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#perfil">
-		                        <h4 class="panel-title">
-		                          	<i class="fa fa-user" style="    padding-right: 15px;" aria-hidden="true"></i>Perfil
-		                        </h4>
-		                    </div>
-		                    <div id="perfil" class="panel-collapse collapse">
-		                        <div class="panel-body">
-		                            <table class="table">
-		                                <tr>
-		                                    <td onclick="carregar('PerfilCliente.xhtml')">
-		                                      Meu Perfil
-		                                    </td>
-		                                </tr>
-		                            </table>
-		                        </div>
-		                    </div>
-		                </div>
-		                <div class="panel panel-default">
-			                <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-			                        <h4 class="panel-title">
-			                          	<i class="fa fa-users" style="    padding-right: 10px;" aria-hidden="true"></i>Funcionário
-			                        </h4>
-		                    </div>
-		                    <div id="collapseOne" class="panel-collapse collapse">
-		                        <div class="panel-body">
-		                            <table class="table">
-		                                <tr>
-		                                    <td onclick="carregar('CadastroFuncionario.xhtml')">
-		                                       Cadastro
-		                                    </td>
-		                                </tr>
-		                            </table>
-		                        </div>
-		                    </div>
-			             </div>
-		                <div class="panel panel-default">
-		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-		                        <h4 class="panel-title">
-		                          <i class="fa fa-users" style="    padding-right: 5px;" aria-hidden="true"></i> Cliente
-		                        </h4>
-		                    </div>
-		                    <div id="collapseTwo" class="panel-collapse collapse">
-		                        <div class="panel-body">
-		                            <table class="table">
-		                                <tr>
-		                                    <td onclick="carregar('CadastroCliente.xhtml')">
-		                                    	Cadastro
-		                                    </td>
-		                                </tr>
-		                            </table>
-		                        </div>
-		                    </div>
-		                </div>
-		                <div class="panel panel-default">
-		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-		                        <h4 class="panel-title">
-		                             <i class="fa fa-cutlery" style="padding-right: 15px;" aria-hidden="true"></i>Refeição
-		                        </h4>
-		                    </div>
-		                    <div id="collapseThree" class="panel-collapse collapse">
-		                        <div class="panel-body">
-		                            <table class="table">
-		                                <tr>
-		                                    <td onclick="carregar('CadastroEmbalagem.xhtml')">
-		                                    	 Cadastro de Embalagem
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td onclick="carregar('CadastroProduto.xhtml')">
-		                                    	 Cadastro de Produto
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td onclick="carregar('CadastroPrato.xhtml')">
-		                                    	 Cadastro de Prato
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td onclick="carregar('CadastroBebida.xhtml')">
-		                                    	 Cadastro de Bebida
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td onclick="carregar('Cardapio.xhtml')">
-		                                    	 Cardápio
-		                                    </td>
-		                                </tr>
-		                                 <tr>
-		                                    <td onclick="carregar('ConsultaPedidos.xhtml')">
-		                                    	 Consulta de Pedidos
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td onclick="carregar('ConsultaAvaliacao.xhtml')">
-		                                    	 Consultar Avaliação
-		                                    </td>
-		                                </tr>
-		                                 <tr>
-		                                    <td onclick="carregar('ConsultaPedidosCliente.xhtml')">
-		                                    	 Consultar Meus Pedidos
-		                                    </td>
-		                                </tr>
-		                                <tr>
-		                                    <td onclick="carregar('HistoricoPedidos.xhtml')">
-		                                    	Histórico de Pedidos
-		                                    </td>
-		                                </tr>
-		                            </table>
-		                        </div>
-		                    </div>
-		                </div>
-		                <div class="panel panel-default">
-		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-		                        <h4 class="panel-title">
-		                           <i class="fa fa-building" style="padding-right: 10px;" aria-hidden="true"></i> Empresa
-		                        </h4>
-		                    </div>
-		                    <div id="collapseFour" class="panel-collapse collapse">
-		                        <div class="panel-body">
-		                            <table class="table">
-		                                <tr>
-		                                    <td onclick="carregar('CadastroEmpresa.xhtml')">
-		                                        Cadastro
-		                                    </td>
-		                                </tr>
-		                            </table>
-		                        </div>
-		                    </div>
-		                </div>
-		                 <div class="panel panel-default">
-		                    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-		                        <h4 class="panel-title">
-		                           <i class="fa fa-calendar" style="padding-right: 10px;" aria-hidden="true"></i> Convênio
-		                        </h4>
-		                    </div>
-		                    <div id="collapseFive" class="panel-collapse collapse">
-		                        <div class="panel-body">
-		                            <table class="table">
-		                                <tr>
-		                                    <td onclick="carregar('CadastroConvenio.xhtml')">
-		                                        Cadastro
-		                                    </td>
-		                                </tr>
-		                                 <tr>
-		                                    <td onclick="carregar('CadastroConvenio.xhtml')">
-		                                        Consulta
-		                                    </td>
-		                                </tr>
-		                            </table>
-		                        </div>
-		                    </div>
-		                </div>
-		                <div class="panel panel-default">
-		                	<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
-		                        <h4 class="panel-title">
-		                           <i class="fa fa-money" style="padding-right: 10px;" aria-hidden="true"></i> Pagamento
-		                        </h4>
-		                    </div>
-		                    <div id="collapseSix" class="panel-collapse collapse">
-		                        <div class="panel-body">
-		                            <table class="table">
-		                                <tr>
-		                                    <td onclick="carregar('CadastroBandeira.xhtml')">
-		                                        Cadastro de Bandeira
-		                                    </td>
-		                                </tr>
-		                            </table>
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		            
-		        </div>
-		        <div id="conteudo" class="col-lg-10 col-md-10" style="padding: 10px;background: #eeeeee;">
+				
+				<div class="dropdown-menu dropdown-menu-right" style="padding: 0px">
+					<div class="profile-dropdown">
+						<div class="profile-header">
+							<h:outputText id="display" styleClass="pull-right profileName" style="white-space: nowrap;font-size: 13px;" value="#{loginController.cliente.nome}" />
+						</div>
+						
+						<div class="profile-content">
+							<button class="btn btn-profile" onclick="load('PerfilCliente.xhtml', ' ','Perfil Pessoal')"> 
+								PERFIL
+							</button>
+							<button class="btn btn-profile" onclick="exitWebrefecoes()" style="float: right"> 
+								SAIR
+							</button>
+						</div>
+					</div>
 				</div>
-		    </div>
-		    
-	  </div>
+			</div>				
+		</div>	
+	<div class="sectionWebRefeicoes">
+		<div class="panel-group" id="accordion">
+         <div class="panel panel-default">
+          <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                  <h4 class="panel-title">
+                    	<i class="fa fa-users" style="    padding-right: 10px;" aria-hidden="true"></i>Funcionário
+                  </h4>
+             </div>
+             <div id="collapseOne" class="panel-collapse collapse">
+                 <div class="panel-body">
+                     <table class="table">
+                         <tr>
+                             <td onclick="load('CadastroFuncionario.xhtml', 'Funcionário','Cadastro de Funcionário')">
+                                Cadastro
+                             </td>
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+       </div>
+         <div class="panel panel-default">
+             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                 <h4 class="panel-title">
+                   <i class="fa fa-users" style="    padding-right: 5px;" aria-hidden="true"></i> Cliente
+                 </h4>
+             </div>
+             <div id="collapseTwo" class="panel-collapse collapse">
+                 <div class="panel-body">
+                     <table class="table">
+                         <tr>
+                             <td onclick="load('CadastroCliente.xhtml','Cliente', 'Cadastro de Cliente')">
+                             	Cadastro
+                             </td>
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+         </div>
+         <div class="panel panel-default">
+             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                 <h4 class="panel-title">
+                      <i class="fa fa-cutlery" style="padding-right: 15px;" aria-hidden="true"></i>Refeição
+                 </h4>
+             </div>
+             <div id="collapseThree" class="panel-collapse collapse">
+                 <div class="panel-body">
+                     <table class="table">
+                         <tr>
+                             <td onclick="load('CadastroEmbalagem.xhtml','Refeição', 'Cadastro de Embalagem')">
+                             	 Cadastro de Embalagem
+                             </td>
+                         </tr>
+                         <tr>
+                             <td onclick="load('CadastroProduto.xhtml', 'Refeição','Cadastro de Produto')">
+                             	 Cadastro de Produto
+                             </td>
+                         </tr>
+                         <tr>
+                             <td onclick="load('CadastroPrato.xhtml', 'Refeição','Cadastro de Prato')">
+                             	 Cadastro de Prato
+                             </td>
+                         </tr>
+                         <tr>
+                             <td onclick="load('CadastroBebida.xhtml', 'Refeição','Cadastro de Bebida')">
+                             	 Cadastro de Bebida
+                             </td>
+                         </tr>
+                         <tr>
+                             <td onclick="load('Cardapio.xhtml', 'Refeição','Cardápio')">
+                             	 Cardápio
+                             </td>
+                         </tr>
+                          <tr>
+                             <td onclick="load('ConsultaPedidos.xhtml', 'Refeição','Consulta de Pedidos')">
+                             	 Consulta de Pedidos
+                             </td>
+                         </tr>
+                         <tr>
+                             <td onclick="load('ConsultaAvaliacao.xhtml', 'Refeição','Consulta de Avaliação')">
+                             	 Consulta de Avaliação
+                             </td>
+                         </tr>
+                          <tr>
+                             <td onclick="load('ConsultaPedidosCliente.xhtml', 'Refeição','Consulta de Pedidos')">
+                             	 Consulta de Pedidos
+                             </td>
+                         </tr>
+                         <tr>
+                             <td onclick="load('HistoricoPedidos.xhtml', 'Refeição','Histórico de Pedidos')">
+                             	Histórico de Pedidos
+                             </td>
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+         </div>
+         <div class="panel panel-default">
+             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                 <h4 class="panel-title">
+                    <i class="fa fa-building" style="padding-right: 10px;" aria-hidden="true"></i> Empresa
+                 </h4>
+             </div>
+             <div id="collapseFour" class="panel-collapse collapse">
+                 <div class="panel-body">
+                     <table class="table">
+                         <tr>
+                             <td onclick="load('CadastroEmpresa.xhtml','Empresa', 'Cadastro de Empresa')">
+                                 Cadastro
+                             </td>
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+         </div>
+          <div class="panel panel-default">
+             <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                 <h4 class="panel-title">
+                    <i class="fa fa-calendar" style="padding-right: 10px;" aria-hidden="true"></i> Convênio
+                 </h4>
+             </div>
+             <div id="collapseFive" class="panel-collapse collapse">
+                 <div class="panel-body">
+                     <table class="table">
+                         <tr>
+                             <td onclick="load('CadastroConvenio.xhtml', 'Convênio','Cadastro de Convênio')">
+                                 Cadastro
+                             </td>
+                         </tr>
+                          <tr>
+                             <td onclick="load('CadastroConvenio.xhtml', 'Convênio','Consulta de Convênio')">
+                                 Consulta
+                             </td>
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+         </div>
+         <div class="panel panel-default">
+         	<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                 <h4 class="panel-title">
+                    <i class="fa fa-money" style="padding-right: 10px;" aria-hidden="true"></i> Pagamento
+                 </h4>
+             </div>
+             <div id="collapseSix" class="panel-collapse collapse">
+                 <div class="panel-body">
+                     <table class="table">
+                         <tr>
+                             <td onclick="load('CadastroBandeira.xhtml', 'Pagamento','Cadastro de Bandeira')">
+                                 Cadastro de Bandeira
+                             </td>
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+         </div>
+      </div>
+	</div>
+	<div class="content-wrap">
+		<div id="contents" class="content">
+		
+		</div>
+	</div>
+	<footer style="margin-left: 230px;">
+  		 <strong>Copyright &copy; 2017 <a href="#" style="color: #6d0000;">WebRefeições</a>.</strong> Todos Direitos Reservados.
+	</footer>	
+</div>
+		        
+				
 		   
 	
 </h:body>

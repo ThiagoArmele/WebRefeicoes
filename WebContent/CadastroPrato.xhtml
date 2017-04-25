@@ -16,10 +16,11 @@
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
 </h:head>
 <h:body>
-			<div class="row">
+			<div class="container-fluid" style="padding: 0px;">
 			
 				<h:form id="formulario">
 					<p:growl id="messages" life="5000"/>
@@ -96,7 +97,8 @@
 			scrollable="true"
 			selectionMode="single"
 			var="prato" 
-			scrollHeight="50%"
+			scrollHeight="600"
+			style="padding: 0px 15px"	
 			selection="#{pratoController.selecionaPrato}"
 			rowKey="#{prato.codigo}"
 			value="#{pratoController.listaPratos}">

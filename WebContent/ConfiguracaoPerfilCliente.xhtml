@@ -16,6 +16,7 @@
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
     <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
 </h:head>
@@ -95,7 +96,7 @@
 			</div>
 			<div class="col-lg-4 form-group">
 				<p:outputLabel for="senha" value="Nova Senha"/><br/>
-				<p:password id="senha" style="width: 100%" redisplay="true" value="#{loginController.cliente.senha}" />
+				<p:password id="senha" style="width: 100%" redisplay="true" value="#{loginController.senha}" />
 			</div>
 			
 			<div class="col-lg-12" style="padding: 0px">
