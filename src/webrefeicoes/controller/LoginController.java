@@ -1,6 +1,8 @@
 package webrefeicoes.controller;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 import javax.faces.application.FacesMessage;
@@ -14,6 +16,7 @@ import org.apache.commons.mail.HtmlEmail;
 import webrefeicoes.dao.ClienteDAO;
 import webrefeicoes.dao.LoginDAO;
 import webrefeicoes.model.Cliente;
+import webrefeicoes.util.Criptografia;
 
 @ManagedBean(name = "loginController")
 @SessionScoped
@@ -28,10 +31,19 @@ public class LoginController implements Serializable{
     String senhaNova;
     private String user, senha;
     HtmlEmail  email;
+    private static MessageDigest md = null;
     
     public String envia() {
     	
-    	cliente = loginDao.getCliente(user, senha);
+    	try {
+			md = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+    	
+    	setSenha(Criptografia.criptografar(getSenha(), md));
+    	
+    	cliente = loginDao.getCliente(user, getSenha());
         if (cliente == null) {
               FacesContext.getCurrentInstance().addMessage(
                          null,
@@ -39,12 +51,14 @@ public class LoginController implements Serializable{
                                      "Erro no Login!"));
               return "";
         } else {
-              return "/index";
+        	
+            return "/index";
         }
   }
     
   public void enviarSenhaNova() throws EmailException{
 	  cliente = loginDao.verificarEmailExistente(emailCliente);
+	  
       if (cliente == null) {
             FacesContext.getCurrentInstance().addMessage(
                        null,

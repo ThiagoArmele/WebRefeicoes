@@ -37,6 +37,9 @@ public class Convenio implements Serializable {
 	
 	@Column(name="statusConvenio")
 	private String statusConvenio;
+	
+	@Column(name="tipoConvenio")
+	private String tipoConvenio;
 
 	public int getCodigo() {
 		return codigo;
@@ -86,8 +89,16 @@ public class Convenio implements Serializable {
 		this.statusConvenio = statusConvenio;
 	}
 
+	public String getTipoConvenio() {
+		return tipoConvenio;
+	}
+
+	public void setTipoConvenio(String tipoConvenio) {
+		this.tipoConvenio = tipoConvenio;
+	}
+
 	public Convenio(int codigo, Integer idCliente, Date dataInicial, Date dataFinal, Double precoTotal,
-			String statusConvenio) {
+			String statusConvenio, String tipoConvenio) {
 		super();
 		this.codigo = codigo;
 		this.idCliente = idCliente;
@@ -95,6 +106,7 @@ public class Convenio implements Serializable {
 		this.dataFinal = dataFinal;
 		this.precoTotal = precoTotal;
 		this.statusConvenio = statusConvenio;
+		this.tipoConvenio = tipoConvenio;
 	}
 
 	

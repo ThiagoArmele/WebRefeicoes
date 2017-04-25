@@ -1,5 +1,6 @@
 package webrefeicoes.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -17,7 +18,9 @@ public class HistoricoPedidoDAO {
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<HistoricoPedido> list(int id, int idCliente, int idEmpresa) {
+	public List<HistoricoPedido> list(int id, int idCliente, int idEmpresa, Date dataInicial, Date dataFinal) {
+		java.sql.Date dataInicialSql = new java.sql.Date (dataInicial.getTime());
+		java.sql.Date dataFinalSql = new java.sql.Date (dataFinal.getTime());
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
@@ -25,9 +28,10 @@ public class HistoricoPedidoDAO {
 				createQuery("from HistoricoPedido where " +
 						(id == 0? "id <> :id" : "id = :id") + 
 						(idCliente == 0? " and idCliente <> :idCliente" : " and idCliente = :idCliente") +
-						(idEmpresa == 0? " and idEmpresa <> :idEmpresa" : " and idEmpresa = :idEmpresa")).setParameter("id",id)
-								.setParameter("idCliente", idCliente).setParameter("idEmpresa", idEmpresa)
-				.list();
+						(idEmpresa == 0? " and idEmpresa <> :idEmpresa" : " and idEmpresa = :idEmpresa")+
+						(dataInicial == null? "" : dataFinal == null? "" : " and dataPedido BETWEEN :dataInicial and :dataFinal")).setParameter("id",id)
+								.setParameter("idCliente", idCliente).setParameter("idEmpresa", idEmpresa).setParameter("dataInicial",dataInicialSql)
+								.setParameter("dataFinal",dataFinalSql).list();
 		t.commit();
 		return lista;
 	}

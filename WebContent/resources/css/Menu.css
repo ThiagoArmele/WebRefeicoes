@@ -1,7 +1,7 @@
 .panel-default > .panel-heading {
     color: #fff;
-    background-color: #2b2727;
-    border-color: #000;
+    background-color: #1a2226;
+    border-left: 2px solid #1a2226;
     cursor: pointer;
     border-radius: 0px;
 }
@@ -9,13 +9,13 @@
 .panel-default > .panel-heading:hover,
 .panel-default > .panel-heading:active,
 .panel-default > .panel-heading:focus {
-    background-color: #a40000;
-    border-color: #000;
+   background-color: #171d1f;
+   border-left: 2px solid #d73925;
 }
 
 .panel-default > .panel-heading + .panel-collapse > .panel-body {
     border-top-color: #2b2727;
-    background: #433e3e;
+    background: #303639;
     padding: 0px;
 }
 
@@ -38,19 +38,120 @@
 .panel-group .panel + .panel {
     margin-top: 0px;
     border-radius: 0px;
-    border: 1px solid #2b2727;
-    border-bottom: 1px solid #1e1d1d;
 }
 
 
 .panel-group .panel {
     margin-bottom: 0;
     border-radius: 0px;
-    border: 1px solid #2b2727;
-    border-bottom: 1px solid #1e1d1d;
+    border: 1px solid #1a2226;
+    border-bottom: 1px solid #1a2226;
+}
+
+html {
+	height: 100%;
 }
 
 body, html {
-	height: 100%;
-    background: #2b2727;
+    background: #ecf0f5;;
 }
+
+body {
+	position: relative;
+    min-height: 100%;
+    padding-bottom: 6rem;
+    overflow-x: hidden;
+}
+
+.painel-profile {
+   float: right;
+   height: 100%;
+   background: #d73925;
+   background: rgba(0,0,0,0.1);
+   padding: 5px 25px;
+   display: grid;
+   transition: all 0.3s;
+}
+
+.painel-profile:hover,
+.painel-profile:focus,
+.painel-profile:active {
+	cursor: pointer;
+    background: rgba(0, 0, 0, 0.19);
+    tr
+}
+
+.profileName { 
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    font-stretch: wider;
+}
+
+.profileWelcome { 
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    height: 20px;
+}
+
+.nameSystem { 
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    display: inline-block;
+}
+
+.header-webRefeicoes {
+	position: relative;
+    max-height: 100px;
+    z-index: 990;
+    display: block;
+    background: #dd4b39;
+}
+
+.sectionWebRefeicoes {
+   	position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 58px;
+    min-height: 100%;
+    width: 230px;
+    z-index: 810;
+    background: #1a2226;
+}
+
+.profile-header {
+	background: #dd4b39;
+    display: grid;
+    padding: 10px;
+}
+
+.profile-content { 
+	padding: 10px	
+}
+
+.btn-profile {
+	background: white;
+    border: 1px solid #aeaeae;
+    font-size: 11px;
+    font-family: monospace;
+    font-weight: bold;
+    color: #6a6a6a;
+}
+
+.btn-profile:hover,
+.btn-profile:focus,
+.btn-profile:active {
+    background: #a2a2a2 !important;
+   	color: #ffffff;
+   	transition: all 0.3s;
+}
+
+.nameView {
+	
+}
+
+    

@@ -2,6 +2,7 @@ package webrefeicoes.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -38,6 +39,7 @@ public class ConvenioController implements Serializable{
 	private EntityManagerFactory factory = Persistence
             .createEntityManagerFactory("WebRefeicoes");
 	private EntityManager em = factory.createEntityManager();
+	private String nomeCliente;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public DataModel getListaConvenios() {
@@ -48,7 +50,10 @@ public class ConvenioController implements Serializable{
 	
 	public ConvenioController() {
 		convenio = new Convenio();
+		convenio.setDataFinal(new Date());
+		convenio.setDataInicial(new Date());
 		setClientes(new ArrayList<SelectItem>());
+		
 	}
 	
 	public Convenio getConvenio() {
@@ -92,16 +97,33 @@ public class ConvenioController implements Serializable{
     	 setConvenio(f); 
      }
 	
+	@SuppressWarnings("deprecation")
 	public void adicionarConvenio(){
 		ConvenioDAO dao = new ConvenioDAO();
 		
 		if (convenio.getCodigo() == 0L) {
+			
+			if(convenio.getTipoConvenio().equals("Mensal")) {
+				convenio.getDataFinal().setDate(convenio.getDataInicial().getDate() + 31);
+			} else {
+				convenio.getDataFinal().setDate(convenio.getDataInicial().getDate() + 15);
+			}
+				
+			
+			
 			dao.save(convenio);
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
 	              		  FacesMessage.SEVERITY_INFO,"Convenio cadastrado com sucesso!", 
 	              		  ""));
 		} else {
+			convenio.setDataFinal(convenio.getDataInicial());
+			if(convenio.getTipoConvenio().equals("Mensal")) {
+				convenio.getDataFinal().setDate(convenio.getDataInicial().getDate() + 31);
+			} else {
+				convenio.getDataFinal().setDate(convenio.getDataInicial().getDate() + 15);
+			}
+			System.out.println(convenio.getDataInicial());
 			dao.update(convenio);
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
@@ -127,6 +149,22 @@ public class ConvenioController implements Serializable{
 
 	public void setClientes(List<SelectItem> clientes) {
 		this.clientes = clientes;
+	}
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	public EntityManager getEm() {
+		return em;
+	}
+
+	public void setEm(EntityManager em) {
+		this.em = em;
 	}
 
 }

@@ -1,6 +1,8 @@
 package webrefeicoes.controller;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import webrefeicoes.dao.ClienteDAO;
 import webrefeicoes.dao.EmpresaDAO;
 import webrefeicoes.model.Cliente;
 import webrefeicoes.model.Empresa;
+import webrefeicoes.util.Criptografia;
 
 @ManagedBean(name = "clienteController")
 @SessionScoped
@@ -31,7 +34,8 @@ public class ClienteController implements Serializable{
 	private Cliente selecionaCliente;
 	private List<SelectItem> empresas;
 	private boolean checkEntrega;
-	
+	private String senha;
+	private static MessageDigest md = null;
 	
 	public List<Cliente> listaClientes() {
 		listaClientes = new ClienteDAO().list();
@@ -96,7 +100,15 @@ public class ClienteController implements Serializable{
 	public void adicionarCliente(){
 		ClienteDAO dao = new ClienteDAO();
 		if(!isCheckEntrega()) {
+			try {
+				md = MessageDigest.getInstance("MD5");
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			cliente.setSenha(Criptografia.criptografar(getSenha(), md));
 			if (cliente.getCodigo() == 0L) {
+				
 				dao.save(cliente);
 				FacesContext.getCurrentInstance().addMessage(
 		                null, new FacesMessage(
@@ -163,5 +175,15 @@ public class ClienteController implements Serializable{
 	public void setCheckEntrega(boolean checkEntrega) {
 		this.checkEntrega = checkEntrega;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	
 
 }

@@ -1,6 +1,8 @@
 package webrefeicoes.controller;
 
 import java.io.Serializable;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -14,6 +16,8 @@ import javax.persistence.Persistence;
 import webrefeicoes.dao.ClienteDAO;
 import webrefeicoes.dao.PerfilDAO;
 import webrefeicoes.model.Cliente;
+import webrefeicoes.model.Funcionario;
+import webrefeicoes.util.Criptografia;
 
 @ManagedBean(name = "perfilController")
 @SessionScoped
@@ -26,6 +30,8 @@ public class PerfilController implements Serializable{
 	PerfilDAO dao = new PerfilDAO();
 	@ManagedProperty(value = "#{loginController}")
 	private LoginController clienteLogado;
+	private static MessageDigest md = null;
+	private String senha;
 	
 	public PerfilController() {
 	}
@@ -56,10 +62,15 @@ public class PerfilController implements Serializable{
 	               .createQuery(
 	                           "SELECT c from Cliente c where c.codigo = :codigo")
 	               .setParameter("codigo", clienteLogado.getCliente().getCodigo()).getSingleResult();
-		System.out.println("Cliente do banco "+ cliente.toString());
-		System.out.println("Cliente da tela " + clienteLogado.getCliente().toString());
 		
 		if (!(cliente.toString().equals(clienteLogado.getCliente().toString()))) {
+			try {
+				md = MessageDigest.getInstance("MD5");
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			clienteLogado.setSenha(Criptografia.criptografar(getSenha(), md));
 			dao.update(clienteLogado.getCliente());
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
@@ -67,6 +78,14 @@ public class PerfilController implements Serializable{
 	              		  ""));
 		}
 		
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 }

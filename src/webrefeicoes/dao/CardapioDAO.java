@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
+import webrefeicoes.model.Cliente;
+import webrefeicoes.model.Convenio;
 import webrefeicoes.model.Produto;
 
 public class CardapioDAO {
@@ -14,6 +16,7 @@ public class CardapioDAO {
 	private EntityManagerFactory factory = Persistence
             .createEntityManagerFactory("WebRefeicoes");
 	private EntityManager em = factory.createEntityManager();
+	
 	
 	
 	
@@ -29,4 +32,30 @@ public class CardapioDAO {
             return null;
       }
 	}
+	
+	public Convenio getConvenio(int idCliente) {
+		try {
+			Convenio convenio = (Convenio) em
+               .createQuery(
+                           "SELECT c from Convenio c where c.idCliente = :idCliente")
+               .setParameter("idCliente", idCliente).getSingleResult();
+            return convenio;
+      } catch (NoResultException e) {
+            return null;
+      }
+		
+	}
+	
+	/*public double valorConvenio(int idCliente) {
+		try {
+			Double valorTotal = (Double) em
+               .createQuery(
+                           "SELECT c.precoTotal from Convenio c where c.idCliente = :idCliente")
+               .setParameter("idCliente", idCliente).getSingleResult();
+            return valorTotal;
+      } catch (NoResultException e) {
+            return 0.0;
+      }
+		
+	}*/
 }

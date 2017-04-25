@@ -19,5 +19,6 @@
 	<mapping class="webrefeicoes.model.Avaliacao" />
 	<mapping class="webrefeicoes.model.BandeiraCartao" />
 	<mapping class="webrefeicoes.model.HistoricoPedido" />
+	<mapping class="webrefeicoes.model.ConvenioView" />
 </session-factory>
 </hibernate-configuration>

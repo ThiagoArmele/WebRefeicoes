@@ -2,10 +2,13 @@ package webrefeicoes.controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
@@ -34,11 +37,12 @@ public class HistoricoPedidoController implements Serializable{
 	int id = 0, idCliente = 0, idEmpresa = 0;
 	private List<SelectItem> clientes;
 	private List<SelectItem> empresas;
+	private Date dataInicial, dataFinal;
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public DataModel getListaHistoricoPedidos() {
-		List<HistoricoPedido> lista = new HistoricoPedidoDAO().list(id,idCliente,idEmpresa);
+		List<HistoricoPedido> lista = new HistoricoPedidoDAO().list(id,idCliente,idEmpresa, dataInicial, dataFinal);
 		listaHistoricoPedidos = new ListDataModel(lista);
 		return listaHistoricoPedidos;
 	}
@@ -47,6 +51,9 @@ public class HistoricoPedidoController implements Serializable{
 		setClientes(new ArrayList<SelectItem>());
 		setEmpresas(new ArrayList<SelectItem>());
 		historicoPedido = new HistoricoPedido();
+		dataInicial = new Date();
+		dataFinal = new Date();
+		dataInicial.setDate(dataInicial.getDate() - 30);
 	}
 	
 	
@@ -66,28 +73,32 @@ public class HistoricoPedidoController implements Serializable{
      }
 	 
 	 
-	 public DataModel listar() {
-		 List<HistoricoPedido> lista = new HistoricoPedidoDAO().list(id, idCliente, idEmpresa);
-		 listaHistoricoPedidos = new ListDataModel(lista);
-		 return listaHistoricoPedidos;
+	public void listar() {
+		 if(dataInicial.getTime() < dataFinal.getTime()){
+			 getListaHistoricoPedidos();
+		 } else {
+			 FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_WARN,"Data Inicial não pode ser maior ou igual que Data Final", 
+		              		  ""));
+		 }
 	}
 	 
-	 
-	 public HistoricoPedido getHistoricoPedido() {
+	public HistoricoPedido getHistoricoPedido() {
 		return historicoPedido;
-	 }
+	}
 		
-	 public void setHistoricoPedido(HistoricoPedido historicoPedido) {
+	public void setHistoricoPedido(HistoricoPedido historicoPedido) {
 		this.historicoPedido = historicoPedido;
-	 }
+	}
 		
-	 public HistoricoPedido getSelecionaHistoricoPedido() {
+	public HistoricoPedido getSelecionaHistoricoPedido() {
 		return selecionaHistoricoPedido;
-	 }
+	}
 
-	 public void setSelecionaHistoricoPedido(HistoricoPedido selecionaHistoricoPedido) {
+	public void setSelecionaHistoricoPedido(HistoricoPedido selecionaHistoricoPedido) {
 		this.selecionaHistoricoPedido = selecionaHistoricoPedido;
-	 }
+	}
 
 	public int getId() {
 		return id;
@@ -145,6 +156,22 @@ public class HistoricoPedidoController implements Serializable{
 
 	public void setEmpresas(List<SelectItem> empresas) {
 		this.empresas = empresas;
+	}
+
+	public Date getDataInicial() {
+		return dataInicial;
+	}
+
+	public void setDataInicial(Date dataInicial) {
+		this.dataInicial = dataInicial;
+	}
+
+	public Date getDataFinal() {
+		return dataFinal;
+	}
+
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
 	}
 
 }

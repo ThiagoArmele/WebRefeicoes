@@ -1,6 +1,9 @@
 package webrefeicoes.controller;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -11,12 +14,10 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 import org.primefaces.event.SelectEvent;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import webrefeicoes.dao.FuncionarioDAO;
 import webrefeicoes.model.Funcionario;
+import webrefeicoes.util.Criptografia;
 
 @ManagedBean(name = "FuncionarioController")
 @SessionScoped
@@ -30,6 +31,8 @@ public class funcionarioController implements Serializable{
 	@SuppressWarnings("rawtypes")
 	private DataModel listaFuncionarios;
 	private Funcionario selecionaFuncionario;
+	private String senha;
+	private static MessageDigest md = null;
 	
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -44,21 +47,6 @@ public class funcionarioController implements Serializable{
 		
 	}
 	
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-	
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-	
-	public Funcionario getSelecionaFuncionario() {
-		return selecionaFuncionario;
-	}
-
-	public void setSelecionaFuncionario(Funcionario selecionaFuncionario) {
-		this.selecionaFuncionario = selecionaFuncionario;
-	}
 	
 	
 	public void excluirFuncionario(Funcionario funcionario){
@@ -85,16 +73,21 @@ public class funcionarioController implements Serializable{
     	 setFuncionario(f); 
      }
 	
-	public void adicionarFuncionario(){
+	public void adicionarFuncionario() throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		FuncionarioDAO dao = new FuncionarioDAO();
 		
 		if (funcionario.getCodigo() == 0L) {
+			md = MessageDigest.getInstance("MD5");
+			funcionario.setSenha(Criptografia.criptografar(getSenha(), md));
+			
 			dao.save(funcionario);
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
 	              		  FacesMessage.SEVERITY_INFO,"Funcionário cadastrado com sucesso!", 
 	              		  ""));
 		} else {
+			md = MessageDigest.getInstance("MD5");
+			funcionario.setSenha(Criptografia.criptografar(getSenha(), md));
 			dao.update(funcionario);
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
@@ -104,4 +97,30 @@ public class funcionarioController implements Serializable{
 	
 	}
 
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+	
+	public Funcionario getSelecionaFuncionario() {
+		return selecionaFuncionario;
+	}
+
+	public void setSelecionaFuncionario(Funcionario selecionaFuncionario) {
+		this.selecionaFuncionario = selecionaFuncionario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	
+	
 }

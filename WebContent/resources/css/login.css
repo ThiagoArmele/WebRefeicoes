@@ -54,30 +54,15 @@ html {
 }
 
 
-	footer {
-	    background: #c62828;
-	    padding: 20px;
-	    color: white;
-	    position: absolute;
-	    bottom: 0px;
-	    width: 100%;
-	    position: absolute;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		padding: 1rem;
-		text-align: center;
-	}
+	
+.esqueciMinhaSenha { 
+	color: white;
+}
 
-	
-	.esqueciMinhaSenha { 
-		color: white;
-	}
-	
-	.esqueciMinhaSenha:hover,
-	.esqueciMinhaSenha:hover,
-	.esqueciMinhaSenha:hover { 
-		color: #cfcfcf;
-		text-decoration: underline;
-		cursor: pointer;
-	}
+.esqueciMinhaSenha:hover,
+.esqueciMinhaSenha:hover,
+.esqueciMinhaSenha:hover { 
+	color: #cfcfcf;
+	text-decoration: underline;
+	cursor: pointer;
+}
