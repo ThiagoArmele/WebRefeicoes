@@ -16,6 +16,7 @@ import org.apache.commons.mail.HtmlEmail;
 import webrefeicoes.dao.ClienteDAO;
 import webrefeicoes.dao.LoginDAO;
 import webrefeicoes.model.Cliente;
+import webrefeicoes.model.Funcionario;
 import webrefeicoes.util.Criptografia;
 
 @ManagedBean(name = "loginController")
@@ -27,11 +28,13 @@ public class LoginController implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private LoginDAO loginDao = new LoginDAO();
     private Cliente cliente  = new Cliente();
+    private Funcionario funcionario  = new Funcionario();
     private String emailCliente;
     String senhaNova;
     private String user, senha;
     HtmlEmail  email;
     private static MessageDigest md = null;
+    private String userLogado;
     
     public String envia() {
     	
@@ -43,17 +46,30 @@ public class LoginController implements Serializable{
     	
     	setSenha(Criptografia.criptografar(getSenha(), md));
     	
-    	cliente = loginDao.getCliente(user, getSenha());
-        if (cliente == null) {
+    	if(userLogado.equals("cliente")){
+    		cliente = loginDao.getCliente(user, getSenha());
+            if (cliente == null) {
+                  FacesContext.getCurrentInstance().addMessage(
+                             null,
+                             new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário e senha não encontrado!",
+                                         "Erro no Login!"));
+                  return "";
+            } else {
+                return "/indexCliente";
+            }
+    	}
+    	
+    	funcionario = loginDao.getFuncionario(user, getSenha());
+        if (funcionario == null) {
               FacesContext.getCurrentInstance().addMessage(
                          null,
                          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Usuário e senha não encontrado!",
                                      "Erro no Login!"));
               return "";
         } else {
-        	
             return "/index";
         }
+    	
   }
     
   public void enviarSenhaNova() throws EmailException{
@@ -169,6 +185,27 @@ public class LoginController implements Serializable{
   public void setSenha(String senha) {
 	  this.senha = senha;
   }
+
+	
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+	public String getUserLogado() {
+		return userLogado;
+	}
+
+	public void setUserLogado(String userLogado) {
+		this.userLogado = userLogado;
+	}
+  
+	
+  
+  
 
   
   

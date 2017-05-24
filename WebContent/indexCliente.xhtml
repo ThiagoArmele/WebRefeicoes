@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet library="css" name="menuCliente.css" />
+    <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+    <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
+    <script>
+    
+    
+    
+    function exitWebrefecoes(){
+        location.href = location.pathname;
+    };
+    
+    function load(button,view){
+    	$("#contents").load(view);
+    	$(".mainnav > li").removeClass("active");
+	    $(button).addClass("active");   
+    };
+    
+    function loadPerfil(view){
+    	$("#contents").load(view);
+    };
+    
+	</script>
+    </h:head>
+<h:body onload="$('#contents').load('HomeCliente.xhtml')">
+	<div class="wrapper">
+		<div class="header-webRefeicoes">
+			<span class="nameSystem">WebRefeições</span>
+			<span style="font-size: 17px;font-weight: bold;color: white;">
+				<i class="fa fa-chevron-right hidden" id='iconFolderModulo' aria-hidden="true" style="margin-right: 10px;"></i> 
+			</span>
+			<div class="dropdown" style="margin-right: 60px;float: right;">
+				<div class="painel-profile" data-toggle="dropdown">
+			
+					<h:inputHidden value="#{convenioController.atualizaConvenio}"  ></h:inputHidden>
+		 	 		<h:outputText id="display" styleClass="pull-right profileName" value="#{loginController.cliente.usuario}" />
+					<h:outputText id="display" styleClass="pull-right profileWelcome" value="Bem Vindo" />
+				</div>
+				
+			</div>				
+		</div>	
+		<div class="subnavbar">
+			  <div class="subnavbar-inner">
+			    <div class="container">
+			      <ul class="mainnav">
+			      	<li onclick="load(this,'HomeCliente.xhtml')" class="active"><a href=""><i class="fa fa-home"></i><span>Home</span> </a> </li>
+			        <li onclick="load(this,'Cardapio.xhtml')"><a href=""><i class="fa fa-cutlery"></i><span>Cardapio</span> </a> </li>
+			        <li onclick="load(this,'ConsultaPedidosCliente.xhtml')"><a href=""><i class="fa fa-clone"></i><span>Pedidos</span> </a> </li>
+			        <li onclick="exitWebrefecoes()"><a href=""><i class="fa fa-external-link"></i><span>Sair</span> </a> </li>
+			      </ul>
+			    </div>
+			    <!-- /container --> 
+			  </div>
+			  <!-- /subnavbar-inner --> 
+		</div>
+		<div id='contents'>
+		
+		</div>
+		<footer>
+  		 	<strong>Copyright &copy; 2017 <a href="#" style="color: #6d0000;">WebRefeições</a>.</strong> Todos Direitos Reservados.
+		</footer>	
+	</div>
+</h:body>
+</html>

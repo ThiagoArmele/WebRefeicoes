@@ -15,11 +15,10 @@
     <h:outputStylesheet library="css" name="util.css" />
     <h:outputStylesheet library="css" name="perfil.css" />
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+   	 <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
-    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
-   <h:outputScript library="bootstrap/js" name="bootstrap.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
-    <h:outputScript library="jquery" name="jqueryMaskedPlugin.js" />
     <style>
     	.iconeResultado {
     	    color: white;
@@ -45,7 +44,7 @@
 				    	 <div class="col-lg-12 col-md-12 col-sm-12" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;background: #f5f5f5;margin: 10px;border:1px solid #eee;">
 				 			<div class="col-lg-12">
 				 				<p style="height: 20px">
-				 				<a href='' class="pull-right" onclick="load('ConfiguracaoPerfilCliente.xhtml','Configuração de Perfil')" style="font-size: 15px;padding-left: 10px;color: #737373;">
+				 				<a href='' class="pull-right" onclick="load('ConfiguracaoPerfilFuncionario.xhtml','Configuração de Perfil')" style="font-size: 15px;padding-left: 10px;color: #737373;">
 			        				<i class="fa fa-edit"></i> Editar perfil
 			        			</a>
 					        	</p>
@@ -56,123 +55,37 @@
 						 	<div class="col-lg-12 col-md-12 col-sm129 profile" style="text-align: center; padding: 0px;">
 						        <div>
 						        	<p style="font-size: 35px;height: 46px;white-space: nowrap;margin-bottom: 0px">
-						        		<p:outputLabel id="Nome" style="width: 100%;font-size: 26px;" value="#{loginController.cliente.nome}" />
+						        		<p:outputLabel id="Nome" style="width: 100%;font-size: 26px;" value="#{loginController.funcionario.nome}" />
 						        	</p>
 		                        </div>
 						 	</div>
 						 	<div class="col-lg-12 informations">
 							      <ul>
-							     	<li><i class="fa fa-home" aria-hidden="true"></i><span><p:outputLabel id="Rua" value="#{loginController.cliente.endereco}"/></span></li>
-							      	<li><i class="fa fa-envelope" aria-hidden="true"></i><span><p:outputLabel id="email" value="#{loginController.cliente.email}"/></span></li>
-							        <li><i class="fa fa-birthday-cake" aria-hidden="true"></i><span><p:outputLabel id="nasc" value="#{loginController.cliente.dataNascimento}">
+							     	<li><i class="fa fa-home" aria-hidden="true"></i><span><p:outputLabel id="Rua" value="#{loginController.funcionario.endereco}"/></span></li>
+							        <li><i class="fa fa-birthday-cake" aria-hidden="true"></i><span><p:outputLabel id="nasc" value="#{loginController.funcionario.dataNascimento}">
 							        	<f:convertDateTime locale="pt_BR"></f:convertDateTime>
 							        </p:outputLabel></span></li>
-  							      	<li><i class="fa fa-building" aria-hidden="true"></i><span><p:outputLabel id="empresa" value="nenhuma" /></span></li>
 							        <li><i class="fa fa-phone" aria-hidden="true"></i><span>
-							        <p:outputLabel  id="dddTelefone" value="#{loginController.cliente.dddTelefone}"/>
-					           		<p:outputLabel  id="telefone" value="#{loginController.cliente.telefone}"/>
+							        <p:outputLabel  id="dddTelefone" value="#{loginController.funcionario.dddTelefone}"/>
+					           		<p:outputLabel  id="telefone" value="#{loginController.funcionario.telefone}"/>
 					           		 / 
-					           		<p:outputLabel id="dddCelular" value="#{loginController.cliente.dddCelular}"/>
-					           		<p:outputLabel  id="celular" value="#{loginController.cliente.celular}"/>
+					           		<p:outputLabel id="dddCelular" value="#{loginController.funcionario.dddCelular}"/>
+					           		<p:outputLabel  id="celular" value="#{loginController.funcionario.celular}"/>
+					           		</span></li>
+					           		<li><i class="fa fa-exclamation-circle" aria-hidden="true"></i><span>
+					           			<p:outputLabel  id="cpf" value="CPF: " style="padding-right: 5px"/>
+						           		<p:outputLabel  value="#{loginController.funcionario.cpf}"/>
+						           		 / 
+						           		<p:outputLabel  id="rg" value="RG: " style="padding-right: 5px"/>
+						           		<p:outputLabel value="#{loginController.funcionario.rg}"/>
 					           		</span></li>
 							        <br></br>
 							      </ul>
 						 	</div>
 				 	 </div>
-			    	<div class="col-lg-12 col-md-12 col-sm-12" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;background: #f5f5f5;margin: 10px;border:1px solid #eee;">
-			    			<div class="col-lg-12 col-md-12 col-sm129 profile" style="text-align: left; padding: 0px;">
-						        <div>
-						        	<p style="font-size: 35px;height: 46px;white-space: nowrap;margin-bottom: 0px">
-						        		<p:outputLabel id="endEntrega" style="width: 100%;font-size: 26px;" value="Endereço de Entrega" />
-						        	</p>
-		                        </div>
-						 	</div>
-						 	<p:outputLabel style="font-weight: normal;" id="enderecoEntrega" value="#{loginController.cliente.enderecoEntrega}" />
-			    	</div> 
-			    	<div class="col-lg-12 col-md-12 col-sm-12" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;background: #f5f5f5;margin: 10px;border:1px solid #eee;">
-		    			<div class="col-lg-12 col-md-12 col-sm12 profile" style="text-align: left; padding: 0px;">
-					        	<p style="font-size: 35px;height: 46px;white-space: nowrap;margin-bottom: 0px">
-					        		<p:outputLabel id="resultado" style="width: 100%;font-size: 26px;" value="Resultado" />
-					        	</p>
-					 	</div>
-					 	<div class="col-lg-12" style="margin-bottom: 10px">
-						 	<div class="col-lg-6 col-md-5 col-sm-5" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
-    								padding: 0px; height: 75px;">
-						 		<div class="col-lg-4" style="border-right: none;height: 100%; 
-						 			    background-color: #2e9fba;border: 1px solid #2e9fba;">
-						 			<i class="fa fa-cutlery iconeResultado"  aria-hidden="true"></i>
-						 		</div>
-						 		<div class="col-lg-8" style="border-left: none;height: 100%; 
-						 		background-color: white;border: 1px solid white;">
-						 			<p style="font-weight: bold;font-size: 21px;">Pedidos</p>
-						 			<p style="text-align: center;font-weight: bold;font-size: 17px;"><h:outputText value="#{perfilController.totalPedido}"></h:outputText></p>
-						 		</div>
-						 	</div>
-					 	
-					 	</div>
-					 	<div class="col-lg-12" style="margin-bottom: 10px">
-						 	<div class="col-lg-6 col-md-5 col-sm-5" style="box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
-    								padding: 0px; height: 75px;">
-						 		<div class="col-lg-4" style="border-right: none;height: 100%; 
-						 			    background-color: #089354;border: 1px solid #089354;">
-						 			<i class="fa fa-star iconeResultado"  aria-hidden="true"></i>
-						 		</div>
-						 		<div class="col-lg-8" style="border-left: none;height: 100%; 
-						 		background-color: white;border: 1px solid white;">
-						 			<p style="font-weight: bold;font-size: 19px;">Avaliações Feitas</p>
-						 			<p style="text-align: center;font-weight: bold;font-size: 17px;"><h:outputText value="#{perfilController.totalAvaliacao}"></h:outputText></p>
-						 		</div>
-						 	</div>
-					 	</div>
-			    	</div> 
-					</div>
+				 	 </div>
 			</h:form>
 		</div>
-		
-		
-			
-<!-- 			<div class="col-lg-4 form-group"> -->
-<!-- 				<p:outputLabel for="usuario" value="Usuário"/><br/> -->
-<!-- 				<p:outputLabel id="usuario" style="width: 100%" value="#{loginController.cliente.usuario}" /> -->
-<!-- 			</div> -->
-			
-<!-- 			<div class="col-lg-5 form-group"> -->
-<!-- 				<p:outputLabel for="RuaEntrega" value="Rua para Entrega " /><br/> -->
-<!-- 				<p:outputLabel style="width: 100%"   -->
-<!-- 				id="RuaEntrega" -->
-<!-- 				value="#{loginController.cliente.ruaEntrega}" -->
-<!-- 				/> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-3 form-group"> -->
-<!-- 				<p:outputLabel for="NumeroEntrega" value="Número para Entrega " /><br/> -->
-<!-- 				<p:outputLabel style="width: 100%"  -->
-<!-- 				id="NumeroEntrega" -->
-<!-- 				value="#{loginController.cliente.numEndEntrega}" -->
-<!-- 				/> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-4 form-group"> -->
-<!-- 				<p:outputLabel for="BairroEntrega" value="Bairro para Entrega " /><br/> -->
-<!-- 				<p:outputLabel style="width: 100%"   -->
-<!-- 				id="BairroEntrega" -->
-<!-- 				value="#{loginController.cliente.bairroEntrega}" -->
-<!-- 				/> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-3 form-group"> -->
-<!-- 				<p:outputLabel for="CidadeEntrega" value="Cidade para Entrega " /><br/> -->
-<!-- 				<p:outputLabel style="width: 100%"   -->
-<!-- 				id="CidadeEntrega" -->
-<!-- 				value="#{loginController.cliente.cidadeEntrega}" -->
-<!-- 				/> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-lg-2 form-group"> -->
-<!-- 				<p:outputLabel for="CEPEntrega" value="CEP para Entrega " /><br/> -->
-<!-- 				<p:outputLabel style="width: 100%"   -->
-<!-- 				id="CEPEntrega" -->
-<!-- 				value="#{loginController.cliente.cepEntrega}" -->
-<!-- 				/> -->
-<!-- 			</div> -->
-<!-- 		</h:form> -->
-	
 
 </h:body>
 </html>

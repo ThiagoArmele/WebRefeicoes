@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui"> 
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputStylesheet library="css" name="menuCliente.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet library="css" name="perfil.css" />
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+	<div class="container-fluid">
+		<div class="col-lg-8">
+			<div class="col-lg-12 div-container" >
+				<p>
+					Perfil
+				</p>
+				<h:form id="formularioPerfil">
+		 			<div class="col-lg-12">
+		 				<p style="height: 20px">
+		 				<a href='' class="pull-right" onclick="loadPerfil('ConfiguracaoPerfilCliente.xhtml')" style="font-size: 15px;padding-left: 10px;color: #737373;">
+	        				<i class="fa fa-edit"></i> Editar perfil
+	        			</a>
+			        	</p>
+		 			</div>
+		 			<div class="col-lg-12 col-md-12 col-sm-12" style="    padding: 10px;">
+				 		<img style="margin: 0 auto; height: 160px; width: 160px " src="resources/images/profile_default.png"  alt="" class="img-circle img-responsive"></img>
+				 	</div>
+				 	<div class="col-lg-12 col-md-12 col-sm129 profile" style="text-align: center; padding: 0px;">
+				        <div>
+				        	<p style="font-size: 35px;height: 46px;white-space: nowrap;margin-bottom: 0px">
+				        		<p:outputLabel id="Nome" style="width: 100%;font-size: 26px;" value="#{loginController.cliente.nome}" />
+				        	</p>
+	                       </div>
+				 	</div>
+				 	<div class="col-lg-12 informations">
+					      <ul>
+					     	<li><i class="fa fa-home" aria-hidden="true"></i><span><p:outputLabel id="Rua" value="#{loginController.cliente.endereco}"/></span></li>
+					      	<li><i class="fa fa-envelope" aria-hidden="true"></i><span><p:outputLabel id="email" value="#{loginController.cliente.email}"/></span></li>
+					        <li><i class="fa fa-birthday-cake" aria-hidden="true"></i><span>
+					        <p:outputLabel id="nasc" value="#{loginController.cliente.dataNascimento}">
+					        	<f:convertDateTime locale="pt_BR"></f:convertDateTime>
+					        </p:outputLabel></span></li>
+							 <li><i class="fa fa-building" aria-hidden="true"></i><span><p:outputLabel id="empresa" value="#{perfilController.empresa}" /></span></li>
+					        <li><i class="fa fa-phone" aria-hidden="true"></i><span>
+					        <p:outputLabel  id="dddTelefone" value="#{loginController.cliente.dddTelefone}"/>
+			           		<p:outputLabel  id="telefone" value="#{loginController.cliente.telefone}"/>
+			           		<p:outputLabel id="dddCelular" value="#{loginController.cliente.dddCelular}"/>
+			           		<p:outputLabel  id="celular" value="#{loginController.cliente.celular}"/>
+			           		</span></li>
+					        <br></br>
+					      </ul>
+				 	</div>
+			 	</h:form>
+		 	 </div>
+		 	 <div class="col-lg-12 div-container" >
+		 	 	<p>
+					Endereço de Entrega
+				</p>
+				<h:form >
+					<div class="col-lg-12">
+						<p:outputLabel style="font-weight: normal;" id="enderecoEntrega" value="#{loginController.cliente.enderecoEntrega}" />
+					</div>
+				</h:form>
+		 	 </div>
+		</div>
+	 	 <div class="col-lg-4">
+	 		<div class="col-lg-12 div-container">
+				<p>
+					Resultado
+				</p>
+			 	<div class="col-lg-12" style="margin-bottom: 10px">
+				 	<div class="col-lg-9 col-md-5 col-sm-5" style="border: 1px solid #c7c7c7;padding: 0px; height: 75px;">
+				 		<div class="col-lg-4" style="border-right: none;height: 100%; 
+				 			       background-color: #5fc3db;border: 1px solid #66c3d9;">
+				 			<i class="fa fa-cutlery iconeResultado"  aria-hidden="true"></i>
+				 		</div>
+				 		<div class="col-lg-8" style="border-left: none;height: 100%; 
+				 		background-color: white;border: 1px solid white;">
+				 			<p style="font-weight: bold;font-size: 21px;">Pedidos</p>
+				 			<p style="text-align: center;font-weight: bold;font-size: 17px;"><h:outputText value="#{perfilController.totalPedido}"></h:outputText></p>
+				 		</div>
+				 	</div>
+			 	</div>
+			 	<div class="col-lg-12" style="margin-bottom: 10px">
+			 		<h:form>
+				 	<div class="col-lg-9 col-md-5 col-sm-5" style="border: 1px solid #c7c7c7;padding: 0px; height: 75px;">
+				 		<div class="col-lg-4" style="border-right: none;height: 100%; 
+				 			       background-color: #35b87d;border: 1px solid #33a873;">
+				 			<i class="fa fa-star iconeResultado"  aria-hidden="true"></i>
+				 		</div>
+				 		<div class="col-lg-8" style="border-left: none;height: 100%; 
+				 		background-color: white;border: 1px solid white;">
+				 			<p style="font-weight: bold;font-size: 19px;">Avaliações Feitas</p>
+				 			<p style="text-align: center;font-weight: bold;font-size: 17px;"><h:outputText value="#{perfilController.totalAvaliacao}"></h:outputText></p>
+				 		</div>
+				 	</div>
+				 	</h:form>
+			 	</div>
+			</div> 
+			<div class="col-lg-12 div-container">
+				<p>
+					Convênio
+				</p>
+				
+				<div style="padding: 5px">
+		 			<p style="font-weight: bold;font-size: 17px;"><h:outputText value="Status"></h:outputText></p>
+		 			<p style="font-weight: bold;font-size: 17px;font-style: italic;color: #878787;padding-left: 10px;"><h:outputText value="#{perfilController.convenio.statusConvenio}"></h:outputText></p>
+		 			<p style="font-weight: bold;font-size: 17px;"><h:outputText value="Fechamento"></h:outputText></p>
+		 			<p style="font-weight: bold;font-size: 17px;font-style: italic;color: #878787;padding-left: 10px;"><h:outputText value="#{perfilController.convenio.dataFinal}">
+		 				<f:convertDateTime locale="pt_BR"></f:convertDateTime>
+		 			</h:outputText></p>
+					<p style="font-weight: bold;font-size: 17px;"><h:outputText value="Valor"></h:outputText></p>
+					<p style="font-weight: bold;font-size: 17px;font-style: italic;color: #878787;padding-left: 10px;">
+					<h:outputText rendered="this != null" value="R$ #{perfilController.convenio.precoTotal}">
+						<f:convertNumber pattern="#0.00"/>
+					</h:outputText>
+					<h:outputText value="0,00" rendered="#{perfilController.convenio.precoTotal} == null"> 
+					</h:outputText>
+					</p>
+				</div>
+			</div>
+	 	 </div>
+		<div class="col-lg-12">
+			<div class="col-lg-12 div-container">
+				<p>
+					Pedidos Pendentes
+				</p>
+				<div class="col-lg-12">
+					<h:form id="formulario">
+					<p:growl id="messages" life="5000"/>
+					 		<div id='informacaoPedido' style="border: 3px double #e84e4e;display: inline-block;background: #ffffff;">
+						 		<div  style="background: #e84e4e; color: white;border-bottom: 3px dashed #e84e4e;display: -webkit-box;">
+							 		<div class="col-lg-5 form-group">
+										<p:outputLabel for="nome" value="Nome:   " />
+										<h:outputText style="width: 100%" 
+										id="nome"
+										value="#{pedidoClienteController.nomeCliente}"
+										/>
+									</div>
+							 		<div class="col-lg-7 form-group">
+										<p:outputLabel for="entrega" value="Endereço de Entrega:    " />
+										<h:outputText style="width: 100%" 
+										id="entrega"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.enderecoEntrega}"/>
+									</div>
+						 		</div>
+						 		<div  class="col-lg-12">
+						 			<div class="col-lg-12 form-group">
+										<p:outputLabel for="Codigo" value="Código do Pedido:  " />
+										<h:outputText style="width: 100%" 
+										id="Codigo"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.codigo}"/>
+									</div>
+						 		</div>
+						 		
+					 			<div  class="col-lg-12">
+									<div class="col-lg-6 form-group">
+										<p:outputLabel for="Mistura" value="Misturas:  " />
+										<h:outputText style="width: 100%" 
+										id="Mistura"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.mistura}"/>
+									</div>
+									<div class="col-lg-6 form-group">
+										<p:outputLabel for="Guarnicao" value="Guarnições:  " />
+										<h:outputText style="width: 100%" 
+										id="Guarnicao"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.guarnicao}"/>
+									</div>
+								</div>
+								
+								<div  class="col-lg-12">
+									<div class="col-lg-12 form-group">
+										<p:outputLabel for="outro" value="Outros: " />
+										<h:outputText style="width: 100%" 
+										id="outro"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.outro}"/>
+									</div>
+								</div>
+								
+								<div  class="col-lg-12">	
+									<div class="col-lg-7 form-group">
+										<p:outputLabel for="descricaoPrato" value="Prato: " />
+										<h:outputText style="width: 100%" 
+										id="descricaoPrato"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.descricaoPrato}"/>
+									</div>
+									
+									<div class="col-lg-5 form-group">
+										<p:outputLabel for="observacao" value="Observação: " />
+										<h:outputText style="width: 100%" 
+										id="observacao"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.observacao}"/>
+									</div>
+								</div>
+								
+								<div  class="col-lg-12">
+									<div class="col-lg-6 form-group">
+										<p:outputLabel for="quilo" value="Quilo: " />
+										<h:outputText style="width: 100%" 
+										id="quilo"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.quilo}"/>
+									</div>
+									<div class="col-lg-3 form-group"  style="color: #088308;font-size: 17px;">
+										<p:outputLabel for="valorQuilo" value="Valor do Quilo: " />
+										R$<h:outputText style="width: 100%" 
+										id="valorQuilo"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.valorQuilo}">
+										<f:convertNumber pattern="#0.00"/>
+										</h:outputText>
+									</div>
+									<div class="col-lg-3 form-group" style="color: #088308;font-size: 17px;">
+										<p:outputLabel for="valor" value="Valor Total:  " />
+										R$<h:outputText style="width: 100%" 
+										id="valor"
+										disabled="true"
+										value="#{pedidoClienteController.pedidoPendente.valorTotal}">
+										<f:convertNumber pattern="#0.00"/>
+										</h:outputText>
+									</div>
+								</div>
+								<div  class="col-lg-12">
+									<div class="col-lg-4 form-group">
+										<p:outputLabel for="tipo" value="Status: " />
+										<h:outputText id="tipo" value="#{pedidoClienteController.pedidoPendente.statusPedido}" style="width: 100%">
+								        </h:outputText>
+									</div>
+								</div>
+							</div>
+					</h:form>
+					<h:form>
+					<p:dataTable id='gridPedido' emptyMessage="Nenhum Pedido Encontrado"
+					scrollable="true"
+					selectionMode="single"
+					var="pedidoPendente" 
+					style="padding: 5px 0px;"
+					scrollHeight="300"
+					selection="#{pedidoClienteController.selecionaPedidoPendente}"
+					rowKey="#{pedidoPendente.codigo}"
+					value="#{pedidoClienteController.listaPedidosPendentes()}">
+						<p:ajax update="formulario"  event="rowSelect" listener="#{pedidoClienteController.trazerDadosPendente}"/>
+				
+						<p:column headerText="Valor Total"
+		   					style="width: 150px;text-align: center"
+		   					filterMatchMode="contains">
+		   					R$<h:outputText value="#{pedidoPendente.valorTotal}">
+		   					 	<f:convertNumber pattern="#0.00"/>
+		   					</h:outputText>
+		   				</p:column>
+		   				
+						<p:column headerText="Status"
+		   					style="width: 200px;text-align: center"
+		   					filterMatchMode="contains">
+		   					<h:outputText value="#{pedidoPendente.statusPedido}"/>
+		   				</p:column>
+						
+		   				<p:column headerText="Código"
+		   					style="width: 90px;text-align: center"
+		   					filterMatchMode="contains">
+		   					<h:outputText value="#{pedidoPendente.codigo}" />
+		   				</p:column>
+		
+		
+						<p:column headerText="Tamanho"
+		   					style="width: 100px;text-align: center"
+		   					filterMatchMode="contains">
+		   					<h:outputText value="Pequena" rendered="#{pedidoPendente.idEmbalagem == 1}"/>
+		   					<h:outputText value="Média" rendered="#{pedidoPendente.idEmbalagem == 2}"/>
+		   					<h:outputText value="Grande" rendered="#{pedidoPendente.idEmbalagem == 3}"/>
+		   				</p:column>
+						
+						
+						<p:column headerText="Guarnições"
+		   					style="width: 300px;text-align: center"
+		   					filterMatchMode="contains">
+		   					<h:outputText value="#{pedidoPendente.guarnicao}"/>
+		   				</p:column>
+						
+						<p:column headerText="Misturas"
+		   					style="width: 300px;text-align: center"
+		   					filterMatchMode="contains">
+		   					<h:outputText value="#{pedidoPendente.mistura}"/>
+		   				</p:column>
+		   				
+		   				<p:column headerText="Outros"
+		   					style="width: 250px;text-align: left"
+		   					filterMatchMode="contains">
+		   					<h:outputText value="#{pedidoPendente.outro}"/>
+		   				</p:column>
+		   				
+						<p:column headerText="Prato Pronto"
+		   					style="width: 350px;text-align: center"
+		   					filterMatchMode="contains">
+		   					<h:outputText value="#{pedidoPendente.descricaoPrato}"/>
+		   				</p:column>
+		   				
+		   				<p:column headerText="Observação"
+		   					style="width: 250px;text-align: center"
+		   					filterMatchMode="contains">
+		   					<h:outputText value="#{pedidoPendente.observacao}"/>
+		   				</p:column>
+		   				
+					</p:dataTable>
+				  </h:form>
+				</div>
+				</div>
+			</div>
+		</div>
+	</h:body>
+	</html>

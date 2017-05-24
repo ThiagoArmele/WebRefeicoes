@@ -5,11 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Persistence;
 import javax.persistence.Table;
 
 @Entity
@@ -63,7 +60,7 @@ public class Pedido implements Serializable{
 	private String quilo;
 	
 	@Column (name="valorQuilo")
-	private Double valorQuilo;
+	private double valorQuilo;
 	
 	@Column (name="enderecoEntrega")
 	private String enderecoEntrega;
@@ -184,7 +181,7 @@ public class Pedido implements Serializable{
 		this.quilo = quilo;
 	}
 	
-	public Double getValorQuilo() {
+	public double getValorQuilo() {
 		return valorQuilo;
 	}
 
@@ -237,7 +234,7 @@ public class Pedido implements Serializable{
 
 	public Pedido(int codigo, Integer codigoCliente, String mistura, String guarnicao, String descricaoPrato,
 			String observacao, Double valorTotal, Integer idEmbalagem, String outro, String statusPedido,
-			Date dataPedido, String bebida, String quilo, Double valorQuilo, String enderecoEntrega, Boolean avaliado,
+			Date dataPedido, String bebida, String quilo, double valorQuilo, String enderecoEntrega, Boolean avaliado,
 			Double troco, String formaPagamento, String bandeiraCartao) {
 		super();
 		this.codigo = codigo;

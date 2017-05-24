@@ -26,7 +26,7 @@ public class Cliente implements Serializable{
 	@Column (name="nome")
 	private String nome;
 	
-	@Column (name="cpf")
+	@Column (name="cpf", unique=true)
 	private String cpf;
 	
 	@Column (name="rg")
@@ -47,7 +47,7 @@ public class Cliente implements Serializable{
 	@Column (name="celular")
 	private String celular;
 	
-	@Column (name="usuario")
+	@Column (name="usuario",unique=true)
 	private String usuario;
 	
 	@Column (name="senha")

@@ -31,58 +31,58 @@
 			
 			<div class="col-lg-6 form-group">
 				<p:outputLabel for="Nome" value="Nome" /><br/>
-				<p:inputText id="Nome" style="width: 100%" value="#{loginController.cliente.nome}" />
+				<p:inputText id="Nome" style="width: 100%" value="#{loginController.funcionario.nome}" />
 			</div>
 			<div class="col-lg-1 form-group">
 				<p:outputLabel for="dddTelefone" value="DDD " /> <br/>
-				<p:inputText id="dddTelefone" style="width: 100%" value="#{loginController.cliente.dddTelefone}" />
+				<p:inputText id="dddTelefone" style="width: 100%" value="#{loginController.funcionario.dddTelefone}" />
 			</div>
 			<div class="col-lg-2 form-group">
 				<p:outputLabel for="telefone" value="Telefone"/><br/>
-				<p:inputText id="telefone" style="width: 100%" value="#{loginController.cliente.telefone}" />
+				<p:inputText id="telefone" style="width: 100%" value="#{loginController.funcionario.telefone}" />
 			</div>
 			<div class="col-lg-1 form-group">
 				<p:outputLabel for="dddCelular" value="DDD " /> <br/>
-				<p:inputText id="dddCelular" style="width: 100%" value="#{loginController.cliente.dddCelular}" />
+				<p:inputText id="dddCelular" style="width: 100%" value="#{loginController.funcionario.dddCelular}" />
 			</div>
 			<div class="col-lg-2 form-group">
 				<p:outputLabel for="celular" value="Celular"/><br/>
-				<p:inputText id="celular" style="width: 100%" value="#{loginController.cliente.celular}" />
+				<p:inputText id="celular" style="width: 100%" value="#{loginController.funcionario.celular}" />
 			</div>
 			
 			<div class="col-lg-5 form-group">
 				<p:outputLabel for="Rua" value="Rua " /><br/>
 				<p:inputText style="width: 100%"  
 				id="Rua"
-				value="#{loginController.cliente.rua}"
+				value="#{loginController.funcionario.rua}"
 				/>
 			</div>
 			<div class="col-lg-2 form-group">
 				<p:outputLabel for="Numero" value="Número " /><br/>
 				<p:inputText style="width: 100%" 
 				id="Numero"
-				value="#{loginController.cliente.numEnd}"
+				value="#{loginController.funcionario.numEnd}"
 				/>
 			</div>
 			<div class="col-lg-5 form-group">
 				<p:outputLabel for="Bairro" value="Bairro " /><br/>
 				<p:inputText style="width: 100%"  
 				id="Bairro"
-				value="#{loginController.cliente.bairro}"
+				value="#{loginController.funcionario.bairro}"
 				/>
 			</div>
 			<div class="col-lg-5 form-group">
 				<p:outputLabel for="Cidade" value="Cidade " /><br/>
 				<p:inputText style="width: 100%"  
 				id="Cidade"
-				value="#{loginController.cliente.cidade}"
+				value="#{loginController.funcionario.cidade}"
 				/>
 			</div>
 			<div class="col-lg-2 form-group">
 				<p:outputLabel for="CEP" value="CEP " /><br/>
 				<p:inputText style="width: 100%"  
 				id="CEP"
-				value="#{loginController.cliente.cep}"
+				value="#{loginController.funcionario.cep}"
 				/>
 			</div>
 			
@@ -92,55 +92,15 @@
 			</div>
 			<div class="col-lg-4 form-group">
 				<p:outputLabel for="usuario" value="Usuário"/><br/>
-				<p:inputText id="usuario" style="width: 100%" value="#{loginController.cliente.usuario}" />
+				<p:inputText id="usuario" style="width: 100%" value="#{loginController.funcionario.usuario}" />
 			</div>
 			<div class="col-lg-4 form-group">
 				<p:outputLabel for="senha" value="Nova Senha"/><br/>
-				<p:password id="senha" style="width: 100%" redisplay="true" value="#{loginController.senha}" />
+				<p:password id="senha" style="width: 100%" redisplay="true" value="#{perfilFuncionarioController.senha}" />
 			</div>
 			
-			<div class="col-lg-12" style="padding: 0px">
-				<span style="font-size: 20px;font-weight: bold;color: #ad2e30;">Dados de Entrega</span>
-				<hr style="    border-top: 1px solid #2b2727;"></hr>
-			</div>
-			
-			<div class="col-lg-5 form-group">
-				<p:outputLabel for="RuaEntrega" value="Rua para Entrega " /><br/>
-				<p:inputText style="width: 100%"  
-				id="RuaEntrega"
-				value="#{loginController.cliente.ruaEntrega}"
-				/>
-			</div>
-			<div class="col-lg-3 form-group">
-				<p:outputLabel for="NumeroEntrega" value="Número para Entrega " /><br/>
-				<p:inputText style="width: 100%" 
-				id="NumeroEntrega"
-				value="#{loginController.cliente.numEndEntrega}"
-				/>
-			</div>
-			<div class="col-lg-4 form-group">
-				<p:outputLabel for="BairroEntrega" value="Bairro para Entrega " /><br/>
-				<p:inputText style="width: 100%"  
-				id="BairroEntrega"
-				value="#{loginController.cliente.bairroEntrega}"
-				/>
-			</div>
-			<div class="col-lg-3 form-group">
-				<p:outputLabel for="CidadeEntrega" value="Cidade para Entrega " /><br/>
-				<p:inputText style="width: 100%"  
-				id="CidadeEntrega"
-				value="#{loginController.cliente.cidadeEntrega}"
-				/>
-			</div>
-			<div class="col-lg-2 form-group">
-				<p:outputLabel for="CEPEntrega" value="CEP para Entrega " /><br/>
-				<p:inputText style="width: 100%"  
-				id="CEPEntrega"
-				value="#{loginController.cliente.cepEntrega}"
-				/>
-			</div>
 			<div class="col-lg-12 form-group">
-				<p:commandButton value= "Salvar Alterações" update="messages" styleClass="btn btn-success" action="#{perfilController.alterar}">
+				<p:commandButton value= "Salvar Alterações" update="messages" styleClass="btn btn-success" action="#{perfilFuncionarioController.alterar}">
 				  </p:commandButton>	
 			
 			</div>

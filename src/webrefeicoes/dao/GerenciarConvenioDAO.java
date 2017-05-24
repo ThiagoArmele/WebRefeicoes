@@ -1,5 +1,6 @@
 package webrefeicoes.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,11 +11,9 @@ import javax.persistence.Persistence;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import webrefeicoes.model.Cliente;
 import webrefeicoes.model.Convenio;
-import webrefeicoes.model.ConvenioView;
 
-public class ConvenioDAO {
+public class GerenciarConvenioDAO {
 
 	private EntityManagerFactory factory = Persistence
             .createEntityManagerFactory("WebRefeicoes");
@@ -33,10 +32,17 @@ public class ConvenioDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Convenio> list() {
+	public List<Convenio> list(int id,int idCliente,String status,String tipo, Date dataInicial, Date dataFinal) {
+		java.sql.Date dataInicialSql = new java.sql.Date (dataInicial.getTime());
+		java.sql.Date dataFinalSql = new java.sql.Date (dataFinal.getTime());
+		
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List<Convenio> lista = session.createQuery("from Convenio").list();
+		List<Convenio> lista = session.createQuery("from Convenio where "+ (id == 0? "id <> :id" : "id = :id") + 
+				(idCliente == 0? " and idCliente <> :idCliente" : " and idCliente = :idCliente") +
+				(dataInicial == null? "" : dataFinal == null? "" : " and dataFinal BETWEEN :dataInicial and :dataFinal")).setParameter("id",id)
+						.setParameter("idCliente", idCliente).setParameter("dataInicial",dataInicialSql)
+						.setParameter("dataFinal",dataFinalSql).list();
 		t.commit();
 		return lista;
 	}
@@ -68,6 +74,3 @@ public class ConvenioDAO {
 		
 	}
 }
-
-
-

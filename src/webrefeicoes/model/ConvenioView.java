@@ -37,6 +37,9 @@ public class ConvenioView implements Serializable{
 	
 	@Column(name="statusConvenio")
 	private String statusConvenio;
+	
+	@Column(name="tipoConvenio")
+	private String tipoConvenio;
 
 	@Column (name="nome")
 	private String nome;
@@ -174,13 +177,22 @@ public class ConvenioView implements Serializable{
 		this.cpf = cpf;
 	}
 
+	
+	public String getTipoConvenio() {
+		return tipoConvenio;
+	}
+
+	public void setTipoConvenio(String tipoConvenio) {
+		this.tipoConvenio = tipoConvenio;
+	}
+
 	public ConvenioView() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public ConvenioView(int codigo, Integer idCliente, Date dataInicial, Date dataFinal, Double precoTotal,
-			String statusConvenio, String nome, String dddTelefone, String telefone, String dddCelular, String celular,
-			String usuario, String email, String cpf) {
+			String statusConvenio, String tipoConvenio, String nome, String dddTelefone, String telefone,
+			String dddCelular, String celular, String usuario, String email, String cpf) {
 		super();
 		this.codigo = codigo;
 		this.idCliente = idCliente;
@@ -188,6 +200,7 @@ public class ConvenioView implements Serializable{
 		this.dataFinal = dataFinal;
 		this.precoTotal = precoTotal;
 		this.statusConvenio = statusConvenio;
+		this.tipoConvenio = tipoConvenio;
 		this.nome = nome;
 		this.dddTelefone = dddTelefone;
 		this.telefone = telefone;
@@ -197,6 +210,4 @@ public class ConvenioView implements Serializable{
 		this.email = email;
 		this.cpf = cpf;
 	}
-	
-	
 }

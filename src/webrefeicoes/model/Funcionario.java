@@ -68,9 +68,6 @@ public class Funcionario implements Serializable{
 	@Column (name="dataNascimento")
 	private Date dataNascimento;
 	
-	@Column (name="permissao")
-	private String permissao;
-	
 	@Column (name="estado")
 	private String estado;
 	
@@ -202,15 +199,6 @@ public class Funcionario implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 	
-	
-	public String getPermissao() {
-		return permissao;
-	}
-
-	public void setPermissao(String permissao) {
-		this.permissao = permissao;
-	}
-
 	public String getEstado() {
 		return estado;
 	}
@@ -220,8 +208,9 @@ public class Funcionario implements Serializable{
 	}
 
 	public String getEndereco() {
-		return rua + " " + numEnd + " - " + bairro + ", " +  cidade + "(" + cep + ")" + ", " + estado;
+		return rua + " " + numEnd + " - " + bairro + ", " +  cidade + "(" + cep + ")";
 	}
+	
 	
 	public Funcionario() {
 		
@@ -229,7 +218,7 @@ public class Funcionario implements Serializable{
 
 	public Funcionario(int codigo, String nome, String cpf, String rg, String dddTelefone, String telefone,
 			String dddCelular, String celular, String usuario, String senha, String rua, String bairro, String cidade,
-			String cep, Integer numEnd, Date dataNascimento, String permissao, String estado) {
+			String cep, Integer numEnd, Date dataNascimento, String estado, String email) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
@@ -247,13 +236,8 @@ public class Funcionario implements Serializable{
 		this.cep = cep;
 		this.numEnd = numEnd;
 		this.dataNascimento = dataNascimento;
-		this.permissao = permissao;
 		this.estado = estado;
 	}
-
-	
-	
-	
 	
 	
 }

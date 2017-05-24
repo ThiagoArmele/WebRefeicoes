@@ -67,6 +67,7 @@ public class CardapioController  implements Serializable{
 	private LoginController clienteLogado;
 	private boolean usarConvenio;
 	private Convenio convenio;
+	private double valorQuilo;
 	
 //	Variaveis globais para armazenar qualquer produto selecionado no cardapio
 	String guarnicoes = "";
@@ -135,50 +136,57 @@ public class CardapioController  implements Serializable{
 	              		  FacesMessage.SEVERITY_ERROR,"Você não possui convênio, para solicitar entre em contato com o restaurante.", 
 	              		  ""));
 		} else {
-			if (verificaMarmita(guarnicaoSelecionada, misturaSelecionada, outroSelecionada, pedido) && !pedido.getFormaPagamento().equals(" ")){
-				if(guarnicoes != null) {
-					pedido.setGuarnicao(guarnicoes);
-				} else {
-					pedido.setGuarnicao(null);
-				}
-			
-				if(misturas != null) {
-					pedido.setMistura(misturas);
-				} else {
-					pedido.setMistura(null);
-				}
-				 
-				if(outros != null) {
-					pedido.setOutro(outros);
-				} else {
-					pedido.setOutro(null);
-				}
-				
-				if(prato != null){
-					pedido.setDescricaoPrato(prato);
-				} else {
-					pedido.setDescricaoPrato(null);
-				}
-				
-				if(bebidas != null){
-					pedido.setBebida(bebidas);
-				} else {
-					pedido.setBebida(null);
-				}
-				
-				if(quilo != null){
-					pedido.setQuilo(quilo);
-				} else {
-					pedido.setQuilo(null);
-				}
-				
-				pedido.setStatusPedido("Aguardando Visualização");
-				pedido.setValorTotal(geraValorTotal());
-				pedido.setDataPedido(new Date());
-				
-				if(pedido.getFormaPagamento().equals("Convênio")){
+			if(pedido.getFormaPagamento().equals("Convênio") && convenio.getStatusConvenio().equals("Fechado")){
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+			              		  FacesMessage.SEVERITY_ERROR,"Não é utilizar o convênio enquanto estiver com status fechado, por favor efetue o pagamento para liberar!", 
+			              		  ""));
+			} else {
+				if (verificaMarmita(guarnicaoSelecionada, misturaSelecionada, outroSelecionada, pedido) && !pedido.getFormaPagamento().equals(" ")){
+					pedido.setValorQuilo(valorQuilo);
 					
-					if(convenio != null){
+					if(guarnicoes != null) {
+						pedido.setGuarnicao(guarnicoes);
+					} else {
+						pedido.setGuarnicao(null);
+					}
+				
+					if(misturas != null) {
+						pedido.setMistura(misturas);
+					} else {
+						pedido.setMistura(null);
+					}
+					 
+					if(outros != null) {
+						pedido.setOutro(outros);
+					} else {
+						pedido.setOutro(null);
+					}
+					
+					if(prato != null){
+						pedido.setDescricaoPrato(prato);
+					} else {
+						pedido.setDescricaoPrato(null);
+					}
+					
+					if(bebidas != null){
+						pedido.setBebida(bebidas);
+					} else {
+						pedido.setBebida(null);
+					}
+					
+					if(quilo != null){
+						pedido.setQuilo(quilo);
+					} else {
+						pedido.setQuilo(null);
+					}
+					
+					pedido.setStatusPedido("Aguardando Visualização");
+					pedido.setValorTotal(geraValorTotal());
+					pedido.setDataPedido(new Date());
+					
+					if(pedido.getFormaPagamento().equals("Convênio")){
+						if(convenio != null){
 						//double precoAtual = new CardapioDAO().valorConvenio(convenio.getIdCliente());
 						if(convenio.getPrecoTotal() == null){
 							convenio.setPrecoTotal(0.0);
@@ -186,35 +194,36 @@ public class CardapioController  implements Serializable{
 						valorTotal += convenio.getPrecoTotal();
 						convenio.setPrecoTotal(valorTotal);
 						convenioDao.update(convenio);
-					} 
+							
+						} 
+					}
 					
-				}
-				
-				if (clienteLogado.getCliente().getCodigo() != 0) {
-					pedido.setCodigoCliente(clienteLogado.getCliente().getCodigo());
-					pedido.setEnderecoEntrega(clienteLogado.getCliente().getEnderecoEntrega());
-				}
-				
-				dao.save(pedido);
-				FacesContext.getCurrentInstance().addMessage(
-		                null, new FacesMessage(
-		              		  FacesMessage.SEVERITY_INFO,"Pedido enviado com sucesso!", 
-		              		  ""));
-			}else {
-				if((pedido.getIdEmbalagem() != null) && ((guarnicaoSelecionada.length == 0 && misturaSelecionada.length == 0 && outroSelecionada.length == 0))){
+					if (clienteLogado.getCliente().getCodigo() != 0) {
+						pedido.setCodigoCliente(clienteLogado.getCliente().getCodigo());
+						pedido.setEnderecoEntrega(clienteLogado.getCliente().getEnderecoEntrega());
+					}
+					
+					
+					dao.save(pedido);
 					FacesContext.getCurrentInstance().addMessage(
 			                null, new FacesMessage(
-			              		  FacesMessage.SEVERITY_WARN,"Você deve informar o que deseja colocar na marmitex.", 
+			              		  FacesMessage.SEVERITY_INFO,"Pedido enviado com sucesso!", 
 			              		  ""));
-				} else if(pedido.getFormaPagamento().equals(" ")) {
-					FacesContext.getCurrentInstance().addMessage(
-			                null, new FacesMessage(
-			              		  FacesMessage.SEVERITY_WARN,"Você deve informar a forma de pagamento", 
-			              		  ""));
+				}else {
+					if((pedido.getIdEmbalagem() != null) && ((guarnicaoSelecionada.length == 0 && misturaSelecionada.length == 0 && outroSelecionada.length == 0))){
+						FacesContext.getCurrentInstance().addMessage(
+				                null, new FacesMessage(
+				              		  FacesMessage.SEVERITY_WARN,"Você deve informar o que deseja colocar na marmitex.", 
+				              		  ""));
+					} else if(pedido.getFormaPagamento().equals(" ")) {
+						FacesContext.getCurrentInstance().addMessage(
+				                null, new FacesMessage(
+				              		  FacesMessage.SEVERITY_WARN,"Você deve informar a forma de pagamento", 
+				              		  ""));
+					}
 				}
 			}
 		}
-		
 	}
 	
 	
@@ -295,9 +304,9 @@ public class CardapioController  implements Serializable{
 		}
 		
 		if(pedido.getIdEmbalagem() != null || guarnicaoSelecionada.length > 0 ||  pratosSelecionados.length > 0 || bebidasSelecionados.length > 0||
- 				misturaSelecionada.length > 0 || outros.length > 0 || quiloSelecionado.length > 0 ||pedido.getValorQuilo() != null) {
+ 				misturaSelecionada.length > 0 || outros.length > 0 || quiloSelecionado.length > 0 ||getValorQuilo() != 0) {
 			
-			if(pedido.getValorQuilo() == null && quiloSelecionado.length > 0) {
+			if(getValorQuilo() == 0 && quiloSelecionado.length > 0) {
 				FacesContext.getCurrentInstance().addMessage(
 		                null, new FacesMessage(
 		              		  FacesMessage.SEVERITY_ERROR,"Para enviar o que foi escolhido no quilo precisa informar um valor no campo 'Valor'.", 
@@ -305,7 +314,7 @@ public class CardapioController  implements Serializable{
 				return false;
 			}
 			
-			if(pedido.getValorQuilo() != null && quiloSelecionado.length == 0) {
+			if(getValorQuilo() != 0 && quiloSelecionado.length == 0) {
 				FacesContext.getCurrentInstance().addMessage(
 		                null, new FacesMessage(
 		              		  FacesMessage.SEVERITY_ERROR,"Para enviar o pedido por favor escolha um dos itens do quilo no cardápio.", 
@@ -351,8 +360,8 @@ public class CardapioController  implements Serializable{
 			setValorTotal(calculaValorBebida(bebidasSelecionados));
 		}
 		
-		if(pedido.getValorQuilo() != null){
-			setValorTotal(pedido.getValorQuilo());
+		if(getValorQuilo() != 0){
+			setValorTotal(getValorQuilo());
 		}
 		
 		return getValorTotal();
@@ -693,7 +702,9 @@ public class CardapioController  implements Serializable{
 	public List<SelectItem> getCartoes() {
 		cartoes.clear();
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		@SuppressWarnings("unused")
 		Transaction t = session.beginTransaction();
+		@SuppressWarnings("unchecked")
 		List<BandeiraCartao> listaCartoes =  session.createQuery("from BandeiraCartao b where b.status = 'disponivel'").list();
 		for(BandeiraCartao quilo : listaCartoes){  
 			 SelectItem  s = new SelectItem();  
@@ -723,6 +734,7 @@ public class CardapioController  implements Serializable{
 		setValorTotal(calcularValorPedido(pedido));
 		setValorTotal(calculaValorBebida(bebidasSelecionados));
 		setValorTotal(calculaValorPrato(pratosSelecionados));
+		setValorTotal(valorQuilo);
 	}
 
 	public boolean isUsarConvenio() {
@@ -739,6 +751,14 @@ public class CardapioController  implements Serializable{
 
 	public void setConvenio(Convenio convenio) {
 		this.convenio = convenio;
+	}
+
+	public double getValorQuilo() {
+		return valorQuilo;
+	}
+
+	public void setValorQuilo(double valorQuilo) {
+		this.valorQuilo = valorQuilo;
 	}
 	
 	

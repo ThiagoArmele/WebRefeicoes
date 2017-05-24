@@ -1,12 +1,15 @@
 package webrefeicoes.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="avaliacao")
@@ -39,6 +42,10 @@ public class Avaliacao implements Serializable {
 	
 	@Column (name = "media")
 	private Double media;
+	
+	@Column (name = "dataEnviada")
+	@Temporal(TemporalType.TIMESTAMP) 
+	private Date dataEnviada;
 
 	public int getCodigo() {
 		return codigo;
@@ -96,9 +103,16 @@ public class Avaliacao implements Serializable {
 		this.media = media;
 	}
 
-	public Avaliacao(int codigo, Double pontuacaoTempo, Double pontuacaoEntrega,
-		 Double pontuacaoComida, String comentario, Double media,
-			String usuario) {
+	public Date getDataEnviada() {
+		return dataEnviada;
+	}
+
+	public void setDataEnviada(Date dataEnviada) {
+		this.dataEnviada = dataEnviada;
+	}
+
+	public Avaliacao(int codigo, Double pontuacaoTempo, Double pontuacaoEntrega, Double pontuacaoComida,
+			String comentario, String usuario, Double media, Date dataEnviada) {
 		super();
 		this.codigo = codigo;
 		this.pontuacaoTempo = pontuacaoTempo;
@@ -107,8 +121,9 @@ public class Avaliacao implements Serializable {
 		this.comentario = comentario;
 		this.usuario = usuario;
 		this.media = media;
+		this.dataEnviada = dataEnviada;
 	}
-	
+
 	public Avaliacao() {
 		// TODO Auto-generated constructor stub
 	}

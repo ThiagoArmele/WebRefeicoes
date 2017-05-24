@@ -47,6 +47,7 @@ public class HistoricoPedidoController implements Serializable{
 		return listaHistoricoPedidos;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public HistoricoPedidoController() {
 		setClientes(new ArrayList<SelectItem>());
 		setEmpresas(new ArrayList<SelectItem>());

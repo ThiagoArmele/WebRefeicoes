@@ -103,11 +103,13 @@
 					</div>
 					<div class="col-lg-2 form-group">
 						<p:outputLabel for="Celular" value="Celular " /><br/>
-						<p:inputText style="width: 100%"
+						<p:inputMask style="width: 100%"
 						id="Celular"
 						maxlength="9"
+						mask="9999-9999?9"
 						value="#{FuncionarioController.funcionario.celular}"
-						/>
+						>
+						</p:inputMask>
 					</div>
 					<div class="col-lg-3 form-group">
 						<p:outputLabel for="Usuario" value="Usuário " /><br/>
@@ -122,8 +124,6 @@
 					<div class="col-lg-3 form-group">
 						<p:outputLabel for="senha" value="Senha " /><br/>
 						<p:password id='senha' style="width: 100%"  
-						required="true" 
-						requiredMessage=" 'Senha' é obrigatório."
 						redisplay="true"
 						maxlength="20"
 						value="#{FuncionarioController.senha}"
@@ -167,13 +167,6 @@
 						maxlength="8"
 						value="#{FuncionarioController.funcionario.cep}"
 						/>
-					</div>
-					<div class="col-lg-2 form-group">
-						<p:outputLabel for="permissao" value="Permissão" /><br/>
-						<p:selectOneMenu id="permissao" value="#{FuncionarioController.funcionario.permissao}" style="width: 100%">
-							  <f:selectItem itemLabel='Normal' itemValue="normal"/> 
-							  <f:selectItem itemLabel='Admin' itemValue="administrador"/> 
-				        </p:selectOneMenu>
 					</div>
 					<div  class="col-lg-12 form-group " style="    text-align: right;">
 						
@@ -243,20 +236,4 @@
    			</p:dataTable>
   </h:body>
   
-  <script>
-  $("#formulario\\:Celular").mask("9999-9999?9")
-  .focusout(function (event) {  
-      var target, phone, element;  
-      target = (event.currentTarget) ? event.currentTarget : event.srcElement;  
-      phone = target.value.replace(/\D/g, '');
-      element = $(target);  
-      element.unmask();  
-      if(phone.length > 10) {  
-          element.mask("(99) 99999-999?9");  
-      } else {  
-          element.mask("(99) 9999-9999?9");  
-      }  
-  });
-  
-  </script>
 </html>  

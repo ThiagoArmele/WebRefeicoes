@@ -3,8 +3,13 @@ package webrefeicoes.controller;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Locale.Category;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -20,6 +25,7 @@ import webrefeicoes.dao.EmpresaDAO;
 import webrefeicoes.model.Cliente;
 import webrefeicoes.model.Empresa;
 import webrefeicoes.util.Criptografia;
+import webrefeicoes.util.Util;
 
 @ManagedBean(name = "clienteController")
 @SessionScoped
@@ -97,57 +103,43 @@ public class ClienteController implements Serializable{
     	 setCliente(f); 
      }
 	
-	public void adicionarCliente(){
+	public void adicionarCliente() throws NoSuchAlgorithmException{
 		ClienteDAO dao = new ClienteDAO();
-		if(!isCheckEntrega()) {
-			try {
-				md = MessageDigest.getInstance("MD5");
-			} catch (NoSuchAlgorithmException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			cliente.setSenha(Criptografia.criptografar(getSenha(), md));
-			if (cliente.getCodigo() == 0L) {
+		
+		md = MessageDigest.getInstance("MD5");
+		cliente.setSenha(Criptografia.criptografar(getSenha(), md));
+		
+		if(cliente.getSenha() != null && cliente.getSenha().trim() != ""){
+			
+			if(new Util().isCpf(cliente.getCpf().replace(".", "").replace("-", ""))){
+				if(isCheckEntrega()) {
+					cliente.setRuaEntrega(cliente.getRua());
+					cliente.setBairroEntrega(cliente.getBairro());
+					cliente.setCidadeEntrega(cliente.getCidade());
+					cliente.setCepEntrega(cliente.getCep());
+					cliente.setNumEndEntrega(cliente.getNumEnd());
+				}
 				
-				dao.save(cliente);
-				FacesContext.getCurrentInstance().addMessage(
-		                null, new FacesMessage(
-		              		  FacesMessage.SEVERITY_INFO,"Cliente cadastrado com sucesso!", 
-		              		  ""));
+				if (cliente.getCodigo() == 0L) {
+					dao.save(cliente);
+					FacesContext.getCurrentInstance().addMessage(
+			                null, new FacesMessage(
+			              		  FacesMessage.SEVERITY_INFO,"Cliente cadastrado com sucesso!", 
+			              		  ""));
+				} else {
+					dao.update(cliente);
+					FacesContext.getCurrentInstance().addMessage(
+			                null, new FacesMessage(
+			              		  FacesMessage.SEVERITY_INFO,"Cliente alterado com sucesso!", 
+			              		  ""));
+				}
 			} else {
-				dao.update(cliente);
 				FacesContext.getCurrentInstance().addMessage(
 		                null, new FacesMessage(
-		              		  FacesMessage.SEVERITY_INFO,"Cliente alterado com sucesso!", 
-		              		  ""));
-			}
-		} else {
-			if (cliente.getCodigo() == 0L) {
-				cliente.setRuaEntrega(cliente.getRua());
-				cliente.setBairroEntrega(cliente.getBairro());
-				cliente.setCidadeEntrega(cliente.getCidade());
-				cliente.setCepEntrega(cliente.getCep());
-				cliente.setNumEndEntrega(cliente.getNumEnd());
-				dao.save(cliente);
-				FacesContext.getCurrentInstance().addMessage(
-		                null, new FacesMessage(
-		              		  FacesMessage.SEVERITY_INFO,"Cliente cadastrado com sucesso!", 
-		              		  ""));
-			} else {
-				cliente.setRuaEntrega(cliente.getRua());
-				cliente.setBairroEntrega(cliente.getBairro());
-				cliente.setCidadeEntrega(cliente.getCidade());
-				cliente.setCepEntrega(cliente.getCep());
-				cliente.setNumEndEntrega(cliente.getNumEnd());
-				dao.update(cliente);
-				FacesContext.getCurrentInstance().addMessage(
-		                null, new FacesMessage(
-		              		  FacesMessage.SEVERITY_INFO,"Cliente alterado com sucesso!", 
+		              		  FacesMessage.SEVERITY_ERROR,"CPF inválido, por favor verfique-o.", 
 		              		  ""));
 			}
 		}
-		
-	
 	}
 
 	public List<SelectItem> getEmpresas() {
@@ -184,6 +176,21 @@ public class ClienteController implements Serializable{
 		this.senha = senha;
 	}
 	
-	
+	public static void main(String[] args) throws ParseException {
+		
+		Util u = new Util();
+		// Get a default NumberFormat instance using the
+        // en_CA locale.
+        Locale caLoc = new Locale("en", "CA");
+        NumberFormat numForm =
+            NumberFormat.getCurrencyInstance(caLoc);
 
+        // Format some decimals using the pattern supplied above.
+        String dest1 = numForm.format(22.3423D);
+        System.out.println("dest1 = " + dest1);
+
+        String dest2 = numForm.format(64000D);
+        System.out.println("dest2 = " + dest2);
+		
+	}
 }

@@ -18,6 +18,7 @@ import org.primefaces.event.SelectEvent;
 import webrefeicoes.dao.FuncionarioDAO;
 import webrefeicoes.model.Funcionario;
 import webrefeicoes.util.Criptografia;
+import webrefeicoes.util.Util;
 
 @ManagedBean(name = "FuncionarioController")
 @SessionScoped
@@ -76,25 +77,38 @@ public class funcionarioController implements Serializable{
 	public void adicionarFuncionario() throws NoSuchAlgorithmException, UnsupportedEncodingException{
 		FuncionarioDAO dao = new FuncionarioDAO();
 		
-		if (funcionario.getCodigo() == 0L) {
-			md = MessageDigest.getInstance("MD5");
-			funcionario.setSenha(Criptografia.criptografar(getSenha(), md));
+		md = MessageDigest.getInstance("MD5");
+		funcionario.setSenha(Criptografia.criptografar(getSenha(), md));
+		
+		if(funcionario.getSenha() != null && funcionario.getSenha().trim() != ""){
 			
-			dao.save(funcionario);
-			FacesContext.getCurrentInstance().addMessage(
-	                null, new FacesMessage(
-	              		  FacesMessage.SEVERITY_INFO,"Funcionário cadastrado com sucesso!", 
-	              		  ""));
+			if(new Util().isCpf(funcionario.getCpf().replace(".", "").replace("-", ""))){
+
+				if (funcionario.getCodigo() == 0L) {
+						dao.save(funcionario);
+						FacesContext.getCurrentInstance().addMessage(
+				                null, new FacesMessage(
+				              		  FacesMessage.SEVERITY_INFO,"Funcionário cadastrado com sucesso!", 
+				              		  ""));
+				} else {
+					dao.update(funcionario);
+					FacesContext.getCurrentInstance().addMessage(
+			                null, new FacesMessage(
+			              		  FacesMessage.SEVERITY_INFO,"Funcionário alterado com sucesso!", 
+			              		  ""));
+				}
+			} else {
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_ERROR,"CPF inválido, por favor verfique-o.", 
+		              		  ""));
+			}	
 		} else {
-			md = MessageDigest.getInstance("MD5");
-			funcionario.setSenha(Criptografia.criptografar(getSenha(), md));
-			dao.update(funcionario);
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
-	              		  FacesMessage.SEVERITY_INFO,"Funcionário alterado com sucesso!", 
+	              		  FacesMessage.SEVERITY_ERROR,"'Senha' é obrigatório!", 
 	              		  ""));
 		}
-	
 	}
 
 	public Funcionario getFuncionario() {

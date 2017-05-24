@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet library="css" name="resultados.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+    <script>
+    
+    	
+    	$(".jqplot-highlighter-tooltip").blur(function(){
+			console.log("teste");
+    	});
+    	//$(".jqplot-highlighter-tooltip > #valor")[0].innerHTML.replace(",",".").replace(".",",")
+	   	function customExtender() {
+	      this.cfg.grid = {
+	         background: '#fff', //Set background to white
+	       	 drawBorder: false,
+	            shadow: false,
+	            gridLineColor: '#c5c5c5 ',
+	            gridLineWidth: 1
+	      };
+	      this.cfg.axes.xaxis.tickOptions.showGridline = false;
+	      this.cfg.highlighter = {
+	              show: true,
+	              tooltipLocation: 'n',
+	              useAxesFormatters: false,
+	              formatString: 'Mês: %s / Valor: <span id="valor">%.2f</span>'
+	         };
+		} 
+    </script>
+</h:head>
+
+<h:body>
+
+	<div  class="container-fluid" style="padding: 0px">
+		<div class="">
+			<div class="row">
+		        <div class="col-lg-3 col-xs-6">
+		          <!-- small box -->
+		          <div class="small-box bg-aqua">
+		            <div class="inner">
+		              <h3><h:outputText value="#{dadosController.funcionarios}"></h:outputText></h3>
+		              
+		            </div>
+		            <div class="icon">
+		              <i class="ion ion-bag"><i class="fa fa-users" aria-hidden="true"></i></i>
+		            </div>
+		            <div class="small-box-footer"><p>Funcionários Totais</p></div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+		        <div class="col-lg-3 col-xs-6">
+		          <!-- small box -->
+		          <div class="small-box bg-green">
+		            <div class="inner">
+		              <h3><h:outputText value="#{dadosController.clientes}"></h:outputText></h3>
+		            </div>
+		            <div class="icon">
+		              <i class="ion ion-bag"><i class="fa fa-users" aria-hidden="true"></i></i>
+		            </div>
+		            <div class="small-box-footer"><p>Clientes Totais</p></div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+		        <div class="col-lg-3 col-xs-6">
+		          <!-- small box -->
+		          <div class="small-box bg-yellow">
+		            <div class="inner">
+		              <h3><h:outputText value="#{dadosController.pedidos}"></h:outputText></h3>
+		            </div>
+		            <div class="icon">
+		               <i class="ion ion-bag"><i class="fa fa-cutlery" aria-hidden="true"></i></i>
+		            </div>
+		            <div class="small-box-footer"><p>Pedidos Totais</p></div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+		        <div class="col-lg-3 col-xs-6">
+		          <!-- small box -->
+		          <div class="small-box bg-red">
+		            <div class="inner">
+		              <h3><h:outputText value="#{dadosController.totalAvaliacao}"></h:outputText></h3>
+		
+		            </div>
+		            <div class="icon">
+		              <i class="fa fa-star" aria-hidden="true"></i>
+		            </div>
+		            <div class="small-box-footer"><p>Avaliações Totais</p></div>
+		          </div>
+		        </div>
+		        <div class="col-lg-3 col-xs-6">
+		          <!-- small box -->
+		          <div class="small-box bg-green">
+		            <div class="inner">
+		              <h3><h:outputText value="#{dadosController.convenio}"></h:outputText></h3>
+		
+		            </div>
+		            <div class="icon">
+		              <i class="fa fa-list-alt" aria-hidden="true"></i>
+		            </div>
+		            <div class="small-box-footer"><p>Clientes Convêniados</p></div>
+		          </div>
+		        </div>
+		        <!-- ./col -->
+		      </div>	
+		</div>
+		<div class="div-grafico">
+			<p>
+			Vendas Anuais
+			</p>
+			<h:form>
+				<div class="col-lg-2 form-group">
+					<p:selectOneMenu value="#{dadosController.anoSelecionado}" style="width: 100%">
+						  <f:selectItem itemLabel="Ano" itemValue="0"/>
+						  <f:selectItems value="#{dadosController.anos}"/>
+			        </p:selectOneMenu>
+			        
+				</div>
+				
+				<p:commandButton value="Listar" update="@form:grafico" actionListener="#{dadosController.listar}" styleClass="btn btn-primary" >
+		        </p:commandButton>
+	          	<div style="padding: 20px">
+				
+				<p:chart  id="grafico" type="bar" responsive="true" model="#{dadosController.barModel}" style="height:300px; width: 100%"/>
+				</div>
+			</h:form>
+		</div>
+		
+		
+		
+			
+	</div>
+</h:body>
+</html>  

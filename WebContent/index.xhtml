@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:p="http://primefaces.org/ui"> 
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  	
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
     <title>
@@ -54,14 +54,15 @@
 			</span>
 			<div class="dropdown" style="margin-right: 60px;float: right;">
 				<div class="painel-profile" data-toggle="dropdown">
-		 	 		<h:outputText id="display" styleClass="pull-right profileName" value="#{loginController.cliente.usuario}" />
+			
+		 	 		<h:outputText id="display" styleClass="pull-right profileName" value="#{loginController.funcionario.usuario}" />
 					<h:outputText id="display" styleClass="pull-right profileWelcome" value="Bem Vindo" />
 				</div>
 				
 				<div class="dropdown-menu dropdown-menu-right" style="padding: 0px">
 					<div class="profile-dropdown">
 						<div class="profile-header">
-							<h:outputText id="display" styleClass="pull-right profileName" style="white-space: nowrap;font-size: 13px;" value="#{loginController.cliente.nome}" />
+							<h:outputText id="display" styleClass="pull-right profileName" style="white-space: nowrap;font-size: 13px;" value="#{loginController.funcionario.nome}" />
 						</div>
 						
 						<div class="profile-content">
@@ -158,11 +159,6 @@
                              	 Consulta de Avaliação
                              </td>
                          </tr>
-                          <tr>
-                             <td onclick="load('ConsultaPedidosCliente.xhtml', 'Refeição','Consulta de Pedidos')">
-                             	 Consulta de Pedidos
-                             </td>
-                         </tr>
                          <tr>
                              <td onclick="load('HistoricoPedidos.xhtml', 'Refeição','Histórico de Pedidos')">
                              	Histórico de Pedidos
@@ -205,8 +201,8 @@
                              </td>
                          </tr>
                           <tr>
-                             <td onclick="load('CadastroConvenio.xhtml', 'Convênio','Consulta de Convênio')">
-                                 Consulta
+                             <td onclick="load('GerenciarConvenio.xhtml', 'Convênio','Gerenciamento de Convênio')">
+                                 Gerenciamento de Convênio
                              </td>
                          </tr>
                      </table>
@@ -225,6 +221,24 @@
                          <tr>
                              <td onclick="load('CadastroBandeira.xhtml', 'Pagamento','Cadastro de Bandeira')">
                                  Cadastro de Bandeira
+                             </td>
+                         </tr>
+                     </table>
+                 </div>
+             </div>
+         </div>
+         <div class="panel panel-default">
+         	<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+                 <h4 class="panel-title">
+                    <i class="fa fa-tachometer" style="padding-right: 10px;" aria-hidden="true"></i> Resultado
+                 </h4>
+             </div>
+             <div id="collapseSeven" class="panel-collapse collapse">
+                 <div class="panel-body">
+                     <table class="table">
+                         <tr>
+                             <td onclick="load('Dados.xhtml', 'Resultado','Dados')">
+                                 Dados
                              </td>
                          </tr>
                      </table>

@@ -48,7 +48,18 @@ public class PedidoDAO {
 	public List<Pedido> listPedidoCliente(Integer codigoCliente) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List<Pedido> lista = session.createQuery("from Pedido p where  p.codigoCliente = :codigoCliente").
+		@SuppressWarnings("unchecked")
+		List<Pedido> lista = session.createQuery("from Pedido p where  p.codigoCliente = :codigoCliente and p.statusPedido = 'Entregue'").
+				setParameter("codigoCliente", codigoCliente).list();
+		t.commit();
+		return lista;
+	}
+	
+	public List<Pedido> listPedidoClientePendente(Integer codigoCliente) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction t = session.beginTransaction();
+		@SuppressWarnings("unchecked")
+		List<Pedido> lista = session.createQuery("from Pedido p where  p.codigoCliente = :codigoCliente and p.statusPedido <> 'Entregue'").
 				setParameter("codigoCliente", codigoCliente).list();
 		t.commit();
 		return lista;

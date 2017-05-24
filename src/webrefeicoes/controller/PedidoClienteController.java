@@ -28,8 +28,11 @@ public class PedidoClienteController implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Pedido pedido;
+	private Pedido pedidoPendente;
 	private List<Pedido> listaPedidos;
+	private List<Pedido> listaPedidosPendentes;
 	private Pedido selecionaPedido;
+	private Pedido selecionaPedidoPendente;
 	private EntityManagerFactory factory = Persistence
             .createEntityManagerFactory("WebRefeicoes");
 	private EntityManager em = factory.createEntityManager();
@@ -43,10 +46,17 @@ public class PedidoClienteController implements Serializable{
 		return listaPedidos;
 	}
 	
+	public List<Pedido> listaPedidosPendentes() {
+		listaPedidosPendentes = new PedidoDAO().listPedidoClientePendente(getClienteLogado().getCliente().getCodigo());
+		return listaPedidosPendentes;
+	}
+	
 	@PostConstruct
 	private void construct() {
 		pedido = new Pedido();
+		pedidoPendente = new Pedido();
 		listaPedidos();
+		listaPedidosPendentes();
 	}
 	
 	public PedidoClienteController() {
@@ -69,9 +79,14 @@ public class PedidoClienteController implements Serializable{
 	}
 	
 	
-	public Pedido selecionarDados(SelectEvent event) {
+	public Pedido selecionarDadosPendentes(SelectEvent event) {
    	 Pedido f = (Pedido) event.getObject();
    	 return f;
+    }
+	
+	public Pedido selecionarDados(SelectEvent event) {
+	   	 Pedido f = (Pedido) event.getObject();
+	   	 return f;
     }
 	
 	 public void trazerDados(SelectEvent event) {
@@ -83,13 +98,22 @@ public class PedidoClienteController implements Serializable{
     	 setPedido(f); 
      }
 	 
+	 public void trazerDadosPendente(SelectEvent event) {
+    	 Pedido f = (Pedido) event.getObject();
+    	 setNomeCliente((String) em
+		           .createQuery(
+	                       "SELECT c.nome from Cliente c where c.codigo = :codigo ")
+	           .setParameter("codigo", f.getCodigoCliente()).getSingleResult());
+    	 setPedidoPendente(f); 
+     }
+	 
 
 	public void adicionarPedido(){
 		PedidoDAO dao = new PedidoDAO();
 		if (pedido.getCodigo() != 0L) {
-			//pedido.setAvaliado(true);
+			pedido.setAvaliado(true);
 			dao.update(pedido);
-			RequestContext.getCurrentInstance().execute("PF('dlg').show()");  
+			RequestContext.getCurrentInstance().execute("PF('dlgAvaliacao').show()");  
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
@@ -111,6 +135,22 @@ public class PedidoClienteController implements Serializable{
 
 	public void setClienteLogado(LoginController clienteLogado) {
 		this.clienteLogado = clienteLogado;
+	}
+
+	public Pedido getPedidoPendente() {
+		return pedidoPendente;
+	}
+
+	public void setPedidoPendente(Pedido pedidoPendente) {
+		this.pedidoPendente = pedidoPendente;
+	}
+
+	public Pedido getSelecionaPedidoPendente() {
+		return selecionaPedidoPendente;
+	}
+
+	public void setSelecionaPedidoPendente(Pedido selecionaPedidoPendente) {
+		this.selecionaPedidoPendente = selecionaPedidoPendente;
 	}
 	
 	

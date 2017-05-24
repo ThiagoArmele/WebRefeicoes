@@ -11,10 +11,11 @@
     </title>
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
     <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputStylesheet library="css" name="menuCliente.css" />
     <h:outputStylesheet library="css" name="Menu.css" />
     <h:outputStylesheet library="css" name="util.css" />
     <h:outputStylesheet library="css" name="WebRefeicoes.css" />
-    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
@@ -24,7 +25,12 @@
 			<div class="container-fluid" id='cardapio'>
 				<h:form id='cardapio'>
 					 <p:growl id="messages" life="5000"/>
-					 <div class="col-lg-9">
+						<div class="col-lg-9 "  style="text-align: right;">
+						 	<p:commandButton onclick="PF('dlg').show();" value= "Pagamento" styleClass="ui-button-primary btn btn-success">
+							  </p:commandButton>
+					 	</div>
+						<div class="col-lg-9">
+					 	
 					 	<p:tabView>
 						 	<p:tab title="Marmitex" >
 					 			<div class="col-lg-4" id='valores'>
@@ -140,12 +146,13 @@
 				 				<div id='quilo' class="container-fluid">
 					 				<div class="col-lg-8  form-group">
 					 					<p:outputLabel for="valor" value="Valor " /><br/>
-										<h:inputText id='valor' value="#{cardapioController.pedido.valorQuilo}">
+										<p:inputText id='valor' value="#{cardapioController.valorQuilo}">
+											<p:ajax update="@form:total" listener="#{cardapioController.calcularValor}"></p:ajax>
 					   						<f:convertNumber pattern="#0.00"/>
-					   					</h:inputText>
-						 				<p:selectManyCheckbox layout="grid" columns="1" value="#{cardapioController.quiloSelecionado}">
+					   					</p:inputText>
+					   					<p:selectManyCheckbox layout="grid" columns="1" value="#{cardapioController.quiloSelecionado}">
 						 						<f:selectItems  value="#{cardapioController.quilos}" />
-						 				</p:selectManyCheckbox><br></br>
+					 					</p:selectManyCheckbox><br></br>
 					 				</div>
 					 				
 				 				</div>
@@ -156,13 +163,15 @@
 					 </div>
 					 <div class="col-lg-3">
 					 	<div class="col-lg-12">
-					 		<p style="background: #680404;color: white;font-weight: bold;padding: 10px 25px;
-					 		text-align: center; margin: 0px;">Valor Total</p>
+					 		<p style="background: #43a643;color: white;font-weight: bold;padding: 10px 25px;
+					 		text-align: center; margin: 0px;font-size: 18px;">Valor Total</p>
 					 	</div>
 					 	<div class="col-lg-12">
-					 		<p style="    border: 1px solid #c1c1c1;text-align: center;padding: 40px
-					 		;font-size: 25px;background: white;"><span style="color: green;font-weight: bold;">
-					 		R$</span><h:outputText style="width: 100%;color: green;font-weight: bold;" 
+					 		<p style="color: #5cb85c !important;font-weight: bold;border: 1px solid #43a643;;text-align: center;padding: 40px
+					 		;font-size: 25px;background: white;">
+					 		<span>
+					 		R$</span>
+					 		<h:outputText style="width: 100%" 
 								id="total"
 								disabled="true"
 								value="#{cardapioController.valorTotal}">
@@ -171,11 +180,8 @@
 					 	</div>
 					 </div>
 					 
-					 <div class="col-lg-12 "  style="text-align: right;">
-					 	<p:commandButton onclick="PF('dlg').show();" value= "Próximo Passo" styleClass="ui-button-primary btn btn-success">
-						  </p:commandButton>
-					 </div>
-					 <p:dialog draggable="false" resizable="false" height="450px" width= "600px" responsive="true" header="Forma de Pagamento" widgetVar="dlg" modal="true" style="padding: 0px">
+					 
+					 <p:dialog draggable="false" resizable="false" height="250px" width= "400px" responsive="true" header="Forma de Pagamento" widgetVar="dlg" modal="true" style="padding: 0px">
 				        <div class="container-fluid" id='avaliacao' style="padding: 0px;">
 							<h:form>
 								<div class="col-lg-12 form-group">
@@ -213,7 +219,7 @@
 												<f:convertNumber pattern="#0.00"/>
 								        </p:inputText>
 				 				   </div>
-				 					<div  class="col-lg-12 form-group" style="text-align: right;">
+				 					<div  class="col-lg-12 form-group" style="text-align: right;padding: 0px">
 									  <p:commandButton value= "Fazer Pedido" update="cardapio:messages" 
 									  styleClass="btn btn-success" action="#{cardapioController.adicionarPedido}" >
 									  </p:commandButton>

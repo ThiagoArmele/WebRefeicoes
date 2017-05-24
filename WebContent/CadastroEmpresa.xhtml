@@ -44,7 +44,7 @@
 						 required="true" 
 						 id="NomeFantasia" />
 					</div>
-					<div class="col-lg-4 form-group">
+					<div class="col-lg-3 form-group">
 						<p:outputLabel for="RazaoSocial" value="Razão Social " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{empresaController.empresa.razaoSocial}"
@@ -58,7 +58,7 @@
 						 required="true" 
 						 id="Cnpj" />
 					</div>
-					<div class="col-lg-2 form-group">
+					<div class="col-lg-3 form-group">
 						<p:outputLabel for="InscricaoEstadual" value="Inscrição Estadual " /><br/>
 						<p:inputText style="width: 100%" 
 						 value="#{empresaController.empresa.inscricaoEstadual}"
@@ -163,7 +163,7 @@
 						 value="#{empresaController.empresa.emailResponsavel}"
 						 id="EmailResponsavel" />
 					</div>
-					<div  class="col-lg-12 form-group">
+					<div  class="col-lg-12 form-group" style="text-align: right">
 						  <p:commandButton value= "Salvar" update="messages gridEmpresa" styleClass="ui-button-primary btn btn-success" action="#{empresaController.adicionarEmpresa}" >
 						  </p:commandButton>
 						  <p:commandButton immediate="true" value="Limpar" actionListener="#{empresaController.limparDados}"  update="@form:formulario"  styleClass="ui-button-primary btn btn-primary" >
@@ -177,6 +177,7 @@
 			scrollable="true"
 			selectionMode="single"
 			var="empresa" 
+			style="padding: 0px 15px"
 			scrollHeight="600"
 			selection="#{empresaController.selecionaEmpresa}"
 			rowKey="#{empresa.codigo}"

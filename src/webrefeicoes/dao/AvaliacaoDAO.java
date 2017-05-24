@@ -25,7 +25,7 @@ public class AvaliacaoDAO {
 	public List<Avaliacao> list() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction t = session.beginTransaction();
-		List<Avaliacao> lista = session.createQuery("from Avaliacao").list();
+		List<Avaliacao> lista = session.createQuery("from Avaliacao order by dataEnviada DESC").list();
 		t.commit();
 		return lista;
 	}

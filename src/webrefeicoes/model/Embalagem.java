@@ -86,6 +86,5 @@ public class Embalagem implements Serializable{
 		this.qtdeGuarnicao = qtdeGuarnicao;
 		this.qtdeMistura = qtdeMistura;
 	}
-
 	
 }

@@ -1,0 +1,137 @@
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.bg-aqua {
+    background-color: #38b8d7 !important;
+}
+
+.bg-green {
+    background-color: #00a65a !important;
+}
+
+.bg-yellow {
+    background-color: #f39c12 !important;
+}
+
+.bg-red {
+    background-color: #dd4b39 !important;
+}
+
+.bg-red, 
+.bg-yellow, 
+.bg-aqua, 
+.bg-blue, 
+.bg-light-blue, 
+.bg-green {
+    color: #c5c5c5 !important;
+    background: #ffffff !important;
+    border: 1px solid #adb2b5;
+    position: relative;
+    display: block;
+    margin-bottom: 12px;
+    border: 1px solid #E4E4E4;
+    -webkit-border-radius: 5px;
+    overflow: hidden;
+    /* padding-bottom: 5px; */
+    -webkit-background-clip: padding-box;
+    -moz-border-radius: 5px;
+    -moz-background-clip: padding;
+    border-radius: 5px;
+    background: #FFF;
+    transition: all .3s ease-in-out;
+}
+
+.small-box {
+    border-radius: 2px;
+    position: relative;
+    display: block;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.small-box>.inner {
+   padding: 25px;
+}
+
+div {
+    display: block;
+}
+
+.small-box h3 {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    padding: 0;
+}
+
+.small-box h3, .small-box p {
+    z-index: 5;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Source Sans Pro',sans-serif;
+}
+
+.small-box p {
+    font-size: 15px;
+    margin: 0px;
+    font-weight: bold;
+}
+
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.small-box>.small-box-footer {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    color: rgba(119, 119, 119, 0.8);
+    display: block;
+    z-index: 10;
+    background: rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+
+.small-box>.small-box-footer:hover {
+    background: rgba(0,0,0,0.15);
+}
+.small-box .icon {
+    -webkit-transition: all .3s linear;
+    -o-transition: all .3s linear;
+    transition: all .3s linear;
+    position: absolute;
+    top: 17px;
+    right: 10px;
+    z-index: 0;
+    font-size: 50px;
+    color: #BAB8B8;
+}
+
+.div-grafico {
+	width: 100%;
+    padding: 10px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    opacity: 1;
+    transition: all .2s ease;	
+}
+
+.div-grafico > p{
+    border-bottom: 2px solid #E6E9ED;
+    padding: 1px 5px 6px;
+    color: #9e9e9e;
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -1,12 +1,15 @@
 package webrefeicoes.controller;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
@@ -32,6 +35,8 @@ public class ConvenioController implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Convenio convenio;
+	@ManagedProperty(value = "#{loginController}")
+	private LoginController clienteLogado;
 	@SuppressWarnings("rawtypes")
 	private DataModel listaConvenios;
 	private Convenio selecionaConvenio;
@@ -39,7 +44,8 @@ public class ConvenioController implements Serializable{
 	private EntityManagerFactory factory = Persistence
             .createEntityManagerFactory("WebRefeicoes");
 	private EntityManager em = factory.createEntityManager();
-	private String nomeCliente;
+	private Date dataAtual;
+	private boolean atualizaConvenio;
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public DataModel getListaConvenios() {
@@ -53,9 +59,24 @@ public class ConvenioController implements Serializable{
 		convenio.setDataFinal(new Date());
 		convenio.setDataInicial(new Date());
 		setClientes(new ArrayList<SelectItem>());
-		
+		SimpleDateFormat fm = new SimpleDateFormat("dd/MM/yyyy");
+		setDataAtual(new Date());
+		System.out.println(dataAtual);
 	}
 	
+	public void verificarConvenio() {
+		ConvenioDAO dao = new ConvenioDAO();
+		
+		Convenio cliente = dao.getConvenio(clienteLogado.getCliente().getCodigo());
+		if(cliente != null){
+			if(cliente.getDataFinal().before(dataAtual)){
+				cliente.setStatusConvenio("Fechado");
+				dao.update(cliente);
+			} 
+		}
+		
+	}
+
 	public Convenio getConvenio() {
 		return convenio;
 	}
@@ -97,40 +118,55 @@ public class ConvenioController implements Serializable{
     	 setConvenio(f); 
      }
 	
-	@SuppressWarnings("deprecation")
 	public void adicionarConvenio(){
 		ConvenioDAO dao = new ConvenioDAO();
+		Calendar c = Calendar.getInstance(); 
+		convenio.setDataFinal(convenio.getDataInicial());
+		c.setTime(convenio.getDataFinal()); 
+		
+		if(convenio.getTipoConvenio().equals("Mensal")) {
+			c.add(Calendar.DATE, 31);
+			convenio.setDataFinal(c.getTime());
+		} else {
+			c.add(Calendar.DATE, 15);
+			convenio.setDataFinal(c.getTime());
+		}
 		
 		if (convenio.getCodigo() == 0L) {
 			
-			if(convenio.getTipoConvenio().equals("Mensal")) {
-				convenio.getDataFinal().setDate(convenio.getDataInicial().getDate() + 31);
+			Convenio cliente = new ConvenioDAO().getConvenio(convenio.getIdCliente());
+			
+			if(cliente == null){
+				ClienteDAO clienteDao = new ClienteDAO();
+				List<Cliente> listaClientes = clienteDao.list();
+				for (Cliente clienteConvenio : listaClientes) {
+					if(clienteConvenio.getCodigo() == convenio.getIdCliente()){
+						convenio.setNomeCliente(clienteConvenio.getNome());
+						break;
+					}
+				}
+				convenio.setStatusConvenio("Aberto");
+				dao.save(convenio);
+				limparDados();
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_INFO,"Convenio cadastrado com sucesso!", 
+		              		  ""));
 			} else {
-				convenio.getDataFinal().setDate(convenio.getDataInicial().getDate() + 15);
+				FacesContext.getCurrentInstance().addMessage(
+		                null, new FacesMessage(
+		              		  FacesMessage.SEVERITY_ERROR,"Já existe esse cliente com convênio!", 
+		              		  ""));
 			}
-				
 			
-			
-			dao.save(convenio);
-			FacesContext.getCurrentInstance().addMessage(
-	                null, new FacesMessage(
-	              		  FacesMessage.SEVERITY_INFO,"Convenio cadastrado com sucesso!", 
-	              		  ""));
 		} else {
-			convenio.setDataFinal(convenio.getDataInicial());
-			if(convenio.getTipoConvenio().equals("Mensal")) {
-				convenio.getDataFinal().setDate(convenio.getDataInicial().getDate() + 31);
-			} else {
-				convenio.getDataFinal().setDate(convenio.getDataInicial().getDate() + 15);
-			}
-			System.out.println(convenio.getDataInicial());
 			dao.update(convenio);
+			limparDados();
 			FacesContext.getCurrentInstance().addMessage(
 	                null, new FacesMessage(
 	              		  FacesMessage.SEVERITY_INFO,"Convenio alterado com sucesso!", 
 	              		  ""));
 		}
-	
 	}
 	
 	public List<SelectItem> getClientes() {
@@ -151,14 +187,6 @@ public class ConvenioController implements Serializable{
 		this.clientes = clientes;
 	}
 
-	public String getNomeCliente() {
-		return nomeCliente;
-	}
-
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
-	}
-
 	public EntityManager getEm() {
 		return em;
 	}
@@ -167,4 +195,32 @@ public class ConvenioController implements Serializable{
 		this.em = em;
 	}
 
+	public Date getDataAtual() {
+		return dataAtual;
+	}
+
+	public void setDataAtual(Date date) {
+		this.dataAtual = date;
+	}
+
+	
+	
+	public boolean isAtualizaConvenio() {
+			verificarConvenio();
+			return atualizaConvenio;
+	}
+
+	public void setAtualizaConvenio(boolean atualizaConvenio) {
+		this.atualizaConvenio = atualizaConvenio;
+	}
+
+	public LoginController getClienteLogado() {
+		return clienteLogado;
+	}
+
+	public void setClienteLogado(LoginController clienteLogado) {
+		this.clienteLogado = clienteLogado;
+	}
+	
+	
 }

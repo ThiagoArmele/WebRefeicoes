@@ -77,6 +77,7 @@
 						<p:outputLabel for="RG" value="RG " /><br/>
 						<p:inputText style="width: 100%"
 						required="true" 
+						maxlength="9"
 						id="RG"
 						requiredMessage=" 'RG' é obrigatório."
 						value="#{clienteController.cliente.rg}"
@@ -119,9 +120,9 @@
 					</div>
 					<div class="col-lg-2 form-group">
 						<p:outputLabel for="Celular" value="Celular " /><br/>
-						<p:inputText style="width: 100%"
+						<p:inputMask style="width: 100%"
 						id="Celular"
-						mask="(99)"
+						mask="9999-99999"
 						value="#{clienteController.cliente.celular}"
 						/>
 					</div>
@@ -137,8 +138,6 @@
 					<div class="col-lg-3 form-group">
 						<p:outputLabel for="senha" value="Senha " /><br/>
 						<p:password id='senha' style="width: 100%"
-						required="true" 
-						requiredMessage=" 'Senha' é obrigatório."
 						redisplay="true"
 						value="#{clienteController.senha}"
 						/>
@@ -146,18 +145,24 @@
 					<div class="col-lg-4 form-group">
 						<p:outputLabel for="empresa" value="Empresa " /><br/>
 						<p:selectOneMenu id="empresa" value="#{clienteController.cliente.empresa}" style="width: 100%">
+							  <f:selectItem itemLabel="" itemValue=""/>
 							  <f:selectItems value="#{clienteController.empresas}"/>
 				        </p:selectOneMenu>
 					</div>
 					<div class="col-lg-5 form-group">
 						<p:outputLabel for="email" value="Email " /><br/>
-						<p:inputText id="email" value="#{clienteController.cliente.email}" style="width: 100%">
+						<p:inputText id="email" value="#{clienteController.cliente.email}" 
+						validatorMessage="E-mail inválido, por favor verifique!"
+						style="width: 100%">
+							<f:validateRegex 
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 				        </p:inputText>
 					</div>
 					<div class="col-lg-3 form-group">
 						<p:outputLabel for="Rua" value="Rua " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Rua"
+						maxlength="8"
 						value="#{clienteController.cliente.rua}"
 						/>
 					</div>
@@ -168,7 +173,7 @@
 						value="#{clienteController.cliente.numEnd}"
 						/>
 					</div>
-					<div class="col-lg-5 form-group">
+					<div class="col-lg-4 form-group">
 						<p:outputLabel for="Bairro" value="Bairro " /><br/>
 						<p:inputText style="width: 100%"  
 						id="Bairro"
@@ -182,10 +187,11 @@
 						value="#{clienteController.cliente.cidade}"
 						/>
 					</div>
-					<div class="col-lg-1 form-group">
+					<div class="col-lg-2 form-group">
 						<p:outputLabel for="CEP" value="CEP " /><br/>
-						<p:inputText style="width: 100%"  
+						<p:inputMask style="width: 100%"  
 						id="CEP"
+						mask="99999-999"
 						value="#{clienteController.cliente.cep}"
 						/>
 					</div>
@@ -194,7 +200,7 @@
 						<h:outputText value="Usar endereço do cliente como entrega" />
 					</div>
 					
-					<div class="col-lg-4 form-group">
+					<div class="col-lg-5 form-group">
 						<p:outputLabel for="RuaEntrega" value="Rua para Entrega " /><br/>
 						<p:inputText style="width: 100%"  
 						id="RuaEntrega"
@@ -224,8 +230,9 @@
 					</div>
 					<div class="col-lg-2 form-group">
 						<p:outputLabel for="CEPEntrega" value="CEP para Entrega " /><br/>
-						<p:inputText style="width: 100%"  
+						<p:inputMask style="width: 100%"  
 						id="CEPEntrega"
+						mask="99999-999"
 						value="#{clienteController.cliente.cepEntrega}"
 						/>
 					</div>
@@ -246,7 +253,7 @@
 			selectionMode="single"
 			var="cliente" 
 			style="padding: 0px 15px;"
-			scrollHeight="600"
+			scrollHeight="300"
 			selection="#{clienteController.selecionaCliente}"
 			rowKey="#{cliente.codigo}"
 			value="#{clienteController.listaClientes()}">
@@ -264,8 +271,7 @@
 				
    				<p:column headerText="Código"
    					style="width: 90px;text-align: center"
-   					filterMatchMode="contains"
-   					sortBy="#{cliente.codigo}">
+   					filterMatchMode="contains">
    					<h:outputText value="#{cliente.codigo}" />
    				</p:column>
 
@@ -284,11 +290,6 @@
    					<h:outputText styleClass="text-center" value="#{cliente.rg}" />
    				</p:column>
    				
-   				<p:column headerText="Empresa"
-   					style="width: 160px;text-align: center">
-   					<h:outputText styleClass="text-center" />
-   				</p:column>
-   				
    				<p:column headerText="DDD (Celular)"
    					style='width: 120px;text-align: center' >
    					<h:outputText value="#{cliente.dddCelular}" />
@@ -302,19 +303,4 @@
    			</p:dataTable>
 		
   </h:body>
-  <script>
-	  $("#formulario\\:Celular").mask("(99) 9999-9999?9")
-	  .focusout(function (event) {  
-	      var target, phone, element;  
-	      target = (event.currentTarget) ? event.currentTarget : event.srcElement;  
-	      phone = target.value.replace(/\D/g, '');
-	      element = $(target);  
-	      element.unmask();  
-	      if(phone.length > 10) {  
-	          element.mask("(99) 99999-999?9");  
-	      } else {  
-	          element.mask("(99) 9999-9999?9");  
-	      }  
-	  });
-  </script>
 </html>  

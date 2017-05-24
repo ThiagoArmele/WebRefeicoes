@@ -19,4 +19,10 @@ public class PerfilDAO {
         return em.createQuery("SELECT p from Pedido p where p.codigoCliente = :codigo and p.avaliado = 1")
                 .setParameter("codigo", codigo).getResultList().size();
 	}
+	
+	
+	public String empresaCliente(int codigoEmpresa) {
+        return (String) em.createQuery("SELECT emp.nomeFantasia from Empresa emp where emp.codigo = :idEmpresa")
+                .setParameter("idEmpresa", codigoEmpresa).getSingleResult();
+	}
 }

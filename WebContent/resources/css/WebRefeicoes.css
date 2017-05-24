@@ -65,15 +65,16 @@
 
 #listaGuarnicao ul > li,
 #listaMistura ul > li {
-   padding: 10px;
-    color: white;
+    padding: 10px;
+    color: #818181;
     font-weight: bold;
-    border-bottom: 1px solid #df7070;
+    border-bottom: 1px solid #d1d1d1;
+    background: #ffffff;
 }
 
 
 #informacaoPedido > div {
-   border-bottom: 1px dashed #e84e4e;
+     border-bottom: 1px solid #e84e4e;
 }
 
 #informacaoPedido > div:LAST-CHILD {
@@ -223,4 +224,54 @@ footer {
     margin-left: auto;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+#quilo table label {
+    margin: 0px !important;
+    padding: 10px !important;
+    color: #666666 !important;
+}
+
+#coments > div#pontuacao {
+   display: inline-block;
+   padding: 5px;
+   margin: 0px;
+   background: #e6e6e6;
+   border: 1px solid #bababa;
+   font-weight: bold;
+   color: #717272;
+}
+#coments > div#pontuacao:hover,
+#coments > div#pontuacao:focus,
+#coments > div#pontuacao:active {
+	background: #d3d3d3;
+	cursor: pointer;
+}
+#coments > div#pontuacao > span{
+	 padding-right: 10px;
+}
+
+#gridAvaliacao hr {	
+    border-top: 1px solid #ccc !important;
+}
+
+#gridAvaliacao ul {
+    margin: 20px;
+    padding: 0px;
+    background: #f8f8f8;
+    border: 1px solid #d9d9d9;
+}
+
+.iconeResultado {
+   	color: white;
+    font-size: 28px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center; 
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }

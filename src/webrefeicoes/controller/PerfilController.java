@@ -14,9 +14,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import webrefeicoes.dao.ClienteDAO;
+import webrefeicoes.dao.ConvenioDAO;
 import webrefeicoes.dao.PerfilDAO;
 import webrefeicoes.model.Cliente;
-import webrefeicoes.model.Funcionario;
+import webrefeicoes.model.Convenio;
 import webrefeicoes.util.Criptografia;
 
 @ManagedBean(name = "perfilController")
@@ -28,12 +29,17 @@ public class PerfilController implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	PerfilDAO dao = new PerfilDAO();
+	ConvenioDAO convenioDao;
 	@ManagedProperty(value = "#{loginController}")
 	private LoginController clienteLogado;
 	private static MessageDigest md = null;
 	private String senha;
+	private String empresa;
+	private Convenio convenio;
 	
 	public PerfilController() {
+		convenio = new Convenio();
+		convenioDao = new ConvenioDAO();
 	}
 
 	public int getTotalAvaliacao() {
@@ -86,6 +92,22 @@ public class PerfilController implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Convenio getConvenio() {
+		return convenioDao.getConvenio(clienteLogado.getCliente().getCodigo());
+	}
+
+	public void setConvenio(Convenio convenio) {
+		this.convenio = convenio;
+	}
+
+	public String getEmpresa() {
+		return new PerfilDAO().empresaCliente(clienteLogado.getCliente().getEmpresa());
+	}
+
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 	
 }

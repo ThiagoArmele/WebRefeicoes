@@ -18,153 +18,171 @@
     <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.js" />
     <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();   
+    });
+    
+    </script>
 </h:head>
 <h:body>
-			<div class="container-fluid" id='avaliacao'  style="padding: 0px;border: 1px solid #b3b3b3;border-radius: 20px;
-    margin-bottom: 20px;padding: 20px;">
+<!-- 			<div class="container-fluid" id='avaliacao'  style="padding: 0px;border: 1px solid #b3b3b3;border-radius: 20px; -->
+<!--     margin-bottom: 20px;padding: 20px;"> -->
 			
-				<h:form id="formulario">
-						<div>
-							<div class="col-lg-2 form-group">
-								<p:outputLabel for="codigo" value="Código: " />
-								<h:outputText style="width: 100%" 
-								id="codigo"
-								disabled="true"
-								value="#{avaliacaoController.avaliacao.codigo}"/>
-							</div>
-						</div>
-						<div>
-							<div class="col-lg-10 form-group">
-								<p:outputLabel for="nome" value="Nome:  " />
-								<h:outputText style="width: 100%" 
-								id="nome"
-								disabled="true"
-								/>
-							</div>
-						</div>
-						<div>
-							<div class="col-lg-12 form-group">
-								<h:outputText style="width: 100%;background: white;border: 1px solid #cdcdcd;padding: 20px 10px;
-    display: -webkit-box; border-radius: 10px;" 
-								id="comentario"
-								disabled="true"
-								value="#{avaliacaoController.avaliacao.comentario}"/>
-							</div>
-						</div>
-						<div class="col-lg-1 form-group">
-							<span><img src="resources/images/entrega.png"></img></span>
-						</div>
-						<div>
-							<div class="col-lg-1 form-group" style="    display: flex;align-items: center;justify-content: center;
-    font-size: 20px;font-weight: bold;height: 65px;">
-								<h:outputText style="width: 100%" 
-								id="entrega"
-								disabled="true"
-								value="#{avaliacaoController.avaliacao.pontuacaoEntrega}"/>
-							</div>
-						</div>
+<!-- 				<h:form id="formulario"> -->
+<!-- 						<div> -->
+<!-- 							<div class="col-lg-2 form-group"> -->
+<!-- 								<p:outputLabel for="codigo" value="Código: " /> -->
+<!-- 								<h:outputText style="width: 100%"  -->
+<!-- 								id="codigo" -->
+<!-- 								disabled="true" -->
+<!-- 								value="#{avaliacaoController.avaliacao.codigo}"/> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div> -->
+<!-- 							<div class="col-lg-10 form-group"> -->
+<!-- 								<p:outputLabel for="nome" value="Nome:  " /> -->
+<!-- 								<h:outputText style="width: 100%"  -->
+<!-- 								id="nome" -->
+<!-- 								disabled="true" -->
+<!-- 								/> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div> -->
+<!-- 							<div class="col-lg-12 form-group"> -->
+<!-- 								<h:outputText style="width: 100%;background: white;border: 1px solid #cdcdcd;padding: 20px 10px; -->
+<!-- /*     display: -webkit-box; border-radius: 10px;"  */ -->
+<!-- 								id="comentario" -->
+<!-- 								disabled="true" -->
+<!-- 								value="#{avaliacaoController.avaliacao.comentario}"/> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="col-lg-1 form-group"> -->
+<!-- 							<span><img src="resources/images/entrega.png"></img></span> -->
+<!-- 						</div> -->
+<!-- 						<div> -->
+<!-- 							<div class="col-lg-1 form-group" style="    display: flex;align-items: center;justify-content: center; -->
+<!--     font-size: 20px;font-weight: bold;height: 65px;"> -->
+<!-- 								<h:outputText style="width: 100%"  -->
+<!-- 								id="entrega" -->
+<!-- 								disabled="true" -->
+<!-- 								value="#{avaliacaoController.avaliacao.pontuacaoEntrega}"/> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						
-						<div class="col-lg-1 form-group">
-							<span><img src="resources/images/comida.png"></img></span>
-						</div>
+<!-- 						<div class="col-lg-1 form-group"> -->
+<!-- 							<span><img src="resources/images/comida.png"></img></span> -->
+<!-- 						</div> -->
 						
-						<div>
-							<div class="col-lg-1 form-group" style="    display: flex;align-items: center;justify-content: center;
-    font-size: 20px;font-weight: bold;height: 65px;">
-								<h:outputText style="width: 100%" 
-								id="comida"
-								disabled="true"
-								value="#{avaliacaoController.avaliacao.pontuacaoComida}"/>
-							</div>
-						</div>
+<!-- 						<div> -->
+<!-- 							<div class="col-lg-1 form-group" style="    display: flex;align-items: center;justify-content: center; -->
+<!--     font-size: 20px;font-weight: bold;height: 65px;"> -->
+<!-- 								<h:outputText style="width: 100%"  -->
+<!-- 								id="comida" -->
+<!-- 								disabled="true" -->
+<!-- 								value="#{avaliacaoController.avaliacao.pontuacaoComida}"/> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						
-						<div class="col-lg-1 form-group">
-							<span><img src="resources/images/tempo.png"></img></span>
-						</div>
-						<div>
-							<div class="col-lg-1 form-group" style="display: flex;align-items: center;justify-content: center;
-    font-size: 20px;font-weight: bold;height: 65px;">
-								<h:outputText style="width: 100%" 
-								id="tempo"
-								disabled="true"
-								value="#{avaliacaoController.avaliacao.pontuacaoTempo}"/>
-							</div>
-						</div>
+<!-- 						<div class="col-lg-1 form-group"> -->
+<!-- 							<span><img src="resources/images/tempo.png"></img></span> -->
+<!-- 						</div> -->
+<!-- 						<div> -->
+<!-- 							<div class="col-lg-1 form-group" style="display: flex;align-items: center;justify-content: center; -->
+<!--     font-size: 20px;font-weight: bold;height: 65px;"> -->
+<!-- 								<h:outputText style="width: 100%"  -->
+<!-- 								id="tempo" -->
+<!-- 								disabled="true" -->
+<!-- 								value="#{avaliacaoController.avaliacao.pontuacaoTempo}"/> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 						
-						<div class="col-lg-1 form-group">
-							<span><img src="resources/images/star.png"></img></span>
-						</div>
-						<div>
-							<div class="col-lg-1 form-group" style="display: flex;align-items: center;justify-content: center;
-    font-size: 20px;font-weight: bold;height: 65px;">
-								<h:outputText style="width: 100%" 
-								id="media"
-								disabled="true"
-								value="#{avaliacaoController.avaliacao.media}">
-									<f:convertNumber pattern="0.00">
+<!-- 						<div class="col-lg-1 form-group"> -->
+<!-- 							<span><img src="resources/images/star.png"></img></span> -->
+<!-- 						</div> -->
+<!-- 						<div> -->
+<!-- 							<div class="col-lg-1 form-group" style="display: flex;align-items: center;justify-content: center; -->
+<!--     font-size: 20px;font-weight: bold;height: 65px;"> -->
+<!-- 								<h:outputText style="width: 100%"  -->
+<!-- 								id="media" -->
+<!-- 								disabled="true" -->
+<!-- 								value="#{avaliacaoController.avaliacao.media}"> -->
+<!-- 									<f:convertNumber pattern="0.00"> -->
 									
-									</f:convertNumber>
-								</h:outputText>
-							</div>
-						</div>
-				</h:form>
+<!-- 									</f:convertNumber> -->
+<!-- 								</h:outputText> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 				</h:form> -->
+<!-- 			</div> -->
+			
+			<div class="container-fluid">
+				<div class="col-lg-2">
+				</div>
+				<div class="col-lg-8" id='gridAvaliacao'>
+					<h:form id="form">
+						<p:dataList  id='gridAvaliacao' emptyMessage="Nenhum Registro Encontrado"
+						scrollable="true"
+						type="unordered" itemType="none" paginator="true" rows="5" styleClass="paginated"
+						var="avaliacao" 
+						style="wid"
+						value="#{avaliacaoController.listaAvaliacaos}">
+		   					<div class="div-coments col-lg-12" style="padding-top: 10px;">
+			   					<div class="col-lg-3">
+			   						<div class="col-lg-12" >
+								 		<img style="margin: 0 auto; height: 60px; width: 60px " src="resources/images/profile_default.png"  alt="" class="img-circle img-responsive"></img>
+						 			</div>
+						 			<div class="col-lg-12" style="padding: 5px;text-align: center;    font-weight: bold;color: #4c4c4c;">
+			   							<h:outputText value="#{avaliacao.usuario}" />
+			   						</div>
+			   						<div class="col-lg-12" style="padding: 5px;font-size: 12px;font-weight: bold;color: #565656;white-space: nowrap;">
+				   						<h:outputText value="#{avaliacao.dataEnviada}">
+				   							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="America/Fortaleza"></f:convertDateTime>
+				   						</h:outputText>
+				   					</div>
+			   					</div>
+			   					<div class="col-lg-9" id='coments'>
+				   					<div id='pontuacao' class="form-group"  data-toggle="tooltip" data-placement="bottom" title="Comida"> 
+										<span><img style="height: 30px;" src="resources/images/comida.png"></img></span>
+										<h:outputText value="#{avaliacao.pontuacaoComida}" />
+									</div> 
+				   					
+				   				
+				   					<div  id='pontuacao' class="form-group" data-toggle="tooltip" data-placement="bottom" title="Tempo">
+										<span><img style="height: 30px;" src="resources/images/tempo.png"></img></span>
+										<h:outputText value="#{avaliacao.pontuacaoTempo}" />
+									</div> 
+				   					
+				   				
+				   					<div  id='pontuacao' class="form-group" data-toggle="tooltip" data-placement="bottom" title="Entrega">
+										<span><img style="height: 30px;" src="resources/images/entrega.png"></img></span>
+										<h:outputText value="#{avaliacao.pontuacaoEntrega}" />
+									</div> 
+				   					
+				   					<div  id='pontuacao' class="form-group" data-toggle="tooltip" data-placement="bottom" title="Média">
+										<span><img style="height: 30px;" src="resources/images/star.png"></img></span>
+										<h:outputText value="#{avaliacao.media}">
+				   							<f:convertNumber pattern="0.00"></f:convertNumber>
+				   						</h:outputText>
+									</div> 
+				   					<div class="col-lg-12" style="    padding: 10px;" >
+			   							<h:outputText value="#{avaliacao.comentario}" />
+			   						</div>
+			   					</div>
+			   					
+		   						<div class="col-lg-12" >
+		   							<hr></hr>
+		   						</div>
+		   						
+		   					</div>
+		   					
+		   					
+	   					</p:dataList>
+	   				</h:form>
+				</div>
+				<div class="col-lg-2">
+				</div>
 			</div>
 			
-			<p:dataTable id='gridAvaliacao' emptyMessage="Nenhum Registro Encontrado"
-			scrollable="true"
-			selectionMode="single"
-			var="avaliacao" 
-			scrollHeight="600"
-			selection="#{avaliacaoController.selecionaAvaliacao}"
-			rowKey="#{avaliacao.codigo}"
-			value="#{avaliacaoController.listaAvaliacaos}">
-				<p:ajax update="formulario"  event="rowSelect" listener="#{avaliacaoController.trazerDados}"/>
-				
-   				<p:column headerText="Codigo"
-   					style="width: 90px;text-align: center" 
-   					sortBy="#{avaliacao.codigo}">
-   					<h:outputText value="#{avaliacao.codigo}" />
-   				</p:column>
-   				
-   				<p:column headerText="Comida"
-   					style="width: 90px;text-align: center" 
-   					sortBy="#{avaliacao.pontuacaoComida}">
-   					<h:outputText value="#{avaliacao.pontuacaoComida}" />
-   				</p:column>
-   				
-   				<p:column headerText="Tempo"
-   					style="width: 90px;text-align: center" 
-   					sortBy="#{avaliacao.pontuacaoTempo}">
-   					<h:outputText value="#{avaliacao.pontuacaoTempo}" />
-   				</p:column>
-   				
-   				<p:column headerText="Entrega"
-   					style="width: 90px;text-align: center" 
-   					sortBy="#{avaliacao.pontuacaoEntrega}">
-   					<h:outputText value="#{avaliacao.pontuacaoEntrega}" />
-   				</p:column>
-   				
-   				<p:column headerText="Média"
-   					style="width: 90px;text-align: center" 
-   					sortBy="#{avaliacao.media}">
-   					<h:outputText value="#{avaliacao.media}">
-   						<f:convertNumber pattern="0.00"></f:convertNumber>
-   					</h:outputText>
-   				</p:column>
-   				
-   				<p:column headerText="Nome"
-   					style="text-align: center" 
-   					>
-   					<h:outputText />
-   				</p:column>
-   				
-   				
-   				<p:column headerText="Comentário"
-   					style="text-align: center" 
-   					sortBy="#{avaliacao.comentario}">
-   					<h:outputText value="#{avaliacao.comentario}" />
-   				</p:column>
-
-   			</p:dataTable>
   </h:body>
 </html>  

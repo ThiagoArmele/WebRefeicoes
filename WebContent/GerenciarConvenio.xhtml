@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">  
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+       Web Refeicoes
+    </title>
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+    <h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
+    <h:outputStylesheet library="css" name="Menu.css" />
+    <h:outputStylesheet library="css" name="util.css" />
+    <h:outputStylesheet library="css" name="WebRefeicoes.css" />
+    <h:outputStylesheet name="webjars/font-awesome/4.4.0/css/font-awesome.css"/>
+    <h:outputScript library="jquery" name="jquery-ui-1.9.2.custom.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.js" />
+    <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+			<div class="container-fluid" style='padding: 0px'>
+				<h:form id="formulario">
+					<p:growl id="messages" life="5000"/>
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="idPed" value="Código Convênio" /><br/>
+						<p:inputText style="width: 100%" 
+						 value="#{gerenciarConvenioController.codigo}"
+						 id="idPed" />
+					</div>
+   					<div class="col-lg-3 form-group">
+						<p:outputLabel for="idCliente" value="Cliente" /><br/>
+						<p:selectOneMenu id="idCliente" value="#{gerenciarConvenioController.convenio.idCliente}" style="width: 100%">
+							  <f:selectItem itemLabel="" itemValue="" />
+							  <f:selectItems value="#{gerenciarConvenioController.idCliente}"/>
+				        </p:selectOneMenu>
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="dataInicial" value="Data Inicial - De" /><br/>
+						<p:calendar 
+						value="#{gerenciarConvenioController.dataInicial}"
+						pattern="dd/MM/yyyy"
+						locale="de" navigator="true"
+						style="width: 100%" 
+						id="dataInicial"
+						mask="true" />
+					</div>
+					<div class="col-lg-2 form-group">
+						<p:outputLabel for="dataFinal" value="Até" /><br/>
+						<p:calendar 
+						value="#{gerenciarConvenioController.dataFinal}"
+						pattern="dd/MM/yyyy"
+						locale="de" navigator="true"
+						style="width: 100%" 
+						id="dataFinal"
+						mask="true" />
+					</div>
+					
+					<div class="col-lg-12 form-group" style="text-align: right;" >
+						 <p:commandButton value= "Listar" update="gridConvenio messages" 
+						 styleClass="btn btn-success" action="#{gerenciarConvenioController.listar}" >
+						 </p:commandButton>
+					</div>
+					
+				</h:form>
+			</div>
+			
+			<p:dataTable id='gridConvenio' emptyMessage="Nenhum Registro Encontrado"
+			scrollable="true"
+			selectionMode="single"
+			var="convenio" 
+			scrollHeight="600"
+			style="padding: 0px 15px"
+			selection="#{gerenciarConvenioController.selecionaConvenio}"
+			rowKey="#{convenio.codigo}"
+			value="#{gerenciarConvenioController.listaConvenios}">
+				<p:ajax update="formulario"  event="rowSelect" />
+				<p:column headerText=""
+   					style='width: 100px;text-align: center' sortBy="">
+   					<h:form>
+	   					<p:commandButton styleClass="btn btn-primary" update="gridConvenio" action="#{gerenciarConvenioController.abrirModal(convenio)}" value="Alterar">
+	   					</p:commandButton>
+   					</h:form>
+   				</p:column>
+   				<p:column headerText="Codigo"
+   					style="width: 90px;text-align: center" >
+   					<h:outputText value="#{convenio.codigo}" />
+   				</p:column>
+   				
+   				<p:column headerText="Data Inicial"
+   					style="text-align: center;width: 120px;" >
+   					<h:outputText value="#{convenio.dataInicial}" >
+   						<f:convertDateTime locale="pt_BR"></f:convertDateTime>
+   					</h:outputText>
+   				</p:column>
+   				
+   				<p:column headerText="Data Final"
+   					style="text-align: center;width: 120px;">
+   					<h:outputText  value="#{convenio.dataFinal}">
+   						<f:convertDateTime locale="pt_BR"></f:convertDateTime>
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Cliente"
+   					style="text-align: center">
+   					<h:outputText  value="#{convenio.nomeCliente}">
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Status"
+   					style="text-align: center;width: 120px;">
+   					<h:outputText  value="#{convenio.statusConvenio}">
+   					</h:outputText>
+   				</p:column>
+   				<p:column headerText="Tipo de Convênio"
+   					style="text-align: center;width: 160px;">
+   					<h:outputText  value="#{convenio.tipoConvenio}">
+   					</h:outputText>
+   				</p:column>
+   			</p:dataTable>
+   			<p:dialog draggable="false" closable="true" resizable="false" height="450px" width= "600px" responsive="true" header="Alterar Convênio" widgetVar="dlgAlterarConvenio" modal="true" style="padding: 0px">
+		        <div class="container-fluid" style="padding: 0px;">
+					<h:form>
+						<p:growl id="messages" life="5000"/>
+						
+							<div class="col-lg-5 form-group">
+								<p:outputLabel for="statusConvenioAlterado" value="Status Convênio" /><br/>
+								<p:selectOneMenu id="statusConvenioAlterado" value="#{gerenciarConvenioController.statusConvenioAlterado}"   style="width: 100%">
+									  <f:selectItem itemLabel='Fechado' itemValue="Fechado"/> 
+									  <f:selectItem itemLabel='Aberto' itemValue="Aberto"/> 
+						        </p:selectOneMenu>
+							</div>
+						
+							
+							<div class="col-lg-6 form-group">
+								<p:outputLabel for="tipoConvenioAlterado" value="Tipo Convênio" /><br/>
+								<p:selectOneMenu id="tipoConvenioAlterado" value="#{gerenciarConvenioController.tipoConvenioAlterado}"   style="width: 100%">
+									  <f:selectItem itemLabel='Mensal' itemValue="Mensal"/> 
+									  <f:selectItem itemLabel='Quinzenal' itemValue="Quinzenal"/> 
+						        </p:selectOneMenu>
+							</div>
+							
+							<br></br>
+							<div class="col-lg-12">
+								<hr></hr>
+							</div>							
+							<br></br>
+							<div class="col-lg-5 form-group">
+								<p:outputLabel for="dataInicialAlterada" value="Data Inicial" /><br/>
+								<p:calendar 
+								value="#{gerenciarConvenioController.dataInicialAlterado}"
+								pattern="dd/MM/yyyy"
+								locale="de" navigator="true"
+								style="width: 100%" 
+								id="dataInicialAlterada"
+								mask="true" />
+							</div>
+							<div  class="col-lg-12 form-group" style="text-align: right;">
+						
+							  <p:commandButton value= "Alterar" update="messages gridConvenio" styleClass="btn btn-success" action="#{gerenciarConvenioController.alterarConvenio}" >
+							  </p:commandButton>
+							</div>
+					</h:form>
+				</div>
+	   	</p:dialog>
+</h:body>
+</html>  
